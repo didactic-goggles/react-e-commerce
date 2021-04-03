@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 import * as bootstrap from 'bootstrap/dist/js/bootstrap.bundle';
 import ReactStars from 'react-rating-stars-component';
 import { FaRegStar, FaStarHalfAlt, FaStar } from 'react-icons/fa';
@@ -7,12 +8,18 @@ import { useAuthState } from '../../../../context';
 import Sonuc from './Sonuc';
 const Urunler = () => {
   console.log('Rendering => Ürünler');
+  const history = useHistory();
+  function useQuery () {
+    return new URLSearchParams(useLocation().search);
+  } 
+  let query = useQuery();
   const userDetails = useAuthState();
   const [filters, setFilters] = useState({
-    categories: [],
-    subCategories: [],
-    childCategories: [],
-    ratings: [],
+    categories: [...(query.get('categories') ? query.get('categories').split(',').map(item => Number(item)) : [])],
+    subCategories: [...(query.get('subCategories') ? query.get('subCategories').split(',').map(item => Number(item)) : [])],
+    childCategories: [...(query.get('childCategories') ? query.get('childCategories').split(',').map(item => Number(item)) : [])],
+    brands: [...(query.get('brands') ? query.get('brands').split(',').map(item => Number(item)) : [])],
+    ratings: [...(query.get('ratings') ? query.get('ratings').split(',').map(item => Number(item)) : [])]
   });
 // const filters = {
 //     categories: [],
@@ -20,10 +27,10 @@ const Urunler = () => {
 //     childCategories: [],
 //     ratings: [],
 //   };
+const [loading, setLoading] = useState(false)
   const [filteredProducts, setFilteredProducts] = useState(
     userDetails.products
   );
-  console.log(userDetails);
   const starsSettings = {
     isHalf: true,
     size: 16,
@@ -32,6 +39,7 @@ const Urunler = () => {
     halfIcon: <FaStarHalfAlt />,
     filledIcon: <FaStar />,
   };
+
 
   const CategoriesFilter = () => {
     if (!userDetails.categories || userDetails.categories.length === 0) {
@@ -60,7 +68,6 @@ const Urunler = () => {
                   categoryCollapse.hide();
               }
               setFilters(tempFilters);
-              console.log(filters);
             }}
             checked={filters.categories.includes(Number(category.id))}
           />
@@ -71,7 +78,7 @@ const Urunler = () => {
             {category.name}
           </label>
           <div
-            className="collapse ps-2"
+            className={`collapse ps-2 ${filters.categories.includes(Number(category.id)) && 'show'}`}
             id={`category-checkbox-collapse-${category.id}`}
           >
             {category.subCategories.map((subCategory) => (
@@ -85,11 +92,18 @@ const Urunler = () => {
                     const subCategoryElement = document.getElementById(
                       `sub-category-checkbox-collapse-${subCategory.id}`
                     );
-                    const subCategoryCollapse = new bootstrap.Collapse(
-                      subCategoryElement
-                    );
-                    subCategoryCollapse.toggle();
+                    const subCategoryCollapse = new bootstrap.Collapse(subCategoryElement);
+                    const tempFilters = {...filters};
+                    if(event.target.checked) {
+                      tempFilters.subCategories.push(Number(subCategory.id));
+                      subCategoryCollapse.show();
+                    } else {
+                        tempFilters.subCategories = tempFilters.subCategories.filter(subCategoryId => Number(subCategory.id) !== subCategoryId);
+                        subCategoryCollapse.hide();
+                    }
+                    setFilters(tempFilters);
                   }}
+                  checked={filters.subCategories.includes(Number(subCategory.id))}
                 />
                 <label
                   className="form-check-label"
@@ -98,7 +112,7 @@ const Urunler = () => {
                   {subCategory.sub_category_name}
                 </label>
                 <div
-                  className="collapse ps-2"
+                  className={`collapse ps-2 ${filters.subCategories.includes(Number(subCategory.id)) && 'show'}`}
                   id={`sub-category-checkbox-collapse-${subCategory.id}`}
                 >
                   {subCategory.childCategories.map((childCategory) => (
@@ -108,6 +122,16 @@ const Urunler = () => {
                         type="checkbox"
                         value=""
                         id={`child-category-checkbox-${childCategory.id}`}
+                        onChange={(event) => {
+                          const tempFilters = {...filters};
+                          if(event.target.checked) {
+                            tempFilters.childCategories.push(Number(childCategory.id));
+                          } else {
+                              tempFilters.childCategories = tempFilters.childCategories.filter(childCategoryId => Number(childCategory.id) !== childCategoryId);
+                          }
+                          setFilters(tempFilters);
+                        }}
+                        checked={filters.childCategories.includes(Number(childCategory.id))}
                       />
                       <label
                         className="form-check-label"
@@ -130,6 +154,46 @@ const Urunler = () => {
       </div>
     );
   };
+
+  const BrandsFilter = () => {
+    if(!userDetails.brands || userDetails.brands.length === 0) return null;
+
+    const brandElements = [];
+    userDetails.brands.forEach(brand => {
+      brandElements.push(
+        <div className="form-check" key={brand.id}>
+        <input
+          className="form-check-input"
+          type="checkbox"
+          value={brand.id}
+          id={`brand-checkbox-${brand.id}`}
+          onChange={(event) => {
+            const tempFilters = {...filters};
+            if(event.target.checked) {
+              tempFilters.brands.push(Number(brand.id));
+            } else {
+              tempFilters.brands = tempFilters.brands.filter(brandId => Number(brand.id) !== brandId)
+            }
+            setFilters(tempFilters);
+          }}
+          checked={filters.brands.includes(Number(brand.id))}
+        />
+        <label
+          className="form-check-label d-flex align-items-center"
+          htmlFor={`brand-checkbox-${brand.id}`}
+        >
+          {brand.name}
+        </label>
+      </div>
+      )
+    })
+    return (
+      <div className="form-group mb-3">
+        <h6 className="font-weight-bolder">Markalar</h6>
+        {brandElements}
+      </div>
+    );
+  }
   const RatingsFilter = () => {
     const Ratings = () => {
       const ratingElements = [];
@@ -155,7 +219,6 @@ const Urunler = () => {
                     tempFilters.ratings = tempFilters.ratings.filter(rating => rating !== ratingValue)
                   }
                   setFilters(tempFilters);
-                console.log(tempFilters);
               }}
               checked={filters.ratings.includes(Number(i))}
             />
@@ -184,8 +247,22 @@ const Urunler = () => {
   };
 
   useEffect(() => {
-    setFilteredProducts(2);
+    console.log('useEffect');
+    let filtersString = "";
+    Object.keys(filters).forEach(key => {
+      if(filters[key].length > 0) {
+        filtersString += `${key}=${filters[key].toString()}&`;
+      }
+    });
+    console.log(filters);
+    console.log(filtersString);
+    console.log(userDetails);
+    
+    history.push({
+      search: `?${filtersString}`
+    });
   }, [filters]);
+
   return (
     <section className="container py-3">
       <div className="row">
@@ -194,13 +271,14 @@ const Urunler = () => {
             <div className="card-body">
               <form>
                 <CategoriesFilter />
+                <BrandsFilter />
                 <RatingsFilter />
               </form>
             </div>
           </div>
         </div>
         <div className="col-md-9">
-          <Sonuc filters={filters} />
+          <Sonuc filters={filters} allProducts={userDetails.products}/>
         </div>
       </div>
     </section>
