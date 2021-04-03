@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,700,500,600|Nunito:700');
+$font-family-sans-serif: "Poppins", sans-serif;
+
+$border-radius: 0 !default;
+$border-radius-sm: 0 !default;
+$border-radius-lg: 0 !default;
+
+$breadcrumb-divider: quote(">");
+// $primary: #03a9f4;
+// $danger: #ff4136;
+// $theme-colors: (
+//     "primary": $primary
+// );
+
+// $body-bg: #F1F5F8;
+// $enable-responsive-font-sizes: true;
+// $btn-border-radius: 2rem;
+// // begin:: Home Page
+// $navbar-nav-link-padding-x:         .8rem !default;
+// $navbar-dark-color:                 rgba(#fff, .7) !default;
+// $navbar-dark-active-color:          #FF0045 !default;
+// end:: Home Page
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "./style.scss";
+// @import "./floating-label.scss";

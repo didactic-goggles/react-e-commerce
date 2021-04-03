@@ -1,0 +1,107 @@
+import React from 'react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import { useAuthState } from '../../../../context';
+const CategoriesVerticalNav = () => {
+  // const dispatch = useAuthDispatch();
+  const userDetails = useAuthState();
+  console.log(userDetails);
+  return (
+    <div className="nav-categories card card-body ps-1">
+      <PerfectScrollbar>
+        <nav
+          className="collapse bd-links"
+          id="bd-docs-nav"
+          aria-label="Docs navigation"
+        >
+          <ul className="list-unstyled mb-0 py-3 pt-md-1">
+            {userDetails.categories &&
+              userDetails.categories.map((category) => {
+                if (category.subCategories.length > 0) {
+                  return (
+                    <li key={category.id} className="mb-1">
+                      <button
+                        className="btn d-inline-flex align-items-center rounded"
+                        data-bs-toggle="collapse"
+                        data-bs-target={`#categories-vertical-nav-category-${category.id}`}
+                        aria-expanded="true"
+                      >
+                        {category.name}
+                      </button>
+
+                      <div
+                        className="collapse show"
+                        id={`categories-vertical-nav-category-${category.id}`}
+                      >
+                        <ul className="list-unstyled fw-normal pb-1 small">
+                          {category.subCategories.map((subCategory) => {
+                            if (subCategory.childCategories.length > 0) {
+                              return (
+                                <li key={subCategory.id} className="mb-1">
+                                  <button
+                                    className="btn d-inline-flex align-items-center rounded collapsed"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target={`#categories-vertical-nav-category-sub-category-${subCategory.id}`}
+                                    aria-expanded="false"
+                                  >
+                                    {subCategory.sub_category_name}
+                                  </button>
+
+                                  <div
+                                    className="collapse"
+                                    id={`categories-vertical-nav-category-sub-category-${subCategory.id}`}
+                                  >
+                                    <ul className="list-unstyled fw-normal pb-1 small">
+                                      {subCategory.childCategories.map(
+                                        (childCategory) => (
+                                          <li key={childCategory.id}>
+                                            <a
+                                              href="/docs/5.0/getting-started/introduction/"
+                                              className="d-inline-flex align-items-center rounded"
+                                            >
+                                              {
+                                                childCategory.child_category_name
+                                              }
+                                            </a>
+                                          </li>
+                                        )
+                                      )}
+                                    </ul>
+                                  </div>
+                                </li>
+                              );
+                            }
+                            return (
+                              <li key={subCategory.id}>
+                                <button
+                                  href="/docs/5.0/migration/"
+                                  className="btn d-inline-flex align-items-center rounded"
+                                >
+                                  {subCategory.sub_category_name}
+                                </button>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    </li>
+                  );
+                }
+                return (
+                  <li key={category.id} className="mb-1">
+                    <a
+                      href="/docs/5.0/migration/"
+                      className="d-inline-flex align-items-center rounded"
+                    >
+                      {category.name}
+                    </a>
+                  </li>
+                );
+              })}
+          </ul>
+        </nav>
+      </PerfectScrollbar>
+    </div>
+  );
+};
+
+export default CategoriesVerticalNav;
