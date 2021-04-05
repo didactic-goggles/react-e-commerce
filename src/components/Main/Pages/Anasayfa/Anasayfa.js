@@ -1,3 +1,4 @@
+import { FaRegClock } from 'react-icons/fa';
 import CategoriesVerticalNav from './CategoriesVerticalNav';
 import ProductsSlider from './ProductsSlider';
 
@@ -150,34 +151,37 @@ const Anasayfa = () => {
       </section>
       {/* end:: Slider */}
       {/* begin:: Section: Info */}
-      <section className="bg-light bg-gradient p-5 mb-3">
+      <section className="bg-light bg-gradient p-5 my-5 shadow">
         <div className="container">
           <div className="d-flex justify-content-center">
             <span className="px-2 px-sm-5 d-flex justify-content-center flex-column border-end">
               <span className="text-center fs-1">
-                <i className="bi bi-house"></i>
+                <FaRegClock />
               </span>
               <span className="text-center">
-                <h4>Header 5</h4>
-                <span>Span</span>
+                <h4>Çalışma Saatlerimiz</h4>
+                <span className="me-2">Pazartesi - Cumartesi</span>
+                <span className="fw-bold">08:00 - 18:00</span>
               </span>
             </span>
             <span className="px-2 px-sm-5 d-flex justify-content-center flex-column border-end">
               <span className="text-center fs-1">
-                <i className="bi bi-house"></i>
+                <FaRegClock />
               </span>
               <span className="text-center">
-                <h4>Header 5</h4>
-                <span>Span</span>
+                <h4>Çalışma Saatlerimiz</h4>
+                <span className="me-2">Pazartesi - Cumartesi</span>
+                <span className="fw-bold">08:00 - 18:00</span>
               </span>
             </span>
             <span className="px-2 px-sm-5 d-flex justify-content-center flex-column">
               <span className="text-center fs-1">
-                <i className="bi bi-house"></i>
+                <FaRegClock />
               </span>
               <span className="text-center">
-                <h4>Header 5</h4>
-                <span>Span</span>
+                <h4>Çalışma Saatlerimiz</h4>
+                <span className="me-2">Pazartesi - Cumartesi</span>
+                <span className="fw-bold">08:00 - 18:00</span>
               </span>
             </span>
           </div>
@@ -188,30 +192,9 @@ const Anasayfa = () => {
       <section className="container mb-3">
         <div className="row">
           <div className="col-md-4">
-            <div className="card bg-dark text-white">
-              <svg
-                className="bd-placeholder-img bd-placeholder-img-lg d-block w-100"
-                width="800"
-                height="200"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: First slide"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Ürün Foto</title>
-                <rect width="100%" height="100%" fill="#777" />
-                <text x="50%" y="50%" fill="#555" dy=".3em">
-                  Ürün 1
-                </text>
-              </svg>
-              <div className="card-img-overlay">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in.
-                </p>
-                <p className="card-text">Last updated 3 mins ago</p>
+            <div className="card bg-light">
+              <div className="card-body">
+                <img className="w-100px" src="https://comfortmedikal.com/img/resim_orjinal/test-transparent.png" alt="test"/>
               </div>
             </div>
           </div>

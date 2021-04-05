@@ -2,7 +2,16 @@
 import React from 'react';
 import { useHistory, NavLink } from 'react-router-dom';
 import ReactCountryFlag from 'react-country-flag';
-import { FaGlobeEurope, FaUserAlt, FaSignInAlt, FaSignOutAlt, FaUserCog, FaHeart } from 'react-icons/fa';
+import {
+  FaGlobeEurope,
+  FaUserAlt,
+  FaSignInAlt,
+  FaSignOutAlt,
+  FaUserCog,
+  FaHeart,
+  FaEnvelope,
+  FaPhoneAlt
+} from 'react-icons/fa';
 import { useAuthDispatch, logout, useAuthState } from '../../context';
 import Navbar from './Navbar';
 
@@ -18,62 +27,24 @@ const Header = () => {
 
   return (
     <header>
-      <div className="bg-dark">
+      <div className="border-bottom d-none d-md-block">
         <nav className="navbar navbar-dark container py-0 px-0">
-          <div className="dropdown">
-            <a
-              className="btn btn-dark dropdown-toggle"
-              href="#"
-              role="button"
-              id="dropdownMenuLink"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <FaGlobeEurope className="me-2" />
-              Dil
+          <div className="border-end px-2">
+            <a href="#" className="text-decoration-none text-dark">
+              <FaEnvelope className="me-2" />
+              <span>mail@mail.com</span>
             </a>
-
-            <ul
-              className="dropdown-menu dropdown-menu-dark"
-              aria-labelledby="dropdownMenuLink"
-            >
-              <li>
-                <a className="dropdown-item text-white" href="#">
-                  <ReactCountryFlag
-                    countryCode="TR"
-                    svg
-                    style={{
-                      width: '1.5em',
-                      height: '1.5em',
-                    }}
-                    className="me-2"
-                    title="TR"
-                  />
-                  Türkçe
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item text-white" href="#">
-                <ReactCountryFlag
-                    countryCode="US"
-                    svg
-                    style={{
-                      width: '1.5em',
-                      height: '1.5em',
-                    }}
-                    className="me-2"
-                    title="US"
-                  />
-                  English (not available)
-                </a>
-              </li>
-            </ul>
+          </div>
+          <div className="px-2 ms-2 me-auto">
+            <a href="#" className="text-decoration-none text-dark">
+              <FaPhoneAlt className="me-2" />
+              <span>222 222 22 22</span>
+            </a>
           </div>
           <div className="d-flex">
             <div className="dropdown me-2">
               <a
-                className="btn btn-dark dropdown-toggle d-flex align-items-center"
-                href="#"
+                className="btn dropdown-toggle d-flex align-items-center border-end"
                 role="button"
                 id="dropdownMenuLink"
                 data-bs-toggle="dropdown"
@@ -85,14 +56,14 @@ const Header = () => {
                   : 'Hesabım'}
               </a>
               <ul
-                className="dropdown-menu dropdown-menu-dark dropdown-menu-end"
+                className="dropdown-menu dropdown-menu-end"
                 aria-labelledby="dropdownMenuLink"
               >
                 {userDetails.user ? (
                   <>
                     <li>
                       <NavLink to="/hesap-ayarlari" className="dropdown-item">
-                        <FaUserCog className="me-2"/>
+                        <FaUserCog className="me-2" />
                         Hesap Ayarları
                       </NavLink>
                     </li>
@@ -120,10 +91,56 @@ const Header = () => {
                 )}
               </ul>
             </div>
-            <a className="btn btn-dark" href="#">
+            <a className="btn border-end" href="#">
               <FaHeart className="me-2 text-danger" />
               Beğendiklerim
             </a>
+            <div className="dropdown">
+              <a
+                className="btn dropdown-toggle"
+                href="#"
+                role="button"
+                id="dropdownMenuLink"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <FaGlobeEurope className="me-2" />
+                Dil
+              </a>
+
+              <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                <li>
+                  <a className="dropdown-item" href="#">
+                    <ReactCountryFlag
+                      countryCode="TR"
+                      svg
+                      style={{
+                        width: '1.5em',
+                        height: '1.5em',
+                      }}
+                      className="me-2"
+                      title="TR"
+                    />
+                    Türkçe
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    <ReactCountryFlag
+                      countryCode="US"
+                      svg
+                      style={{
+                        width: '1.5em',
+                        height: '1.5em',
+                      }}
+                      className="me-2"
+                      title="US"
+                    />
+                    English (not available)
+                  </a>
+                </li>
+              </ul>
+            </div>
             {/* <div className="dropdown">
 
                         <ul className="dropdown-menu dropdown-menu-dark dropdown-menu-end"
