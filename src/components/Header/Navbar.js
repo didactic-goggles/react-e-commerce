@@ -60,6 +60,7 @@ const Navbar = () => {
     const searchValue = event.target.value;
     if (searchValue.trim().length < 3) {
       setSearchResults(null);
+      searchDropdown.current.classList.remove('show');
       return;
     }
     const tempSearchResults = {
@@ -116,16 +117,12 @@ const Navbar = () => {
       tempSearchResults.brands.length === 0 && 
       tempSearchResults.products.length === 0
     ) {
-      console.log('null');
       setSearchResults(null);
+      searchDropdown.current.classList.add('show');
       return;
     }
     setSearchResults(tempSearchResults);
-    console.log(tempSearchResults);
-    // console.log(searchResultCategories);
-    // console.log(event);
     searchDropdown.current.classList.add('show');
-    // console.log(searchDropdown);
   };
 
   const handleSearchBlur = (event) => {
@@ -140,8 +137,7 @@ const Navbar = () => {
   };
 
   const SearchResults = () => {
-    console.log(searchResults);
-    if (searchResults == null) return <h5>Sonuç bulunamadı...</h5>;
+    if (searchResults == null) return <h5 className="px-3 py-2">Sonuç bulunamadı...</h5>;
     // else if(searchResults === 'empty') return <h5>Yazmaya devam edin...</h5>;
     return (
       <>
@@ -242,7 +238,7 @@ const Navbar = () => {
             <h3 className="mb-0 text-dark">LOGO</h3>
           </NavLink>
           <div className="dropdown w-100">
-            <div className="searchbox mx-0 mx-md-5">
+            <div className="searchbox mx-0 mx-md-5 shadow-sm">
               <input
                 type="text"
                 className="search-textbox"
@@ -262,7 +258,7 @@ const Navbar = () => {
               </a>
             </div>
             <div
-              className="dropdown-menu text-muted mx-0 mx-md-5 w-50"
+              className="dropdown-menu text-muted mx-0 mx-md-5 w-50 search-menu"
               ref={searchDropdown}
             >
               <SearchResults />
@@ -272,8 +268,8 @@ const Navbar = () => {
           {/* <a>Get in</a> */}
         </div>
         <nav
-          className="navbar navbar-dark"
-          style={{ backgroundColor: 'var(--bs-gray)' }}
+          className="navbar navbar-dark bg-dark"
+          // style={{ backgroundColor: 'var(--bs-gray)' }}
         >
           <ul
             id="mainNav"
