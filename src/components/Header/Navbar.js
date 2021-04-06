@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import {
   FaSearch,
   FaTimes,
@@ -23,6 +23,7 @@ import {
 
 const Navbar = () => {
   console.log('Rendering => Navbar');
+  const baseURL = 'https://comfortmedikal.com/';
   const searchDropdown = useRef();
   const searchInput = useRef();
   const dispatch = useAuthDispatch();
@@ -56,8 +57,8 @@ const Navbar = () => {
     getAllBrandsAndCategories();
   }, []);
 
-  const handleSearch = (event) => {
-    const searchValue = event.target.value;
+  const handleSearch = () => {
+    const searchValue = searchInput.current.value;
     if (searchValue.trim().length < 3) {
       setSearchResults(null);
       searchDropdown.current.classList.remove('show');
@@ -82,6 +83,7 @@ const Navbar = () => {
         ) {
           tempSearchResults.subCategories.push({
             ...subCategory,
+            category_id: category.id,
             category_name: category.name,
           });
         }
@@ -93,7 +95,9 @@ const Navbar = () => {
           ) {
             tempSearchResults.childCategories.push({
               ...childCategory,
+              category_id: category.id,
               category_name: category.name,
+              sub_category_id: subCategory.id,
               sub_category_name: subCategory.sub_category_name,
             });
           }
@@ -102,19 +106,19 @@ const Navbar = () => {
     });
     userDetails.brands.forEach(
       (brand) =>
-      brand.name.toLocaleLowerCase().indexOf(searchValue) !== -1 &&
+        brand.name.toLocaleLowerCase().indexOf(searchValue) !== -1 &&
         tempSearchResults.brands.push(brand)
     );
     userDetails.products.forEach(
       (product) =>
-      product.name.toLocaleLowerCase().indexOf(searchValue) !== -1 &&
+        product.name.toLocaleLowerCase().indexOf(searchValue) !== -1 &&
         tempSearchResults.products.push(product)
     );
     if (
       tempSearchResults.categories.length === 0 &&
       tempSearchResults.subCategories.length === 0 &&
-      tempSearchResults.childCategories.length === 0 && 
-      tempSearchResults.brands.length === 0 && 
+      tempSearchResults.childCategories.length === 0 &&
+      tempSearchResults.brands.length === 0 &&
       tempSearchResults.products.length === 0
     ) {
       setSearchResults(null);
@@ -126,18 +130,21 @@ const Navbar = () => {
   };
 
   const handleSearchBlur = (event) => {
-    searchDropdown.current.classList.remove('show');
-    setSearchResults(null);
+    setTimeout(() => {
+      searchDropdown.current.classList.remove('show');
+      setSearchResults(null);
+    }, 100);
   };
 
   const handleSearchCancel = (event) => {
     setSearchResults(null);
     searchDropdown.current.classList.remove('show');
-    searchInput.current.value = "";
+    searchInput.current.value = '';
   };
 
   const SearchResults = () => {
-    if (searchResults == null) return <h5 className="px-3 py-2">Sonuç bulunamadı...</h5>;
+    if (searchResults == null)
+      return <h5 className="px-3 py-2">Sonuç bulunamadı...</h5>;
     // else if(searchResults === 'empty') return <h5>Yazmaya devam edin...</h5>;
     return (
       <>
@@ -145,13 +152,13 @@ const Navbar = () => {
           <div className="list-group">
             <h6 className="dropdown-header text-primary">Kategoriler</h6>
             {searchResults.categories.map((category, index) => (
-              <a
+              <Link
                 key={index}
-                href="#"
+                to={`/urunler?categories=${category.id}`}
                 className="list-group-item list-group-item-action"
               >
                 {category.name}
-              </a>
+              </Link>
             ))}
           </div>
         )}
@@ -159,9 +166,9 @@ const Navbar = () => {
           <div className="list-group">
             <h6 className="dropdown-header text-primary">Alt Kategoriler</h6>
             {searchResults.subCategories.map((subCategory, index) => (
-              <a
+              <Link
                 key={index}
-                href="#"
+                to={`/urunler?categories=${subCategory.category_id}&subCategories=${subCategory.id}`}
                 className="list-group-item list-group-item-action"
               >
                 <span className="d-block">{subCategory.sub_category_name}</span>
@@ -170,7 +177,7 @@ const Navbar = () => {
                 </small>
                 <span> &gt; </span>
                 {}
-              </a>
+              </Link>
             ))}
           </div>
         )}
@@ -178,9 +185,9 @@ const Navbar = () => {
           <div className="list-group">
             <h6 className="dropdown-header text-primary">Ürün Tipi</h6>
             {searchResults.childCategories.map((childCategory, index) => (
-              <a
+              <Link
                 key={index}
-                href="#"
+                to={`/urunler?categories=${childCategory.category_id}&subCategories=${childCategory.sub_category_id}&childCategories=${childCategory.id}`}
                 className="list-group-item list-group-item-action"
               >
                 <span className="d-block">
@@ -194,7 +201,7 @@ const Navbar = () => {
                   {childCategory.sub_category_name}
                 </small>
                 <span> &gt; </span>
-              </a>
+              </Link>
             ))}
           </div>
         )}
@@ -202,13 +209,13 @@ const Navbar = () => {
           <div className="list-group">
             <h6 className="dropdown-header text-primary">Markalar</h6>
             {searchResults.brands.map((brand, index) => (
-              <a
+              <Link
                 key={index}
-                href="#"
+                to={`/urunler?brands=${brand.id}`}
                 className="list-group-item list-group-item-action"
               >
                 {brand.name}
-              </a>
+              </Link>
             ))}
           </div>
         )}
@@ -216,13 +223,32 @@ const Navbar = () => {
           <div className="list-group">
             <h6 className="dropdown-header text-primary">Ürünler</h6>
             {searchResults.products.map((product, index) => (
-              <a
+              <Link
                 key={index}
-                href="#"
+                to={`/urun/${product.id}`}
                 className="list-group-item list-group-item-action"
               >
-                {product.name}
-              </a>
+                <div>
+                  <img
+                    className="me-2"
+                    style={{
+                      width: '50px',
+                    }}
+                    src={
+                      product.productPrimaryImage
+                        ? `${baseURL}${product.productPrimaryImage}`
+                        : 'https://via.placeholder.com/150'
+                    }
+                    alt={product.name}
+                    onError={(event) =>
+                      event.target.src !== 'https://via.placeholder.com/150'
+                        ? (event.target.src = 'https://via.placeholder.com/150')
+                        : ''
+                    }
+                  />
+                  <span>{product.name}</span>
+                </div>
+              </Link>
             ))}
           </div>
         )}
@@ -244,10 +270,13 @@ const Navbar = () => {
                 className="search-textbox"
                 placeholder="Ürün, Marka yada Kategori ara..."
                 ref={searchInput}
-                onChange={(event) => handleSearch(event)}
+                onChange={() => handleSearch()}
                 onBlur={(event) => handleSearchBlur(event)}
               />
-              <a className="ico-btn search-btn">
+              <a
+                className="ico-btn search-btn"
+                onClick={() => handleSearch()}
+              >
                 <FaSearch />
               </a>
               <a
@@ -313,9 +342,12 @@ const Navbar = () => {
                 {allMenuTypes.brands &&
                   allMenuTypes.brands.map((brand) => (
                     <li key={brand.id}>
-                      <a className="dropdown-item" href="#">
+                      <Link
+                        className="dropdown-item"
+                        to={`/urunler?brands=${brand.id}`}
+                      >
                         {brand.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
               </ul>
@@ -375,14 +407,14 @@ const Navbar = () => {
                                           {subCategory.childCategories.map(
                                             (childCategory) => (
                                               <li key={childCategory.id}>
-                                                <a
+                                                <Link
                                                   className="dropdown-item"
-                                                  href="#"
+                                                  to={`/urunler?categories=${category.id}&subCategories=${subCategory.id}&childCategories=${childCategory.id}`}
                                                 >
                                                   {
                                                     childCategory.child_category_name
                                                   }
-                                                </a>
+                                                </Link>
                                               </li>
                                             )
                                           )}
@@ -393,9 +425,12 @@ const Navbar = () => {
                                 }
                                 return (
                                   <li key={subCategory.id}>
-                                    <a className="dropdown-item" href="#">
+                                    <Link
+                                      className="dropdown-item"
+                                      to={`/urunler?categories=${category.id}&subCategories=${subCategory.id}`}
+                                    >
                                       {subCategory.sub_category_name}
-                                    </a>
+                                    </Link>
                                   </li>
                                 );
                               })}
@@ -406,9 +441,12 @@ const Navbar = () => {
                     }
                     return (
                       <li key={category.id}>
-                        <a className="dropdown-item" href="#">
+                        <Link
+                          className="dropdown-item"
+                          to={`/urunler?categories=${category.id}`}
+                        >
                           {category.name}
-                        </a>
+                        </Link>
                       </li>
                     );
                   })}

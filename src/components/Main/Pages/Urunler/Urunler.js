@@ -9,28 +9,63 @@ import Sonuc from './Sonuc';
 const Urunler = () => {
   console.log('Rendering => Ürünler');
   const history = useHistory();
-  function useQuery () {
+  function useQuery() {
     return new URLSearchParams(useLocation().search);
-  } 
+  }
   let query = useQuery();
   const userDetails = useAuthState();
   const [filters, setFilters] = useState({
-    categories: [...(query.get('categories') ? query.get('categories').split(',').map(item => Number(item)) : [])],
-    subCategories: [...(query.get('subCategories') ? query.get('subCategories').split(',').map(item => Number(item)) : [])],
-    childCategories: [...(query.get('childCategories') ? query.get('childCategories').split(',').map(item => Number(item)) : [])],
-    brands: [...(query.get('brands') ? query.get('brands').split(',').map(item => Number(item)) : [])],
-    ratings: [...(query.get('ratings') ? query.get('ratings').split(',').map(item => Number(item)) : [])]
+    categories: [
+      ...(query.get('categories')
+        ? query
+            .get('categories')
+            .split(',')
+            .map((item) => Number(item))
+        : []),
+    ],
+    subCategories: [
+      ...(query.get('subCategories')
+        ? query
+            .get('subCategories')
+            .split(',')
+            .map((item) => Number(item))
+        : []),
+    ],
+    childCategories: [
+      ...(query.get('childCategories')
+        ? query
+            .get('childCategories')
+            .split(',')
+            .map((item) => Number(item))
+        : []),
+    ],
+    brands: [
+      ...(query.get('brands')
+        ? query
+            .get('brands')
+            .split(',')
+            .map((item) => Number(item))
+        : []),
+    ],
+    ratings: [
+      ...(query.get('ratings')
+        ? query
+            .get('ratings')
+            .split(',')
+            .map((item) => Number(item))
+        : []),
+    ],
   });
-// const filters = {
-//     categories: [],
-//     subCategories: [],
-//     childCategories: [],
-//     ratings: [],
-//   };
-const [loading, setLoading] = useState(false)
-  const [filteredProducts, setFilteredProducts] = useState(
-    userDetails.products
-  );
+  // const filters = {
+  //     categories: [],
+  //     subCategories: [],
+  //     childCategories: [],
+  //     ratings: [],
+  //   };
+  // const [loading, setLoading] = useState(false)
+  //   const [filteredProducts, setFilteredProducts] = useState(
+  //     userDetails.products
+  //   );
   const starsSettings = {
     isHalf: true,
     size: 16,
@@ -39,7 +74,6 @@ const [loading, setLoading] = useState(false)
     halfIcon: <FaStarHalfAlt />,
     filledIcon: <FaStar />,
   };
-
 
   const CategoriesFilter = () => {
     if (!userDetails.categories || userDetails.categories.length === 0) {
@@ -59,13 +93,15 @@ const [loading, setLoading] = useState(false)
                 `category-checkbox-collapse-${category.id}`
               );
               const categoryCollapse = new bootstrap.Collapse(categoryElement);
-              const tempFilters = {...filters};
-              if(event.target.checked) {
+              const tempFilters = { ...filters };
+              if (event.target.checked) {
                 tempFilters.categories.push(Number(category.id));
                 categoryCollapse.show();
               } else {
-                  tempFilters.categories = tempFilters.categories.filter(categoryId => Number(category.id) !== categoryId);
-                  categoryCollapse.hide();
+                tempFilters.categories = tempFilters.categories.filter(
+                  (categoryId) => Number(category.id) !== categoryId
+                );
+                categoryCollapse.hide();
               }
               setFilters(tempFilters);
             }}
@@ -78,7 +114,9 @@ const [loading, setLoading] = useState(false)
             {category.name}
           </label>
           <div
-            className={`collapse ps-2 ${filters.categories.includes(Number(category.id)) && 'show'}`}
+            className={`collapse ps-2 ${
+              filters.categories.includes(Number(category.id)) && 'show'
+            }`}
             id={`category-checkbox-collapse-${category.id}`}
           >
             {category.subCategories.map((subCategory) => (
@@ -92,18 +130,25 @@ const [loading, setLoading] = useState(false)
                     const subCategoryElement = document.getElementById(
                       `sub-category-checkbox-collapse-${subCategory.id}`
                     );
-                    const subCategoryCollapse = new bootstrap.Collapse(subCategoryElement);
-                    const tempFilters = {...filters};
-                    if(event.target.checked) {
+                    const subCategoryCollapse = new bootstrap.Collapse(
+                      subCategoryElement
+                    );
+                    const tempFilters = { ...filters };
+                    if (event.target.checked) {
                       tempFilters.subCategories.push(Number(subCategory.id));
                       subCategoryCollapse.show();
                     } else {
-                        tempFilters.subCategories = tempFilters.subCategories.filter(subCategoryId => Number(subCategory.id) !== subCategoryId);
-                        subCategoryCollapse.hide();
+                      tempFilters.subCategories = tempFilters.subCategories.filter(
+                        (subCategoryId) =>
+                          Number(subCategory.id) !== subCategoryId
+                      );
+                      subCategoryCollapse.hide();
                     }
                     setFilters(tempFilters);
                   }}
-                  checked={filters.subCategories.includes(Number(subCategory.id))}
+                  checked={filters.subCategories.includes(
+                    Number(subCategory.id)
+                  )}
                 />
                 <label
                   className="form-check-label"
@@ -112,7 +157,10 @@ const [loading, setLoading] = useState(false)
                   {subCategory.sub_category_name}
                 </label>
                 <div
-                  className={`collapse ps-2 ${filters.subCategories.includes(Number(subCategory.id)) && 'show'}`}
+                  className={`collapse ps-2 ${
+                    filters.subCategories.includes(Number(subCategory.id)) &&
+                    'show'
+                  }`}
                   id={`sub-category-checkbox-collapse-${subCategory.id}`}
                 >
                   {subCategory.childCategories.map((childCategory) => (
@@ -123,15 +171,22 @@ const [loading, setLoading] = useState(false)
                         value=""
                         id={`child-category-checkbox-${childCategory.id}`}
                         onChange={(event) => {
-                          const tempFilters = {...filters};
-                          if(event.target.checked) {
-                            tempFilters.childCategories.push(Number(childCategory.id));
+                          const tempFilters = { ...filters };
+                          if (event.target.checked) {
+                            tempFilters.childCategories.push(
+                              Number(childCategory.id)
+                            );
                           } else {
-                              tempFilters.childCategories = tempFilters.childCategories.filter(childCategoryId => Number(childCategory.id) !== childCategoryId);
+                            tempFilters.childCategories = tempFilters.childCategories.filter(
+                              (childCategoryId) =>
+                                Number(childCategory.id) !== childCategoryId
+                            );
                           }
                           setFilters(tempFilters);
                         }}
-                        checked={filters.childCategories.includes(Number(childCategory.id))}
+                        checked={filters.childCategories.includes(
+                          Number(childCategory.id)
+                        )}
                       />
                       <label
                         className="form-check-label"
@@ -156,44 +211,46 @@ const [loading, setLoading] = useState(false)
   };
 
   const BrandsFilter = () => {
-    if(!userDetails.brands || userDetails.brands.length === 0) return null;
+    if (!userDetails.brands || userDetails.brands.length === 0) return null;
 
     const brandElements = [];
-    userDetails.brands.forEach(brand => {
+    userDetails.brands.forEach((brand) => {
       brandElements.push(
         <div className="form-check" key={brand.id}>
-        <input
-          className="form-check-input"
-          type="checkbox"
-          value={brand.id}
-          id={`brand-checkbox-${brand.id}`}
-          onChange={(event) => {
-            const tempFilters = {...filters};
-            if(event.target.checked) {
-              tempFilters.brands.push(Number(brand.id));
-            } else {
-              tempFilters.brands = tempFilters.brands.filter(brandId => Number(brand.id) !== brandId)
-            }
-            setFilters(tempFilters);
-          }}
-          checked={filters.brands.includes(Number(brand.id))}
-        />
-        <label
-          className="form-check-label d-flex align-items-center"
-          htmlFor={`brand-checkbox-${brand.id}`}
-        >
-          {brand.name}
-        </label>
-      </div>
-      )
-    })
+          <input
+            className="form-check-input"
+            type="checkbox"
+            value={brand.id}
+            id={`brand-checkbox-${brand.id}`}
+            onChange={(event) => {
+              const tempFilters = { ...filters };
+              if (event.target.checked) {
+                tempFilters.brands.push(Number(brand.id));
+              } else {
+                tempFilters.brands = tempFilters.brands.filter(
+                  (brandId) => Number(brand.id) !== brandId
+                );
+              }
+              setFilters(tempFilters);
+            }}
+            checked={filters.brands.includes(Number(brand.id))}
+          />
+          <label
+            className="form-check-label d-flex align-items-center"
+            htmlFor={`brand-checkbox-${brand.id}`}
+          >
+            {brand.name}
+          </label>
+        </div>
+      );
+    });
     return (
       <div className="form-group mb-3">
         <h6 className="font-weight-bolder">Markalar</h6>
         {brandElements}
       </div>
     );
-  }
+  };
   const RatingsFilter = () => {
     const Ratings = () => {
       const ratingElements = [];
@@ -206,19 +263,21 @@ const [loading, setLoading] = useState(false)
               value={i}
               id={`rating-checkbox-${i}`}
               onChange={(event) => {
-                  const ratingValue = Number(event.target.value);
+                const ratingValue = Number(event.target.value);
                 //   if(event.target.checked) {
                 //     filters.ratings.push(ratingValue);
                 //   } else {
                 //     filters.ratings = filters.ratings.filter(rating => rating !== ratingValue)
                 //   }
-                  const tempFilters = {...filters};
-                  if(event.target.checked) {
-                    tempFilters.ratings.push(ratingValue);
-                  } else {
-                    tempFilters.ratings = tempFilters.ratings.filter(rating => rating !== ratingValue)
-                  }
-                  setFilters(tempFilters);
+                const tempFilters = { ...filters };
+                if (event.target.checked) {
+                  tempFilters.ratings.push(ratingValue);
+                } else {
+                  tempFilters.ratings = tempFilters.ratings.filter(
+                    (rating) => rating !== ratingValue
+                  );
+                }
+                setFilters(tempFilters);
               }}
               checked={filters.ratings.includes(Number(i))}
             />
@@ -248,20 +307,17 @@ const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     console.log('useEffect');
-    let filtersString = "";
-    Object.keys(filters).forEach(key => {
-      if(filters[key].length > 0) {
+    let filtersString = '';
+    Object.keys(filters).forEach((key) => {
+      if (filters[key].length > 0) {
         filtersString += `${key}=${filters[key].toString()}&`;
       }
     });
-    console.log(filters);
-    console.log(filtersString);
-    console.log(userDetails);
-    
+
     history.push({
-      search: `?${filtersString}`
+      search: `?${filtersString}`,
     });
-  }, [filters]);
+  }, [filters, history]);
 
   return (
     <section className="container py-3">
@@ -278,7 +334,7 @@ const [loading, setLoading] = useState(false)
           </div>
         </div>
         <div className="col-md-9">
-          <Sonuc filters={filters} allProducts={userDetails.products}/>
+          <Sonuc filters={filters} allProducts={userDetails.products} />
         </div>
       </div>
     </section>

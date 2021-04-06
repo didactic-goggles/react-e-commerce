@@ -13,8 +13,8 @@ const Sonuc = (props) => {
           return false;
         if(filters.subCategories.length > 0 && !filters.subCategories.includes(Number(product.subCategoryId)))
           return false;
-        // if(filters.childCategories.length > 0 && !filters.childCategories.includes(Number(product.categoryId)))
-        //   return false;
+        if(filters.childCategories.length > 0 && !filters.childCategories.includes(Number(product.childCategoryId)))
+          return false;
         if(filters.brands.length > 0 && !filters.brands.includes(Number(product.brandId)))
           return false;
         if(filters.ratings.length > 0 && !filters.ratings.includes(Math.round(Number(product.rating))))

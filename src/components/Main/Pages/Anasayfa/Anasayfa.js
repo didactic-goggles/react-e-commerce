@@ -192,65 +192,47 @@ const Anasayfa = () => {
       <section className="container mb-3">
         <div className="row">
           <div className="col-md-4">
-            <div className="card bg-light">
+            <div className="card bg-light border-0 rounded-3 shadow-sm">
               <div className="card-body">
-                <img className="w-100px" src="https://comfortmedikal.com/img/resim_orjinal/test-transparent.png" alt="test"/>
+                <div className="row">
+                  <div className="col-lg-6 col-sm-12 d-flex justify-content-center flex-column">
+                    <h4>AAA Serisi Ürünler</h4>
+                    <a href="#" className="btn btn-link text-start px-0">İnceleyin</a>
+                  </div>
+                  <div className="col-6">
+                    <img className="w-100" src="https://comfortmedikal.com/img/resim_orjinal/test-transparent1.png" alt="test"/>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           <div className="col-md-4">
-            <div className="card bg-dark text-white">
-              <svg
-                className="bd-placeholder-img bd-placeholder-img-lg d-block w-100"
-                width="800"
-                height="200"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: First slide"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Ürün Foto</title>
-                <rect width="100%" height="100%" fill="#777" />
-                <text x="50%" y="50%" fill="#555" dy=".3em">
-                  Ürün 1
-                </text>
-              </svg>
-              <div className="card-img-overlay">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in.
-                </p>
-                <p className="card-text">Last updated 3 mins ago</p>
+            <div className="card bg-light border-0 rounded-3 shadow-sm">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-lg-6 col-sm-12 d-flex justify-content-center flex-column">
+                    <h4>AAA Serisi Ürünler</h4>
+                    <a href="#" className="btn btn-link text-start px-0">İnceleyin</a>
+                  </div>
+                  <div className="col-6">
+                    <img className="w-100" src="https://comfortmedikal.com/img/resim_orjinal/test-transparent1.png" alt="test"/>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           <div className="col-md-4">
-            <div className="card bg-dark text-white">
-              <svg
-                className="bd-placeholder-img bd-placeholder-img-lg d-block w-100"
-                width="800"
-                height="200"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: First slide"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Ürün Foto</title>
-                <rect width="100%" height="100%" fill="#777" />
-                <text x="50%" y="50%" fill="#555" dy=".3em">
-                  Ürün 1
-                </text>
-              </svg>
-              <div className="card-img-overlay">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in.
-                </p>
-                <p className="card-text">Last updated 3 mins ago</p>
+            <div className="card bg-light border-0 rounded-3 shadow-sm">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-lg-6 col-sm-12 d-flex justify-content-center flex-column">
+                    <h4>AAA Serisi Ürünler</h4>
+                    <a href="#" className="btn btn-link text-start px-0">İnceleyin</a>
+                  </div>
+                  <div className="col-6">
+                    <img className="w-100" src="https://comfortmedikal.com/img/resim_orjinal/test-transparent1.png" alt="test"/>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
