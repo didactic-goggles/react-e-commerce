@@ -2,10 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap');
 $font-family-sans-serif: "Nunito Sans", sans-serif;
 
-$border-radius: 0 !default;
-$border-radius-sm: 0 !default;
-$border-radius-lg: 0 !default;
-
+// $border-radius: 0 !default;
+// $border-radius-sm: 0 !default;
+// $border-radius-lg: 0 !default;
+$nav-pills-border-radius: 0 !default;
+$btn-border-radius: 0 !default;
+$btn-border-radius-lg: 0 !default;
+$btn-border-radius-sm: 0 !default;
+$dropdown-border-radius: 0 !default;
+$dropdown-border-width: 0 !default;
 $breadcrumb-divider: quote(">");
 $primary: #03a9f4;
 // $danger: #ff4136;

@@ -7,7 +7,6 @@ $btn-icon-size-xs: 24px !default; //custom parameter
 $input-height: calc(1.5em + 1.3rem + 2px) !default;
 $input-height-sm: calc(1.35em + 1.1rem + 2px) !default;
 $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
-
 body {
     // min-height: 100vh;
     // display: flex;
@@ -332,7 +331,7 @@ body {
     .dropdown-item {
         transition: padding-left .5s ease;
         &:hover {
-            padding-left: .3rem;
+            padding-left: 1.3rem;
         }
     }
     .dropdown-menu {

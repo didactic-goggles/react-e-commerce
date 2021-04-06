@@ -191,7 +191,7 @@
 #mainNav .dropdown-item {
   transition: padding-left .5s ease; }
   #mainNav .dropdown-item:hover {
-    padding-left: .3rem; }
+    padding-left: 1.3rem; }
 
 #mainNav .dropdown-menu {
   border-top: 5px solid var(--bs-primary); }
