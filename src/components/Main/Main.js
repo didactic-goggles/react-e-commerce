@@ -8,6 +8,7 @@ import Iletisim from './Pages/Iletisim/Iletisim';
 import Urun from './Pages/Urun/Urun';
 import Login from '../Login/Login';
 import Urunler from './Pages/Urunler/Urunler';
+import Signup from '../Login/Signup';
 
 const Main = () => {
   return (
@@ -30,6 +31,9 @@ const Main = () => {
         </Route>
         <Route path="/giris">
           <Login />
+        </Route>
+        <Route path="/kayit">
+          <Signup />
         </Route>
         <Route path="/">
           <Anasayfa />
