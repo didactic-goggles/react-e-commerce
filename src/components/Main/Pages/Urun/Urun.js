@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 import OwlCarousel from 'react-owl-carousel';
 import ReactStars from 'react-rating-stars-component';
 import { FaRegStar, FaStarHalfAlt, FaStar } from 'react-icons/fa';
 import ReactTooltip from 'react-tooltip';
 import ReactImageMagnify from 'react-image-magnify';
+import * as bootstrap from 'bootstrap/dist/js/bootstrap.bundle';
 
-import { useAuthDispatch, useAuthState } from '../../../../context';
+import { useAuthState } from '../../../../context';
 import API from '../../../../api';
 import LoadingIndicator from '../../../UI/LoadingIndicator';
 
@@ -17,8 +18,8 @@ import Comments from './Comments';
 const Urun = () => {
   console.log('Rendering => Urun');
   const baseURL = 'https://comfortmedikal.com/';
-  let history = useHistory();
-  const dispatch = useAuthDispatch();
+  // let history = useHistory();
+  // const dispatch = useAuthDispatch();
   const userDetails = useAuthState();
   console.log(userDetails);
   // const starRating = useRef();
@@ -30,7 +31,7 @@ const Urun = () => {
   const starsSettings = {
     isHalf: true,
     size: 20,
-    value: productInfo ? Math.round(Number(productInfo.overallRating) * 2) / 2 : 0,
+    value: productInfo && productInfo.overallRating ? Math.round(Number(productInfo.overallRating) * 2) / 2 : 0,
     emptyIcon: <FaRegStar />,
     halfIcon: <FaStarHalfAlt />,
     filledIcon: <FaStar />,
@@ -46,40 +47,38 @@ const Urun = () => {
     },
   };
 
-  const getProductDetails = async () => {
-    const getProductDetailsResponse = await API.get(
-      `/products.php?product_id=${productId}`
-    );
-
-    const tempProductInfo = {
-      product: getProductDetailsResponse.product,
-      productDetails: getProductDetailsResponse.productDetails,
-      categories: getProductDetailsResponse.categories[0],
-      comments: getProductDetailsResponse.comments,
-      productImages: getProductDetailsResponse.productImages,
-    };
-    if (getProductDetailsResponse.productImages.length > 0) {
-      tempProductInfo.activeImageProduct = tempProductInfo.productImages.filter(
-        (productImage) =>
-          productImage.id ===
-          tempProductInfo.productDetails.product_base_image_id
-      )[0];
-    }
-
-    if (getProductDetailsResponse.comments.length > 0)
-      tempProductInfo.overallRating =
-        getProductDetailsResponse.comments.reduce(
-          (totalRating, c2) => totalRating + Number(c2.rating),
-          0
-        ) / getProductDetailsResponse.comments.length;
-    setProductInfo(tempProductInfo);
-    setLoading(false);
-  };
-
   useEffect(() => {
-    // setLoading(true);
+    const getProductDetails = async () => {
+      const getProductDetailsResponse = await API.get(
+        `/products.php?product_id=${productId}`
+      );
+  
+      const tempProductInfo = {
+        product: getProductDetailsResponse.product,
+        productDetails: getProductDetailsResponse.productDetails,
+        categories: getProductDetailsResponse.categories[0],
+        comments: getProductDetailsResponse.comments,
+        productImages: getProductDetailsResponse.productImages,
+      };
+      if (getProductDetailsResponse.productImages.length > 0) {
+        tempProductInfo.activeImageProduct = tempProductInfo.productImages.filter(
+          (productImage) =>
+            productImage.id ===
+            tempProductInfo.productDetails.product_base_image_id
+        )[0];
+      }
+  
+      if (getProductDetailsResponse.comments.length > 0)
+        tempProductInfo.overallRating =
+          getProductDetailsResponse.comments.reduce(
+            (totalRating, c2) => totalRating + Number(c2.rating),
+            0
+          ) / getProductDetailsResponse.comments.length;
+      setProductInfo(tempProductInfo);
+      setLoading(false);
+    };
     getProductDetails();
-  }, []);
+  }, [productId]);
 
   const handleActiveProductImageChange = (productImageId) => {
     // const targetIndex = productInfo.productImages.findIndex(productImage => productImage.id === productImageId);
@@ -99,15 +98,16 @@ const Urun = () => {
   return (
     <section className="container py-3">
       {productInfo.categories && (
+      <div className="card card-body p-2 mb-3 rounded-0 shadow-sm d-block align-items-center">
         <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
+          <ol className="breadcrumb mb-0">
             <li className="breadcrumb-item">
-              <NavLink to="/urunler" exact>
+              <NavLink to="/urunler" className="text-decoration-none" exact>
                 Ürünler
               </NavLink>
             </li>
             <li className="breadcrumb-item" aria-current="page">
-              <NavLink to={`/urunler?category_id=${productInfo.categories.id}`}>
+              <NavLink to={`/urunler?category_id=${productInfo.categories.id}`} className="text-decoration-none">
                 {productInfo.categories.name}
               </NavLink>
             </li>
@@ -115,7 +115,7 @@ const Urun = () => {
               <li className="breadcrumb-item" aria-current="page">
                 <NavLink
                   to={`/urunler?sub_category_id=${productInfo.categories.sub_category_id}`}
-                  className="active"
+                  className="text-decoration-none"
                 >
                   {productInfo.categories.sub_category_name}
                 </NavLink>
@@ -125,7 +125,7 @@ const Urun = () => {
               <li className="breadcrumb-item" aria-current="page">
                 <NavLink
                   to={`/urunler?child_category_id=${productInfo.categories.child_category_id}`}
-                  className="active"
+                  className="text-decoration-none"
                 >
                   {productInfo.categories.child_category_name}
                 </NavLink>
@@ -136,6 +136,7 @@ const Urun = () => {
             </li>
           </ol>
         </nav>
+      </div>
       )}
       <div className="row">
         <div className="col-sm-5">
@@ -244,9 +245,9 @@ const Urun = () => {
               <ReactStars {...starsSettings} />
             ) : (
               <span>
-                <a data-tip data-for="infoForLogin">
+                <span data-tip data-for="infoForLogin">
                   <ReactStars {...starsSettings} />
-                </a>
+                </span>
                 <ReactTooltip
                   id="infoForLogin"
                   place="top"
@@ -263,11 +264,16 @@ const Urun = () => {
               </span>
             )}
             {productInfo.comments.length > 0 ? (
-              <a 
+              <a
+                href="#comments"
                 className="btn btn-link text-warning"
                 onClick={(event) => {
                   event.preventDefault();
-                  document.querySelector('#comments').scrollIntoView();
+                  // document.querySelector('#comments').scrollIntoView();
+                  var firstTabEl = document.querySelector('#pills-comments-tab')
+                  var firstTab = new bootstrap.Tab(firstTabEl)
+
+                  firstTab.show()
                 }}
               >
                 {' '}
@@ -278,7 +284,7 @@ const Urun = () => {
             )}
           </div>
           <div>
-            <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <ul className="nav nav-tabs mb-3" id="pills-tab" role="tablist">
               <li className="nav-item" role="presentation">
                 <button
                   className="nav-link active"
@@ -321,6 +327,20 @@ const Urun = () => {
                   Teknik Özellikler
                 </button>
               </li>
+              <li className="nav-item" role="presentation">
+                <button
+                  className="nav-link"
+                  id="pills-comments-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-comments"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-comments"
+                  aria-selected="false"
+                >
+                  Yorumlar
+                </button>
+              </li>
             </ul>
             <div className="tab-content" id="pills-tabContent">
               <div
@@ -353,15 +373,22 @@ const Urun = () => {
                 cillum adipisicing ad. Non est magna aliquip quis pariatur
                 culpa.
               </div>
+              <div
+                className="tab-pane fade"
+                id="pills-comments"
+                role="tabpanel"
+                aria-labelledby="pills-comments-tab"
+              >
+                <Comments
+                  comments={productInfo.comments}
+                  userDetails={userDetails}
+                  productId={productId}
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <Comments
-        comments={productInfo.comments}
-        userDetails={userDetails}
-        productId={productId}
-      />
     </section>
   );
 };

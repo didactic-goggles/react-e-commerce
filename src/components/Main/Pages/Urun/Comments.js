@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+// import { useHistory} from 'react-router-dom';
 import moment from 'moment';
 import { NavLink } from 'react-router-dom';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -9,7 +10,11 @@ import Comment from './Comment';
 import API from '../../../../api';
 
 const Comments = (props) => {
+  console.log('Rendering => Comments');
   const { comments, userDetails, productId } = props;
+  const [allComments, setAllComments] = useState(comments);
+  // const history = useHistory()
+  const isUserCommentedThis = allComments.filter(comment => userDetails.user && Number(comment.userId) === Number(userDetails.user.id)).length > 0;
   const [newComment, setNewComment] = useState('');
   const [newRating, setNewRating] = useState(0);
   const ratingInputSettings = {
@@ -23,9 +28,8 @@ const Comments = (props) => {
   };
 
   const handleNewComment = async () => {
-    console.log(newComment, newRating);
     const newCommentBody = {
-      user_id: '4',
+      user_id: userDetails.user.id,
       product_id: productId,
       comment: newComment,
       rating: newRating,
@@ -35,15 +39,34 @@ const Comments = (props) => {
     Object.keys(newCommentBody).forEach(key => newCommentFormData.append(key, newCommentBody[key]));
     const newCommentResponse = await API.post('/comment.php', newCommentFormData);
     console.log(newCommentResponse);
+    // history.go(0);
+    const tempAllComments = allComments;
+    tempAllComments.push({
+      userId: userDetails.user.id,
+      username: userDetails.user.username,
+      product_id: productId,
+      comment: newComment,
+      rating: newRating,
+      createdDate: moment().format('YYYY-MM-DD'),
+      id: 'newComment'
+    });
+    console.log(tempAllComments);
+    setAllComments(tempAllComments);
   }
+
+  useEffect(() => {
+    console.log('useEffect');
+    setNewComment('');
+    setNewRating(0);
+  }, []);
   return (
     <div id="comments">
       <div className="my-3">
-        <h4 className="mb-3">Yorumlar</h4>
-        {comments.length > 0 ? (
+        {/* <h4 className="mb-3">Yorumlar</h4> */}
+        {allComments.length > 0 ? (
           <PerfectScrollbar>
             <div className="comments-section">
-              {comments.map((comment) => (
+              {allComments.map((comment) => (
                 <Comment comment={comment} key={comment.id} />
               ))}
             </div>
@@ -52,7 +75,7 @@ const Comments = (props) => {
           <h5>Bu ürün henüz yorumlanmamış. İlk yorumu siz ekleyin</h5>
         )}
       </div>
-      {userDetails.user ? (
+      {userDetails.user && !isUserCommentedThis? (
         <div>
           <form>
             <h5>Yorum Ekle</h5>
@@ -77,7 +100,9 @@ const Comments = (props) => {
             </div>
           </form>
         </div>
-      ) : (
+      ) : ( isUserCommentedThis ? <h5>
+        Bu ürünü yorumladınız
+      </h5> : 
         <h5>
           Yorum eklemek için lütfen <NavLink to="/giris">giriş yapın</NavLink>
         </h5>

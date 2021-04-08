@@ -11,7 +11,7 @@ const Comment = (props) => {
   const starsSettings = {
     isHalf: true,
     size: 16,
-    value: Number(comment.rating) || 0,
+    value: comment.rating ? Number(comment.rating) : 0,
     edit: false,
     emptyIcon: <FaRegStar />,
     halfIcon: <FaStarHalfAlt />,
