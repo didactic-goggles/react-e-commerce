@@ -1,9 +1,9 @@
 // import axios from 'axios';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import OwlCarousel from 'react-owl-carousel';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import API from '../../../../api';
-import LoadingIndicator from '../../../UI/LoadingIndicator';
+// import API from '../../../../api';
+// import LoadingIndicator from '../../../UI/LoadingIndicator';
 import Product from '../../../UI/Product/Product';
 
 import { useAuthState } from '../../../../context';
@@ -13,34 +13,34 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 const ProductsSlider = () => {
   console.log('Rendering => ProductsSlider');
   const userDetails = useAuthState();
-  const [loading, setLoading] = useState(true);
-  const [allProducts, setAllProducts] = useState([]);
+  // const [loading, setLoading] = useState(true);
+  // const [allProducts, setAllProducts] = useState([]);
   const specialCarousel = useRef();
   const latestCarousel = useRef();
   const mostLikedCarousel = useRef();
   // const [activeCarousel, setActiveCarousel] = useState('special');
   let activeCarousel = 'special';
 
-  useEffect(() => {
-    console.log('Start');
-    const getProducts = async () => {
-      const allProducts = userDetails.products;
-      // const getAllProductsResponse = await API.get('products.php');
-      if(allProducts.length > 0) {
-        setAllProducts(allProducts);
-        setLoading(false);
-        console.log('Finish');
-      } else {
-        setLoading(false);
-        setAllProducts([]);
-      }
-    };
-    getProducts();
-  }, []);
+  // useEffect(() => {
+  //   console.log('Start');
+  //   const getProducts = async () => {
+  //     const allProducts = userDetails.products;
+  //     // const getAllProductsResponse = await API.get('products.php');
+  //     if(allProducts.length > 0) {
+  //       setAllProducts(allProducts);
+  //       setLoading(false);
+  //       console.log('Finish');
+  //     } else {
+  //       setLoading(false);
+  //       setAllProducts([]);
+  //     }
+  //   };
+  //   getProducts();
+  // }, []);
 
-  if(loading) {
-    return <LoadingIndicator text="Ürünler Yükleniyor..." />;
-  }
+  // if(loading) {
+  //   return <LoadingIndicator text="Ürünler Yükleniyor..." />;
+  // }
 
   if (userDetails.products.length === 0) {
     return <h5>Ürünler Yüklenemedi</h5>;

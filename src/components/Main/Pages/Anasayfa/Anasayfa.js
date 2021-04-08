@@ -55,9 +55,9 @@ const Anasayfa = () => {
                   <h1>Ürün Başlığı</h1>
                   <p>Ürün Açıklaması</p>
                   <p>
-                    <a className="btn btn-lg btn-primary" href="#">
+                    <button className="btn btn-lg btn-primary">
                       Ürün Detayına Git
-                    </a>
+                    </button>
                   </p>
                 </div>
               </div>
@@ -85,9 +85,9 @@ const Anasayfa = () => {
                   <h1>Ürün Başlığı</h1>
                   <p>Ürün Açıklaması</p>
                   <p>
-                    <a className="btn btn-lg btn-primary" href="#">
+                    <button className="btn btn-lg btn-primary">
                       Ürün Detayına Git
-                    </a>
+                    </button>
                   </p>
                 </div>
               </div>
@@ -115,9 +115,9 @@ const Anasayfa = () => {
                   <h1>Ürün Başlığı</h1>
                   <p>Ürün Açıklaması</p>
                   <p>
-                    <a className="btn btn-lg btn-primary" href="#">
+                    <button className="btn btn-lg btn-primary">
                       Ürün Detayına Git
-                    </a>
+                    </button>
                   </p>
                 </div>
               </div>
@@ -197,7 +197,7 @@ const Anasayfa = () => {
                 <div className="row">
                   <div className="col-lg-6 col-sm-12 d-flex justify-content-center flex-column">
                     <h4>AAA Serisi Ürünler</h4>
-                    <a href="#" className="btn btn-link text-start px-0">İnceleyin</a>
+                    <button href="#" className="btn btn-link text-start px-0">İnceleyin</button>
                   </div>
                   <div className="col-6">
                     <img className="w-100" src="https://comfortmedikal.com/img/resim_orjinal/test-transparent1.png" alt="test"/>
@@ -212,7 +212,7 @@ const Anasayfa = () => {
                 <div className="row">
                   <div className="col-lg-6 col-sm-12 d-flex justify-content-center flex-column">
                     <h4>AAA Serisi Ürünler</h4>
-                    <a href="#" className="btn btn-link text-start px-0">İnceleyin</a>
+                    <button className="btn btn-link text-start px-0">İnceleyin</button>
                   </div>
                   <div className="col-6">
                     <img className="w-100" src="https://comfortmedikal.com/img/resim_orjinal/test-transparent1.png" alt="test"/>
@@ -227,7 +227,7 @@ const Anasayfa = () => {
                 <div className="row">
                   <div className="col-lg-6 col-sm-12 d-flex justify-content-center flex-column">
                     <h4>AAA Serisi Ürünler</h4>
-                    <a href="#" className="btn btn-link text-start px-0">İnceleyin</a>
+                    <button className="btn btn-link text-start px-0">İnceleyin</button>
                   </div>
                   <div className="col-6">
                     <img className="w-100" src="https://comfortmedikal.com/img/resim_orjinal/test-transparent1.png" alt="test"/>

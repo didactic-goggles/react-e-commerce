@@ -41,12 +41,14 @@ const Product = (props) => {
         <div className="image-overlay py-2">
           <div className="d-flex justify-content-center align-items-center flex-column h-100">
             <NavLink to={`/urun/${product.id}`} exact>
-              <button className="btn btn-primary mb-2" type="button">
-                <FaEye /> Ürünü Göster
+              <button className="btn btn-light btn-circle mb-2" type="button">
+                <FaEye/> 
+                {/* <span className="d-inline d-md-none">Ürünü Göster</span> */}
               </button>
             </NavLink>
-            <button className="btn btn-danger" type="button">
-              <FaHeart /> Beğendiklerime Ekle
+            <button className="btn btn-danger btn-circle" type="button">
+              <FaHeart />
+               {/* Beğendiklerime Ekle */}
             </button>
           </div>
         </div>

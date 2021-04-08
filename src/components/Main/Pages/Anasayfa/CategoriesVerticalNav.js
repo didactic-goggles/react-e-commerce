@@ -6,7 +6,7 @@ const CategoriesVerticalNav = () => {
   const userDetails = useAuthState();
   console.log(userDetails);
   return (
-    <div className="nav-categories card card-body ps-1">
+    <div className="nav-categories card card-body ps-1 shadow-sm">
       <PerfectScrollbar>
         <nav
           className="collapse bd-links"

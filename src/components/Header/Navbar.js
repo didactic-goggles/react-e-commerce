@@ -36,26 +36,43 @@ const Navbar = () => {
     brands: [],
     products: [],
   });
-  const getAllBrandsAndCategories = async () => {
-    // getAllCategories(dispatch);
-    // console.log(asd);
-    // const getAllBrandsResponse = API.get('/brands.php');
-    // const getAllCategoriesResponse = API.get('/categories.php');
-    const allResponses = await Promise.all([
-      getAllCategories(dispatch),
-      getAllBrands(dispatch),
-      getAllProducts(dispatch),
-    ]);
-    setAllMenuTypes({
-      categories: allResponses[0].categories,
-      brands: allResponses[1].brands,
-      products: allResponses[2].products,
-    });
-  };
+  // const getAllBrandsAndCategories = async () => {
+  //   // getAllCategories(dispatch);
+  //   // console.log(asd);
+  //   // const getAllBrandsResponse = API.get('/brands.php');
+  //   // const getAllCategoriesResponse = API.get('/categories.php');
+  //   const allResponses = await Promise.all([
+  //     getAllCategories(dispatch),
+  //     getAllBrands(dispatch),
+  //     getAllProducts(dispatch),
+  //   ]);
+  //   setAllMenuTypes({
+  //     categories: allResponses[0].categories,
+  //     brands: allResponses[1].brands,
+  //     products: allResponses[2].products,
+  //   });
+  // };
+  
 
   useEffect(() => {
+    const getAllBrandsAndCategories = async () => {
+      // getAllCategories(dispatch);
+      // console.log(asd);
+      // const getAllBrandsResponse = API.get('/brands.php');
+      // const getAllCategoriesResponse = API.get('/categories.php');
+      const allResponses = await Promise.all([
+        getAllCategories(dispatch),
+        getAllBrands(dispatch),
+        getAllProducts(dispatch),
+      ]);
+      setAllMenuTypes({
+        categories: allResponses[0].categories,
+        brands: allResponses[1].brands,
+        products: allResponses[2].products,
+      });
+    };
     getAllBrandsAndCategories();
-  }, []);
+  }, [dispatch]);
 
   const handleSearch = () => {
     const searchValue = searchInput.current.value;
