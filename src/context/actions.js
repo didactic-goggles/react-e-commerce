@@ -29,10 +29,46 @@ export async function loginUser(dispatch, loginPayload) {
 		// }
         dispatch({ type: 'LOGIN_SUCCESS', payload: response });
 		localStorage.setItem('currentUser', JSON.stringify(response.user));
+		localStorage.setItem('currentUserToken', response.token);
         return response; 
 
 	} catch (error) {
 		dispatch({ type: 'LOGIN_ERROR', error: 'Giriş Başarısız' });
+	}
+}
+
+export async function signupUser(dispatch, signupPayload) {
+	// const requestOptions = {
+	// 	method: 'POST',
+	// 	headers: { 'Content-Type': 'application/json' },
+	// 	body: JSON.stringify(loginPayload),
+	// };
+
+	try {
+		dispatch({ type: 'REQUEST_SIGNUP' });
+        const signupFormData = new FormData();
+        Object.keys(signupPayload).forEach(key => signupFormData.append(key, signupPayload[key]));
+		const response = await API.post('/signup.php', signupFormData);
+        console.log(response);
+        if(!response) {
+            dispatch({ type: 'SIGNUP_ERROR', error: 'Kayıt Başarısız' });
+            console.log(response);
+            return;
+            // throw 'Giriş Başarısız';
+        }
+		// let data = await response.json();
+
+		// if (data.user) {
+		// 	dispatch({ type: 'LOGIN_SUCCESS', payload: data });
+		// 	localStorage.setItem('currentUser', JSON.stringify(data));
+		// 	return data;
+		// }
+        dispatch({ type: 'SIGNUP_SUCCESS', payload: response });
+		localStorage.setItem('currentUser', JSON.stringify(response.user));
+        return response; 
+
+	} catch (error) {
+		dispatch({ type: 'SIGNUP_ERROR', error: 'Kayıt Başarısız' });
 	}
 }
 

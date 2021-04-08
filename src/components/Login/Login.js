@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { loginUser, useAuthState, useAuthDispatch } from '../../context';
 const Login = (props) => {
   console.log('Rendering => Login');
@@ -15,7 +15,7 @@ const Login = (props) => {
 
     try {
       let response = await loginUser(dispatch, { email, password });
-      console.log(response)
+      console.log(response);
       if (!response.user) return;
       history.push('/');
     } catch (error) {
@@ -64,6 +64,10 @@ const Login = (props) => {
             <input type="checkbox" value="remember-me" /> Beni Hatırla
           </label>
         </div> */}
+        <h5 className="text-center my-3">
+          Hesabınız yok mu? <NavLink to="/kayit">Kayıt olun</NavLink>
+        </h5>
+
         <button
           className="w-100 btn btn-lg btn-primary"
           type="button"
