@@ -17,6 +17,28 @@ const Comments = (props) => {
   const isUserCommentedThis = allComments.filter(comment => userDetails.user && Number(comment.userId) === Number(userDetails.user.id)).length > 0;
   const [newComment, setNewComment] = useState('');
   const [newRating, setNewRating] = useState(0);
+  // let allCommentsObject;
+  // if(allComments.length > 0) {
+  //   console.log(allComments);
+  //   allCommentsObject=  <PerfectScrollbar>
+  //     <div className="comments-section">
+  //       {allComments.map((comment) => (
+  //         <Comment comment={comment} key={comment.id} />
+  //       ))}
+  //     </div>
+  //   </PerfectScrollbar>;
+  // } else {
+  //   allCommentsObject = <h5>Bu ürün henüz yorumlanmamış. İlk yorumu siz ekleyin</h5>;
+  // }
+  const [allCommentsObject, setAllCommentsObject] = useState(
+    allComments.length > 0 ? <PerfectScrollbar>
+        <div className="comments-section">
+          {allComments.map((comment) => (
+            <Comment comment={comment} key={comment.id} />
+          ))}
+        </div>
+      </PerfectScrollbar> : <h5>Bu ürün henüz yorumlanmamış. İlk yorumu siz ekleyin</h5>
+  );
   const ratingInputSettings = {
     isHalf: true,
     size: 20,
@@ -52,28 +74,30 @@ const Comments = (props) => {
     });
     console.log(tempAllComments);
     setAllComments(tempAllComments);
+    if(allComments.length > 0) {
+      console.log(allComments);
+      setAllCommentsObject(<PerfectScrollbar>
+        <div className="comments-section">
+          {allComments.map((comment) => (
+            <Comment comment={comment} key={comment.id} />
+          ))}
+        </div>
+      </PerfectScrollbar>);
+    } else {
+      setAllCommentsObject(<h5>Bu ürün henüz yorumlanmamış. İlk yorumu siz ekleyin</h5>);
+    }
   }
 
   useEffect(() => {
     console.log('useEffect');
     setNewComment('');
     setNewRating(0);
-  }, []);
+  }, [allComments]);
   return (
     <div id="comments">
       <div className="my-3">
         {/* <h4 className="mb-3">Yorumlar</h4> */}
-        {allComments.length > 0 ? (
-          <PerfectScrollbar>
-            <div className="comments-section">
-              {allComments.map((comment) => (
-                <Comment comment={comment} key={comment.id} />
-              ))}
-            </div>
-          </PerfectScrollbar>
-        ) : (
-          <h5>Bu ürün henüz yorumlanmamış. İlk yorumu siz ekleyin</h5>
-        )}
+        {allCommentsObject}
       </div>
       {userDetails.user && !isUserCommentedThis? (
         <div>

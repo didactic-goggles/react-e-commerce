@@ -338,7 +338,7 @@ const Urun = () => {
                   aria-controls="pills-comments"
                   aria-selected="false"
                 >
-                  Yorumlar
+                  Yorumlar {productInfo.comments.length > 0 ? `(${productInfo.comments.length})` : ''}
                 </button>
               </li>
             </ul>
