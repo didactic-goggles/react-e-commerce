@@ -1,38 +1,75 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import Product from '../../../UI/Product/Product';
 
 const Sonuc = (props) => {
-    console.log('Rendering => Sonuç');
-    
-    const {filters, allProducts} = props;
-    console.log(filters);
-    const tempProducts = allProducts.filter(product => {
+  console.log('Rendering => Sonuç');
+
+  const { filters, allProducts } = props;
+  
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  // const [sortedProducts, setSortedProducts] = useState([]);
+  useEffect(() => {
+    console.log(allProducts);
+    setFilteredProducts(allProducts.filter((product) => {
       try {
-        console.log(product.categoryId);
-        if(filters.categories.length > 0 && !filters.categories.includes(Number(product.categoryId)))
+        if (
+          filters.categories.length > 0 &&
+          !filters.categories.includes(Number(product.categoryId))
+        )
           return false;
-        if(filters.subCategories.length > 0 && !filters.subCategories.includes(Number(product.subCategoryId)))
+        if (
+          filters.subCategories.length > 0 &&
+          !filters.subCategories.includes(Number(product.subCategoryId))
+        )
           return false;
-        if(filters.childCategories.length > 0 && !filters.childCategories.includes(Number(product.childCategoryId)))
+        if (
+          filters.childCategories.length > 0 &&
+          !filters.childCategories.includes(Number(product.childCategoryId))
+        )
           return false;
-        if(filters.brands.length > 0 && !filters.brands.includes(Number(product.brandId)))
+        if (
+          filters.brands.length > 0 &&
+          !filters.brands.includes(Number(product.brandId))
+        )
           return false;
-        if(filters.ratings.length > 0 && !filters.ratings.includes(Math.round(Number(product.rating))))
+        if (
+          filters.ratings.length > 0 &&
+          !filters.ratings.includes(Math.round(Number(product.rating)))
+        )
           return false;
-      } catch ( error ) {}
+      } catch (error) {}
       return true;
-    });
+    }));
 
-    // setFilteredProducts(tempProducts);
-    return (
-        <div className="row">
-            {tempProducts.map(product => (
-                <div className="col-md-3" key={product.id}>
-                    <Product product={product} />
-                </div>
-            ))}
-        </div>
-    )
-}
+  }, [allProducts, filters]);
+  // useEffect(() => {
+  //   console.log('useEffect');
 
-export default Sonuc
+  //   // if (sorting === '') return;
+  //   // const mode = sorting.indexOf('desc') !== -1 ? -1 : 1;
+  //   let tempProducts = filteredProducts;
+  //   console.log(tempProducts);
+  //   if (sorting.indexOf('name') !== -1) {
+  //     tempProducts = filteredProducts.sort((a, b) =>
+  //       a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase()
+  //         ? sorting.indexOf('desc') !== -1 ? 1 : -1
+  //         : sorting.indexOf('desc') !== -1 ? -1 : 1
+  //     );
+  //   }
+  //   setSortedProducts(tempProducts);
+  //   // console.log(tempProducts);
+  // }, [sorting, filteredProducts]);
+  return (
+    <>
+      <div className="row">
+        {filteredProducts.map((product) => (
+          <div className="col-md-4 mb-2" key={product.id}>
+            <Product product={product} />
+          </div>
+        ))}
+      </div>
+    </>
+  );
+};
+
+export default Sonuc;

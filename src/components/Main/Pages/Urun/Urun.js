@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
-import { NavLink} from 'react-router-dom';
+import { NavLink, Link} from 'react-router-dom';
 import OwlCarousel from 'react-owl-carousel';
 import ReactStars from 'react-rating-stars-component';
 import { FaRegStar, FaStarHalfAlt, FaStar } from 'react-icons/fa';
@@ -56,7 +56,7 @@ const Urun = () => {
       const tempProductInfo = {
         product: getProductDetailsResponse.product,
         productDetails: getProductDetailsResponse.productDetails,
-        categories: getProductDetailsResponse.categories[0],
+        categories: getProductDetailsResponse.categories,
         comments: getProductDetailsResponse.comments,
         productImages: getProductDetailsResponse.productImages,
       };
@@ -102,32 +102,32 @@ const Urun = () => {
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb mb-0">
             <li className="breadcrumb-item">
-              <NavLink to="/urunler" className="text-decoration-none" exact>
+              <NavLink to="/urunler" className="text-decoration-none fw-bold" exact>
                 Ürünler
               </NavLink>
             </li>
             <li className="breadcrumb-item" aria-current="page">
-              <NavLink to={`/urunler?category_id=${productInfo.categories.id}`} className="text-decoration-none">
-                {productInfo.categories.name}
-              </NavLink>
+              <Link to={`/urunler?categories=${productInfo.categories.categoryId}`} className="text-decoration-none fw-bold">
+                {productInfo.categories.category}
+              </Link>
             </li>
-            {productInfo.categories.sub_category_id && (
+            {productInfo.categories.subCategoryId && (
               <li className="breadcrumb-item" aria-current="page">
                 <NavLink
-                  to={`/urunler?sub_category_id=${productInfo.categories.sub_category_id}`}
-                  className="text-decoration-none"
+                  to={`/urunler?categories=${productInfo.categories.categoryId}&subCategories=${productInfo.categories.subCategoryId}`}
+                  className="text-decoration-none fw-bold"
                 >
-                  {productInfo.categories.sub_category_name}
+                  {productInfo.categories.subCategory}
                 </NavLink>
               </li>
             )}
-            {productInfo.categories.child_category_id && (
+            {productInfo.categories.childCategoryId && (
               <li className="breadcrumb-item" aria-current="page">
                 <NavLink
-                  to={`/urunler?child_category_id=${productInfo.categories.child_category_id}`}
-                  className="text-decoration-none"
+                  to={`/urunler?categories=${productInfo.categories.categoryId}&subCategories=${productInfo.categories.subCategoryId}&childCategories=${productInfo.categories.childCategoryId}`}
+                  className="text-decoration-none fw-bold"
                 >
-                  {productInfo.categories.child_category_name}
+                  {productInfo.categories.childCategory}
                 </NavLink>
               </li>
             )}
