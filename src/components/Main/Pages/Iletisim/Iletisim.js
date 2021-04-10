@@ -38,7 +38,7 @@ const Iletisim = () => {
             // width="600"
             height="450"
             style={{ border: '0', width: '100%' }}
-            allowfullscreen=""
+            allowFullScreen=""
             loading="lazy"
           ></iframe>
         </div>

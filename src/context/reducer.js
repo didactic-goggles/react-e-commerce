@@ -2,7 +2,7 @@ let user = localStorage.getItem('currentUser')
 	? JSON.parse(localStorage.getItem('currentUser'))
 	: '';
 let token = localStorage.getItem('currentUserToken');
-console.log(user);
+
 export const initialState = {
 	user: null || user,
 	token: '' || token,
