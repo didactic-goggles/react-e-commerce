@@ -37,7 +37,7 @@ const Signup = () => {
     }
   };
   return (
-    <section className="form-signup">
+    <section className="form-signup my-5">
       <form>
         <h1 className="h3 mb-3 fw-normal">Kayıt Olun</h1>
 

@@ -153,37 +153,43 @@ const Anasayfa = () => {
       {/* begin:: Section: Info */}
       <section className="bg-light bg-gradient p-5 my-5 shadow">
         <div className="container">
-          <div className="d-flex justify-content-center">
-            <span className="px-2 px-sm-5 d-flex justify-content-center flex-column border-end">
-              <span className="text-center fs-1">
-                <FaRegClock />
+          <div className="row justify-content-center">
+            <div className="col-md-4 col-12">
+              <span className="px-2 px-sm-5 d-flex justify-content-center flex-column border-right-md border-sm-0">
+                <span className="text-center fs-1">
+                  <FaRegClock />
+                </span>
+                <span className="text-center">
+                  <h4>Çalışma Saatlerimiz</h4>
+                  <span className="me-2">Pazartesi - Cumartesi</span>
+                  <span className="fw-bold">08:00 - 18:00</span>
+                </span>
               </span>
-              <span className="text-center">
-                <h4>Çalışma Saatlerimiz</h4>
-                <span className="me-2">Pazartesi - Cumartesi</span>
-                <span className="fw-bold">08:00 - 18:00</span>
+            </div>
+            <div className="col-md-4 col-12">
+              <span className="px-2 px-sm-5 d-flex justify-content-center flex-column border-right-md border-sm-0">
+                <span className="text-center fs-1">
+                  <FaRegClock />
+                </span>
+                <span className="text-center">
+                  <h4>Çalışma Saatlerimiz</h4>
+                  <span className="me-2">Pazartesi - Cumartesi</span>
+                  <span className="fw-bold">08:00 - 18:00</span>
+                </span>
               </span>
-            </span>
-            <span className="px-2 px-sm-5 d-flex justify-content-center flex-column border-end">
-              <span className="text-center fs-1">
-                <FaRegClock />
+            </div>
+            <div className="col-md-4 col-12">
+              <span className="px-2 px-sm-5 d-flex justify-content-center flex-column">
+                <span className="text-center fs-1">
+                  <FaRegClock />
+                </span>
+                <span className="text-center">
+                  <h4>Çalışma Saatlerimiz</h4>
+                  <span className="me-2">Pazartesi - Cumartesi</span>
+                  <span className="fw-bold">08:00 - 18:00</span>
+                </span>
               </span>
-              <span className="text-center">
-                <h4>Çalışma Saatlerimiz</h4>
-                <span className="me-2">Pazartesi - Cumartesi</span>
-                <span className="fw-bold">08:00 - 18:00</span>
-              </span>
-            </span>
-            <span className="px-2 px-sm-5 d-flex justify-content-center flex-column">
-              <span className="text-center fs-1">
-                <FaRegClock />
-              </span>
-              <span className="text-center">
-                <h4>Çalışma Saatlerimiz</h4>
-                <span className="me-2">Pazartesi - Cumartesi</span>
-                <span className="fw-bold">08:00 - 18:00</span>
-              </span>
-            </span>
+            </div>
           </div>
         </div>
       </section>
@@ -191,46 +197,67 @@ const Anasayfa = () => {
       {/* begin:: Cards: Product */}
       <section className="container mb-3">
         <div className="row">
-          <div className="col-md-4">
+          <div className="col-md-4 mb-2">
             <div className="card bg-light border-0 rounded-3 shadow-sm">
               <div className="card-body">
                 <div className="row">
-                  <div className="col-lg-6 col-sm-12 d-flex justify-content-center flex-column">
+                  <div className="col-6 d-flex justify-content-center flex-column">
                     <h4>AAA Serisi Ürünler</h4>
-                    <button href="#" className="btn btn-link text-start px-0">İnceleyin</button>
+                    <button href="#" className="btn btn-link text-start px-0">
+                      İnceleyin
+                    </button>
                   </div>
                   <div className="col-6">
-                    <img className="w-100" src="https://comfortmedikal.com/img/resim_orjinal/test-transparent1.png" alt="test"/>
+                    <img
+                      className="w-100"
+                      src="https://comfortmedikal.com/img/resim_orjinal/test-transparent1.png"
+                      alt="test"
+                      style={{ maxWidth: '200px' }}
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-4 mb-2">
             <div className="card bg-light border-0 rounded-3 shadow-sm">
               <div className="card-body">
                 <div className="row">
-                  <div className="col-lg-6 col-sm-12 d-flex justify-content-center flex-column">
+                  <div className="col-6 d-flex justify-content-center flex-column">
                     <h4>AAA Serisi Ürünler</h4>
-                    <button className="btn btn-link text-start px-0">İnceleyin</button>
+                    <button href="#" className="btn btn-link text-start px-0">
+                      İnceleyin
+                    </button>
                   </div>
                   <div className="col-6">
-                    <img className="w-100" src="https://comfortmedikal.com/img/resim_orjinal/test-transparent1.png" alt="test"/>
+                    <img
+                      className="w-100"
+                      src="https://comfortmedikal.com/img/resim_orjinal/test-transparent1.png"
+                      alt="test"
+                      style={{ maxWidth: '200px' }}
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-4 mb-2">
             <div className="card bg-light border-0 rounded-3 shadow-sm">
               <div className="card-body">
                 <div className="row">
-                  <div className="col-lg-6 col-sm-12 d-flex justify-content-center flex-column">
+                  <div className="col-6 d-flex justify-content-center flex-column">
                     <h4>AAA Serisi Ürünler</h4>
-                    <button className="btn btn-link text-start px-0">İnceleyin</button>
+                    <button href="#" className="btn btn-link text-start px-0">
+                      İnceleyin
+                    </button>
                   </div>
                   <div className="col-6">
-                    <img className="w-100" src="https://comfortmedikal.com/img/resim_orjinal/test-transparent1.png" alt="test"/>
+                    <img
+                      className="w-100"
+                      src="https://comfortmedikal.com/img/resim_orjinal/test-transparent1.png"
+                      alt="test"
+                      style={{ maxWidth: '200px' }}
+                    />
                   </div>
                 </div>
               </div>
@@ -242,7 +269,7 @@ const Anasayfa = () => {
       {/* begin:: Collapse: Categories */}
       <section className="container mb-3">
         <div className="row">
-          <div className="col-md-4 col-lg-3">
+          <div className="col-md-4 col-lg-3 mb-3">
             <CategoriesVerticalNav />
           </div>
           <div className="col-md-8 col-lg-9">

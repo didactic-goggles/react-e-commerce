@@ -23,7 +23,7 @@ const Login = (props) => {
     }
   };
   return (
-    <section className="form-signin">
+    <section className="form-signin my-5">
       <form>
         <h1 className="h3 mb-3 fw-normal">Giriş Yapın</h1>
         {errorMessage ? (

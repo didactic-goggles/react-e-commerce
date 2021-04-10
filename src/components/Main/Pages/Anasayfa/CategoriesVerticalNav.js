@@ -9,7 +9,7 @@ const CategoriesVerticalNav = () => {
     <div className="nav-categories card card-body ps-1 shadow-sm">
       <PerfectScrollbar>
         <nav
-          className="collapse bd-links"
+          className="bd-links"
           id="bd-docs-nav"
           aria-label="Docs navigation"
         >
