@@ -45,30 +45,59 @@ try {
         $response["productImages"] = $productImages;
 
         // Product Categories
-        $queryProductCategories = "SELECT cc.child_category_name, cc.id as child_category_id, sc.sub_category_name , sc.id as sub_category_id, c.name, c.id FROM `Product_Category` pc 
-        LEFT JOIN Child_Categories cc on cc.id = pc.category_id
-        LEFT JOIN Sub_Categories sc on sc.id = cc.sub_category_id
-        LEFT JOIN Categories c on c.id = sc.category_id
+        $queryProductCategories = "SELECT pc.category_id as pcCategoryId, pc.type as pcType FROM Product_Category pc
         WHERE pc.product_id=$product_id";
         $dbProductCategoriesResponse = mysqli_query($con, $queryProductCategories);
         // $commentsSth = mysqli_fetch_assoc($dbProductCommentsResponse);
         $productCategories = array();
         while ($r = mysqli_fetch_assoc($dbProductCategoriesResponse)) {
-            $productCategories[] = $r;
+            if($r['pcType'] == 'category') {
+                $categoryQuery = "SELECT name, id from Categories where id=".$r['pcCategoryId'];
+                $sthCategory = mysqli_query($con, $categoryQuery);
+                // $rows1 = array();
+                while ($rCategory = mysqli_fetch_assoc($sthCategory)) {
+                    $productCategories["category"] = $rCategory['name'];
+                    $productCategories["categoryId"] = $rCategory['id'];
+                }
+            } else if($r['pcType'] == 'subCategory') {
+                $subCategoryQuery = "SELECT sc.sub_category_name as subCategory,sc.id as subCategoryId, 
+                    c.name as category, c.id as categoryId FROM `Sub_Categories` sc 
+                    LEFT JOIN Categories c on c.id =  sc.category_id
+                    WHERE sc.id=".$r['pcCategoryId'];
+                $sthSubCategory = mysqli_query($con, $subCategoryQuery);
+                // $rows1 = array();
+                while ($rSubCategory = mysqli_fetch_assoc($sthSubCategory)) {
+                    $productCategories["subCategory"] = $rSubCategory['subCategory'];
+                    $productCategories["subCategoryId"] = $rSubCategory['subCategoryId'];
+                    $productCategories["category"] = $rSubCategory['category'];
+                    $productCategories["categoryId"] = $rSubCategory['categoryId'];
+                }
+            } else if($r['pcType'] == 'childCategory') {
+                $childCategoryQuery = "SELECT cc.child_category_name as childCategory, cc.id as childCategoryId, sc.sub_category_name as subCategory,sc.id as subCategoryId, c.name as category, c.id as categoryId FROM `Child_Categories` cc
+                LEFT JOIN Sub_Categories sc on sc.id =  cc.sub_category_id
+                LEFT JOIN Categories c on c.id =  sc.category_id
+                WHERE cc.id=".$r['pcCategoryId'];
+                $sthChildCategory = mysqli_query($con, $childCategoryQuery);
+                // $rows1 = array();
+                while ($rChildCategory = mysqli_fetch_assoc($sthChildCategory)) {
+                    $productCategories["childCategory"] = $rChildCategory['childCategory'];
+                    $productCategories["childCategoryId"] = $rChildCategory['childCategoryId'];
+                    $productCategories["subCategory"] = $rChildCategory['subCategory'];
+                    $productCategories["subCategoryId"] = $rChildCategory['subCategoryId'];
+                    $productCategories["category"] = $rChildCategory['category'];
+                    $productCategories["categoryId"] = $rChildCategory['categoryId'];
+                }
+            }
+            $rows[] = $r;
         }
         $response["categories"] = $productCategories;
         // if($comments != null) {
         //     $response["comments"] = $comments;
         // }
     } else {
-        $query = "SELECT p.id, p.name, cc.child_category_name as childCategory, 
-        cc.id as childCategoryId, sc.sub_category_name as subCategory, sc.id as subCategoryId, 
-        c.name as category, c.id as categoryId, pi.image_path as productPrimaryImage,
+        $query = "SELECT p.id, p.name, pc.category_id as pcCategoryId, pc.type as pcType, pi.image_path as productPrimaryImage,
         pd.brand_id as brandId, AVG(com.rating) as rating FROM Products p 
         LEFT JOIN Product_Category pc ON p.id = pc.product_id
-        LEFT JOIN Child_Categories cc on pc.category_id = cc.id
-        LEFT JOIN Sub_Categories sc on sc.id = cc.sub_category_id
-        LEFT JOIN Categories c on c.id = sc.category_id
         LEFT JOIN Product_Details pd on pd.product_id = p.id
         LEFT JOIN Product_Images pi on pi.id = pd.product_base_image_id
         LEFT JOIN Comments com on com.product_id = p.id
@@ -77,6 +106,43 @@ try {
         $sth = mysqli_query($con, $query);
         $rows = array();
         while ($r = mysqli_fetch_assoc($sth)) {
+            if($r['pcType'] == 'category') {
+                $categoryQuery = "SELECT name, id from Categories where id=".$r['pcCategoryId'];
+                $sthCategory = mysqli_query($con, $categoryQuery);
+                // $rows1 = array();
+                while ($rCategory = mysqli_fetch_assoc($sthCategory)) {
+                    $r["category"] = $rCategory['name'];
+                    $r["categoryId"] = $rCategory['id'];
+                }
+            } else if($r['pcType'] == 'subCategory') {
+                $subCategoryQuery = "SELECT sc.sub_category_name as subCategory,sc.id as subCategoryId, 
+                    c.name as category, c.id as categoryId FROM `Sub_Categories` sc 
+                    LEFT JOIN Categories c on c.id =  sc.category_id
+                    WHERE sc.id=".$r['pcCategoryId'];
+                $sthSubCategory = mysqli_query($con, $subCategoryQuery);
+                // $rows1 = array();
+                while ($rSubCategory = mysqli_fetch_assoc($sthSubCategory)) {
+                    $r["subCategory"] = $rSubCategory['subCategory'];
+                    $r["subCategoryId"] = $rSubCategory['subCategoryId'];
+                    $r["category"] = $rSubCategory['category'];
+                    $r["categoryId"] = $rSubCategory['categoryId'];
+                }
+            } else if($r['pcType'] == 'childCategory') {
+                $childCategoryQuery = "SELECT cc.child_category_name as childCategory, cc.id as childCategoryId, sc.sub_category_name as subCategory,sc.id as subCategoryId, c.name as category, c.id as categoryId FROM `Child_Categories` cc
+                LEFT JOIN Sub_Categories sc on sc.id =  cc.sub_category_id
+                LEFT JOIN Categories c on c.id =  sc.category_id
+                WHERE cc.id=".$r['pcCategoryId'];
+                $sthChildCategory = mysqli_query($con, $childCategoryQuery);
+                // $rows1 = array();
+                while ($rChildCategory = mysqli_fetch_assoc($sthChildCategory)) {
+                    $r["childCategory"] = $rChildCategory['childCategory'];
+                    $r["childCategoryId"] = $rChildCategory['childCategoryId'];
+                    $r["subCategory"] = $rChildCategory['subCategory'];
+                    $r["subCategoryId"] = $rChildCategory['subCategoryId'];
+                    $r["category"] = $rChildCategory['category'];
+                    $r["categoryId"] = $rChildCategory['categoryId'];
+                }
+            }
             $rows[] = $r;
         }
         if (count($rows) == 0) {
