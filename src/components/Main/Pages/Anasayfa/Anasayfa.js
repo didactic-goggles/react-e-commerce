@@ -1,4 +1,4 @@
-import { FaRegClock } from 'react-icons/fa';
+import { FaRegClock, FaHeadset, FaTruck } from 'react-icons/fa';
 import CategoriesVerticalNav from './CategoriesVerticalNav';
 import ProductsSlider from './ProductsSlider';
 
@@ -151,40 +151,40 @@ const Anasayfa = () => {
       </section>
       {/* end:: Slider */}
       {/* begin:: Section: Info */}
-      <section className="bg-light bg-gradient p-5 my-5 shadow">
+      <section className="bg-light bg-gradient px-5 py-4 my-5 shadow">
         <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-md-4 col-12">
-              <span className="px-2 px-sm-5 d-flex justify-content-center flex-column border-right-md border-sm-0">
-                <span className="text-center fs-1">
+          <div className="row justify-content-center align-items-stretch">
+            <div className="col-md-4 col-12 mb-3">
+              <span className="px-2 px-sm-5 d-flex justify-content-center flex-column border-right-md border-sm-0 h-100">
+                <span className="text-center fs-1 mb-auto">
                   <FaRegClock />
                 </span>
-                <span className="text-center">
+                <span className="text-center mb-auto">
                   <h4>Çalışma Saatlerimiz</h4>
                   <span className="me-2">Pazartesi - Cumartesi</span>
                   <span className="fw-bold">08:00 - 18:00</span>
                 </span>
               </span>
             </div>
-            <div className="col-md-4 col-12">
-              <span className="px-2 px-sm-5 d-flex justify-content-center flex-column border-right-md border-sm-0">
-                <span className="text-center fs-1">
-                  <FaRegClock />
+            <div className="col-md-4 col-12 mb-3">
+              <span className="px-2 px-sm-5 d-flex justify-content-center flex-column border-right-md border-sm-0 h-100">
+                <span className="text-center fs-1 mb-auto">
+                  <FaHeadset />
                 </span>
-                <span className="text-center">
-                  <h4>Çalışma Saatlerimiz</h4>
-                  <span className="me-2">Pazartesi - Cumartesi</span>
-                  <span className="fw-bold">08:00 - 18:00</span>
+                <span className="text-center mb-auto">
+                  <h4>Sipariş Desteği</h4>
+                  <span className="me-2">7/24 Destek Hattı</span>
+                  <span className="fw-bold">222 222 22 22</span>
                 </span>
               </span>
             </div>
             <div className="col-md-4 col-12">
-              <span className="px-2 px-sm-5 d-flex justify-content-center flex-column">
-                <span className="text-center fs-1">
-                  <FaRegClock />
+              <span className="px-2 px-sm-5 d-flex justify-content-center flex-column h-100">
+                <span className="text-center fs-1 mb-auto">
+                  <FaTruck />
                 </span>
-                <span className="text-center">
-                  <h4>Çalışma Saatlerimiz</h4>
+                <span className="text-center mb-auto">
+                  <h4>Hızlı Kargo</h4>
                   <span className="me-2">Pazartesi - Cumartesi</span>
                   <span className="fw-bold">08:00 - 18:00</span>
                 </span>

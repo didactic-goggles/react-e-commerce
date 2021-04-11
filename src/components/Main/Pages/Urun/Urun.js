@@ -157,6 +157,7 @@ const Urun = () => {
                     width: 1200,
                     height: 1800,
                   },
+                  shouldUsePositiveSpaceLens: true
                 }}
                 style={{
                   zIndex: 100,

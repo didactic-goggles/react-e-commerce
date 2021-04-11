@@ -394,7 +394,7 @@ const Urunler = () => {
     <section className="container py-3">
       <div className="row">
         <div className="col-md-3 mb-2">
-          <div className="card">
+          <div className="card rounded-0">
             <div className="card-body">
               <form>
                 <CategoriesFilter />
