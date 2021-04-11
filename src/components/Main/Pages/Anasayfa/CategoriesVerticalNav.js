@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useAuthState } from '../../../../context';
 const CategoriesVerticalNav = () => {
@@ -54,14 +55,14 @@ const CategoriesVerticalNav = () => {
                                       {subCategory.childCategories.map(
                                         (childCategory) => (
                                           <li key={childCategory.id}>
-                                            <a
-                                              href="/docs/5.0/getting-started/introduction/"
+                                            <Link
+                                              to={`/urunler?categories=${category.id}&subCategories=${subCategory.id}&childCategories=${childCategory.id}`}
                                               className="d-inline-flex align-items-center rounded"
                                             >
                                               {
                                                 childCategory.child_category_name
                                               }
-                                            </a>
+                                            </Link>
                                           </li>
                                         )
                                       )}
@@ -72,12 +73,13 @@ const CategoriesVerticalNav = () => {
                             }
                             return (
                               <li key={subCategory.id}>
-                                <button
-                                  href="/docs/5.0/migration/"
-                                  className="btn d-inline-flex align-items-center rounded"
+                                <Link
+                                  to={`/urunler?categories=${category.id}&subCategories=${subCategory.id}`}
+                                  className="d-inline-flex align-items-center rounded fs-6"
+                                  style={{fontWeight: '600'}}
                                 >
                                   {subCategory.sub_category_name}
-                                </button>
+                                </Link>
                               </li>
                             );
                           })}
@@ -88,12 +90,12 @@ const CategoriesVerticalNav = () => {
                 }
                 return (
                   <li key={category.id} className="mb-1">
-                    <a
-                      href="/docs/5.0/migration/"
+                    <Link
+                      to={`/urunler?categories=${category.id}`} 
                       className="d-inline-flex align-items-center rounded"
                     >
                       {category.name}
-                    </a>
+                    </Link>
                   </li>
                 );
               })}
