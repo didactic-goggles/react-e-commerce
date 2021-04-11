@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import { useHistory, NavLink } from 'react-router-dom';
+import { useHistory, NavLink, Link } from 'react-router-dom';
 import ReactCountryFlag from 'react-country-flag';
 import {
   FaGlobeEurope,
@@ -62,10 +62,10 @@ const Header = () => {
                 {userDetails.user ? (
                   <>
                     <li>
-                      <NavLink to="/hesap-ayarlari" className="dropdown-item">
+                      <Link to="/hesap-ayarlari" className="dropdown-item">
                         <FaUserCog className="me-2" />
                         Hesap Ayarları
-                      </NavLink>
+                      </Link>
                     </li>
                     <li>
                       <a
@@ -83,18 +83,18 @@ const Header = () => {
                   </>
                 ) : (
                   <li>
-                    <NavLink to="/giris" className="dropdown-item">
+                    <Link to="/giris" className="dropdown-item">
                       <FaSignInAlt className="me-2" />
                       Giriş Yap
-                    </NavLink>
+                    </Link>
                   </li>
                 )}
               </ul>
             </div>
-            <a className="btn border-end" href="#">
+            <Link className="btn border-end" to="/begendiklerim">
               <FaHeart className="me-2 text-danger" />
               Beğendiklerim
-            </a>
+            </Link>
             <div className="dropdown">
               <a
                 className="btn dropdown-toggle"

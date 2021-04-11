@@ -10,7 +10,8 @@ export const initialState = {
 	errorMessage: null,
     categories: null,
 	brands: null,
-	products: []
+	products: [],
+	wishList: []
 };
 
 export const AuthReducer = (initialState, action) => {
@@ -44,6 +45,7 @@ export const AuthReducer = (initialState, action) => {
 				...initialState,
 				user: action.payload.user,
 				token: action.payload.auth_token,
+				wishList: action.payload.wishList,
 				errorMessage: null,
 				loading: false,
 			};

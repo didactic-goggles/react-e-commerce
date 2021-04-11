@@ -46,6 +46,13 @@ try {
     $password2 = $row['password'];
     if(password_verify($login_password, $password2))
     {
+        $queryWishList = "SELECT id, product_id, user_id, createdDate from WishList where user_id=".$login_id;
+        $sthWishList = mysqli_query($con, $queryWishList);
+        $rowsWishList = array();
+        while ($rWishList = mysqli_fetch_assoc($sthWishList)) {
+            $rowsWishList[] = $rWishList;
+        }
+        
         $secret_key = "YOUR_SECRET_KEY";
         $issuer_claim = "THE_ISSUER"; // this can be the servername
         $audience_claim = "THE_AUDIENCE";
@@ -81,7 +88,8 @@ try {
                     "lastname" => $login_lastname,
                     "email" => $login_email
                 ),
-                "expireAt" => $expire_claim
+                "expireAt" => $expire_claim,
+                "wishList" => $rowsWishList
             ));
     }
     else{

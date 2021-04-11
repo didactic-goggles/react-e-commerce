@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { loginUser, useAuthState, useAuthDispatch } from '../../context';
 const Login = (props) => {
   console.log('Rendering => Login');
@@ -65,7 +65,7 @@ const Login = (props) => {
           </label>
         </div> */}
         <h5 className="text-center my-3">
-          Hesabınız yok mu? <NavLink to="/kayit">Kayıt olun</NavLink>
+          Hesabınız yok mu? <Link to="/kayit">Kayıt olun</Link>
         </h5>
 
         <button

@@ -9,6 +9,7 @@ import Urun from './Pages/Urun/Urun';
 import Login from '../Login/Login';
 import Urunler from './Pages/Urunler/Urunler';
 import Signup from '../Login/Signup';
+import WishList from '../WishList/WishList';
 
 const Main = () => {
   return (
@@ -28,6 +29,9 @@ const Main = () => {
         </Route>
         <Route path="/urun/:productId">
           <Urun />
+        </Route>
+        <Route path="/begendiklerim">
+          <WishList />
         </Route>
         <Route path="/giris">
           <Login />
