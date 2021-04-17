@@ -5,9 +5,9 @@ const Footer = () => {
   return (
     <footer className="bg-dark mt-auto text-white py-5">
       <div className="container">
-        <div className="d-flex flex-column flex-md-row justify-content-center">
+        <div className="row">
           <div
-            className="border-right-md border-sm-0 flex-fill px-3 d-flex align-items-center mb-3"
+            className="col-md-2 border-right-md border-sm-0 flex-fill d-flex align-items-center justify-content-center mb-3"
             ref={(el) =>
               el &&
               el.style.setProperty('border-color', '#6c757d3d', 'important')
@@ -16,13 +16,12 @@ const Footer = () => {
             <h5>Logo</h5>
           </div>
           <div
-            className="border-right-md border-sm-0 flex-fill px-0 px-md-3 mb-3"
+            className="col-md-5 border-right-md border-sm-0 flex-fill mb-3"
             ref={(el) =>
               el &&
               el.style.setProperty('border-color', '#6c757d3d', 'important')
             }
           >
-            <h5 className="px-3">Linkler</h5>
             <ul className="nav flex-row">
               <li className="nav-item">
                 <NavLink to="/" className="nav-link text-white">
@@ -51,11 +50,11 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="flex-fill px-3">
+          <div className="col-md-5">
             <div className="d-flex flex-column">
               <span className="mb-2">
                 <FaMapMarked className="me-2" style={{ fontSize: '25px' }} />{' '}
-                Adres: Ssdsdsd SDSDSDsd sdsds
+                Adres: Molla Gürani Mahallesi Emin Ali Yasin Sk. No: 3 34093 Fatih/İstanbul
               </span>
               <span className="mb-2">
                 <FaPhoneAlt className="me-2" style={{ fontSize: '25px' }} />{' '}
@@ -63,7 +62,7 @@ const Footer = () => {
               </span>
               <span>
                 <FaEnvelope className="me-2" style={{ fontSize: '25px' }} />{' '}
-                E-posta: mail@mail.com
+                <a href="mailto:info@comfortmedikal.com" class="text-decoration-none text-white">info@comfortmedikal.com</a>
               </span>
             </div>
           </div>
