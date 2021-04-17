@@ -2,7 +2,7 @@ const LoadingIndicator = (props) => {
   const { text, type } = props;
 
   return (
-    <div className="d-flex align-items-center justify-content-center">
+    <div className="d-flex align-items-center justify-content-center my-3">
       <div
         className={`spinner-border ml-auto ${type || 'text-primary'}`}
         role="status"
