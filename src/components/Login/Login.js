@@ -23,60 +23,87 @@ const Login = (props) => {
     }
   };
   return (
-    <section className="form-signin my-5">
-      <form>
-        <h1 className="h3 mb-3 fw-normal">Giriş Yapın</h1>
-        {errorMessage ? (
-          <div className="alert alert-danger fade show" role="alert">
-            <strong>{errorMessage}</strong>
+    <section className="container my-5">
+      <div className="card rounded-3">
+        <div className="row g-0">
+          <div className="col-md-6">
+            <div
+              className="h-100 text-center text-white d-flex align-items-center justify-content-center"
+              style={{
+                backgroundImage:
+                  'linear-gradient(to right bottom, #03a9f433, #0dcaf02e), url(https://comfortmedikal.com/img/pexels-pixabay-220201.jpg)',
+                backgroundSize: 'cover',
+              }}
+            >
+              <div className="py-4 py-md-0">
+                <h3 className="display-5">Hoşgeldiniz</h3>
+                <p>Sitede yeniyseniz lütfen</p>
+                <Link to="/kayit" className="btn btn-outline-light">
+                  kayıt olun
+                </Link>
+              </div>
+            </div>
           </div>
-        ) : (
-          ''
-        )}
+          <div className="col-md-6">
+            <div className="card-body">
+              <form
+                className="form-signin py-5 px-2 px-md-5"
+                onSubmit={handleLogin}
+              >
+                <h1 className="h3 mb-3 fw-normal">Giriş Yapın</h1>
+                {errorMessage ? (
+                  <div className="alert alert-danger fade show" role="alert">
+                    <strong>{errorMessage}</strong>
+                  </div>
+                ) : (
+                  ''
+                )}
 
-        <div className="form-floating">
-          <input
-            type="email"
-            className="form-control"
-            id="floatingInput"
-            placeholder="isim@mail.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={loading}
-          />
-          <label htmlFor="floatingInput">E-posta adresi</label>
+                <div className="form-floating">
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="floatingInput"
+                    placeholder="isim@mail.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={loading}
+                    required
+                  />
+                  <label htmlFor="floatingInput">E-posta adresi</label>
+                </div>
+                <div className="form-floating">
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="floatingPassword"
+                    placeholder="şifre"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    disabled={loading}
+                    required
+                  />
+                  <label htmlFor="floatingPassword">Şifre</label>
+                </div>
+
+                {/* <div className="checkbox mb-3">
+                <label>
+                  <input type="checkbox" value="remember-me" /> Beni Hatırla
+                </label>
+              </div> */}
+
+                <button
+                  className="w-100 btn btn-lg btn-primary"
+                  type="submit"
+                  disabled={loading}
+                >
+                  Giriş Yap
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
-        <div className="form-floating">
-          <input
-            type="password"
-            className="form-control"
-            id="floatingPassword"
-            placeholder="şifre"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            disabled={loading}
-          />
-          <label htmlFor="floatingPassword">Şifre</label>
-        </div>
-
-        {/* <div className="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me" /> Beni Hatırla
-          </label>
-        </div> */}
-        <h5 className="text-center my-3">
-          Hesabınız yok mu? <Link to="/kayit">Kayıt olun</Link>
-        </h5>
-
-        <button
-          className="w-100 btn btn-lg btn-primary"
-          type="button"
-          onClick={handleLogin}
-          disabled={loading}
-        >
-          Giriş Yap
-        </button>
-      </form>
+      </div>
     </section>
   );
 };
