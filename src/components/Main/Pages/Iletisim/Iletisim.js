@@ -14,8 +14,7 @@ const Iletisim = () => {
           <span className="d-flex align-items-center mb-2">
             <FaMapMarked className="me-2" />
             <span>
-              Labore irure ut nostrud ut consectetur et consectetur sint est
-              nulla minim.
+              Adres: Molla Gürani Mahallesi Emin Ali Yasin Sk. No: 3 34093 Fatih/İstanbul
             </span>
           </span>
           <span className="d-flex align-items-center mb-2">
@@ -24,10 +23,10 @@ const Iletisim = () => {
           </span>
           <span className="d-flex align-items-center mb-2">
             <a
-              href="mailto:mail@mail.com"
+              href="mailto:info@comfortmedikal.com"
               className="text-decoration-none text-dark"
             >
-              <FaEnvelope className="me-2" /> <span>mail@mail.com</span>
+              <FaEnvelope className="me-2" /> <span>info@comfortmedikal.com</span>
             </a>
           </span>
         </div>

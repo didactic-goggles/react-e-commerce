@@ -30,9 +30,9 @@ const Header = () => {
       <div className="border-bottom d-none d-md-block">
         <nav className="navbar navbar-dark container py-0 px-0">
           <div className="border-end px-2">
-            <a href="#" className="text-decoration-none text-dark">
+            <a href="mailto:info@comfortmedikal.com" className="text-decoration-none text-dark">
               <FaEnvelope className="me-2" />
-              <span>mail@mail.com</span>
+              info@comfortmedikal.com
             </a>
           </div>
           <div className="px-2 ms-2 me-auto">
@@ -95,7 +95,7 @@ const Header = () => {
               <FaHeart className="me-2 text-danger" />
               Beğendiklerim
             </Link>
-            <div className="dropdown">
+            {/* <div className="dropdown">
               <a
                 className="btn dropdown-toggle"
                 href="#"
@@ -140,7 +140,7 @@ const Header = () => {
                   </a>
                 </li>
               </ul>
-            </div>
+            </div> */}
             {/* <div className="dropdown">
 
                         <ul className="dropdown-menu dropdown-menu-dark dropdown-menu-end"
