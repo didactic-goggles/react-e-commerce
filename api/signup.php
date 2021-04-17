@@ -17,7 +17,6 @@ try {
     $signup_firstname = '';
     $signup_lastname = '';
     $signup_email = '';
-    $signup_userType = '';
     $signup_password = '';
     $signup_passwordConfirm = '';
     // $data = json_decode(file_get_contents("php://input"));
@@ -28,19 +27,17 @@ try {
     $signup_firstname = filter_var($_POST["firstname"], FILTER_SANITIZE_STRING);
     $signup_lastname = filter_var($_POST["lastname"], FILTER_SANITIZE_STRING);
     $signup_email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
-    $signup_userType = filter_var($_POST["userType"], FILTER_SANITIZE_STRING);
     $signup_password = filter_var($_POST["password"], FILTER_SANITIZE_STRING);
     $signup_passwordConfirm = filter_var($_POST["passwordConfirm"], FILTER_SANITIZE_STRING);
 
     if($signup_password != $signup_passwordConfirm) {
         throw new Exception("Passwords are not mathced", 1);
     }
-    if($signup_username != "" && $signup_firstname != "" && $signup_lastname != "" && $signup_email != "" &&
-        $signup_userType != "" && $signup_password != "") {
-        $stmt = mysqli_prepare($con, "INSERT INTO `Users` (`username`,`firstname`,`lastname`, `email`, `userType`, `password`) VALUES (?,?,?,?,?,?)");
+    if($signup_username != "" && $signup_firstname != "" && $signup_lastname != "" && $signup_email != "" && $signup_password != "") {
+        $stmt = mysqli_prepare($con, "INSERT INTO `Users` (`username`,`firstname`,`lastname`, `email`, `password`) VALUES (?,?,?,?,?)");
         // $stmt= $con->prepare($query);
         $password_hash = password_hash($signup_password, PASSWORD_BCRYPT);
-        mysqli_stmt_bind_param($stmt, 'ssssss', $signup_username,$signup_firstname,$signup_lastname, $signup_email, $signup_userType, $password_hash);
+        mysqli_stmt_bind_param($stmt, 'ssssss', $signup_username,$signup_firstname,$signup_lastname, $signup_email, $password_hash);
 
         if(mysqli_stmt_execute($stmt) == false) {
             throw new Exception(mysqli_stmt_error($stmt), 1);
