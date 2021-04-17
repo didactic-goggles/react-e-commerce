@@ -1,6 +1,7 @@
 // @import "../node_modules/bootstrap/scss/variables";
 * {
     outline: none;
+    text-transform: uppercase !important;
 }
 
 $btn-icon-size-xs: 24px !default; //custom parameter
@@ -197,7 +198,13 @@ $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
     }
 }
 
+.logo {
+    animation: moveInLeft .7s ease-out;
+}
 
+.searchbox-container {
+    animation: moveInBottom .5s ease-out .5s backwards;
+}
 /*Styling Search Textbox*/
 .searchbox {
     background: rgba(0, 0, 0, 0.12);
@@ -237,7 +244,7 @@ $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
 
     .search-textbox {
         position: relative;
-        width: 270px;
+        width: 300px;
         height: 100%;
         background: transparent;
         border: none;
@@ -357,11 +364,14 @@ $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
         }
     }
     li.nav-item {
+        // &:hover {
+        //     transform: translateY(-2px);
+        // }
         >a.nav-link {
             display: flex;
             align-items: center;
             color: white;
-
+            // transition: all .2s ease-out;
             svg {
                 font-size: 22px;
             }
@@ -385,6 +395,7 @@ $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
 
         &:hover {
             background-color: var(--bs-primary);
+            border-radius: $border-radius;
             // a {
             //     // background-color: #0d6efd40;
             // }
@@ -461,7 +472,7 @@ $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
 
 .form-signin, .form-signup {
     width: 100%;
-    max-width: 330px;
+    max-width: 530px;
     padding: 15px;
     margin: auto;
 }

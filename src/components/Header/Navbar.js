@@ -277,11 +277,11 @@ const Navbar = () => {
       {/* begin:: Main Nav */}
       <section className="pt-3">
         <div className="container d-flex align-items-center flex-column flex-md-row mb-2">
-          <NavLink to="/" exact className="text-decoration-none">
+          <NavLink to="/" exact className="text-decoration-none logo">
             <h3 className="mb-0 text-dark">LOGO</h3>
           </NavLink>
-          <div className="dropdown w-100">
-            <div className="searchbox mx-0 mx-md-5 shadow-sm">
+          <div className="dropdown w-100 searchbox-container">
+            <div className="searchbox mx-0 mx-md-5 shadow-sm rounded-pill">
               <input
                 type="text"
                 className="search-textbox"

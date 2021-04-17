@@ -5,15 +5,15 @@ $font-family-sans-serif: "Nunito Sans", sans-serif;
 // $border-radius: 0 !default;
 // $border-radius-sm: 0 !default;
 // $border-radius-lg: 0 !default;
-$nav-pills-border-radius: 0 !default;
-$btn-border-radius: 0 !default;
-$btn-border-radius-lg: 0 !default;
-$btn-border-radius-sm: 0 !default;
-$dropdown-border-radius: 0 !default;
-$dropdown-border-width: 0 !default;
+// $nav-pills-border-radius: 0 !default;
+// $btn-border-radius: 0 !default;
+// $btn-border-radius-lg: 0 !default;
+// $btn-border-radius-sm: 0 !default;
+// $dropdown-border-radius: 0 !default;
+// $dropdown-border-width: 0 !default;
 $breadcrumb-divider: quote(">");
 // $input-border-radius: 0 !default;
-$form-check-input-border-radius: 0 !default;
+// $form-check-input-border-radius: 0 !default;
 $primary: #03a9f4;
 
 
@@ -82,6 +82,6 @@ $primary: #03a9f4;
 // Utilities
 @import "../../node_modules/bootstrap/scss/utilities/api";
 // scss-docs-end import-stack
-
+@import "./animations.scss";
 @import "./style.scss";
 // @import "../../node_modules/bootstrap/scss/./floating-label.scss";
