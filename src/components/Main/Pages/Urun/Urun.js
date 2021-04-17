@@ -303,34 +303,6 @@ const Urun = () => {
               <li className="nav-item" role="presentation">
                 <button
                   className="nav-link"
-                  id="pills-profile-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-profile"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-profile"
-                  aria-selected="false"
-                >
-                  Ürün Açıklaması
-                </button>
-              </li>
-              <li className="nav-item" role="presentation">
-                <button
-                  className="nav-link"
-                  id="pills-contact-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-contact"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-contact"
-                  aria-selected="false"
-                >
-                  Teknik Özellikler
-                </button>
-              </li>
-              <li className="nav-item" role="presentation">
-                <button
-                  className="nav-link"
                   id="pills-comments-tab"
                   data-bs-toggle="pill"
                   data-bs-target="#pills-comments"
@@ -353,26 +325,6 @@ const Urun = () => {
                 {(productInfo.productDetails &&
                   productInfo.productDetails.description) ||
                   'Ürün özellikleri mevcut değil'}
-              </div>
-              <div
-                className="tab-pane fade"
-                id="pills-profile"
-                role="tabpanel"
-                aria-labelledby="pills-profile-tab"
-              >
-                {(productInfo.productDetails &&
-                  productInfo.productDetails.description) ||
-                  'Ürün açıklaması mevcut değil'}
-              </div>
-              <div
-                className="tab-pane fade"
-                id="pills-contact"
-                role="tabpanel"
-                aria-labelledby="pills-contact-tab"
-              >
-                Ullamco labore anim ea elit et Lorem exercitation. Velit nostrud
-                cillum adipisicing ad. Non est magna aliquip quis pariatur
-                culpa.
               </div>
               <div
                 className="tab-pane fade"
