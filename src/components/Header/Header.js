@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import { useHistory, NavLink, Link } from 'react-router-dom';
-import ReactCountryFlag from 'react-country-flag';
+import { useHistory, Link } from 'react-router-dom';
+// import ReactCountryFlag from 'react-country-flag';
 import {
-  FaGlobeEurope,
+  // FaGlobeEurope,
   FaUserAlt,
   FaSignInAlt,
   FaSignOutAlt,
