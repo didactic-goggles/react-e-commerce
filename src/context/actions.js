@@ -29,6 +29,7 @@ export async function loginUser(dispatch, loginPayload) {
 		// }
         dispatch({ type: 'LOGIN_SUCCESS', payload: response });
 		localStorage.setItem('currentUser', JSON.stringify(response.user));
+		localStorage.setItem('currentUserWishList', JSON.stringify(response.wishList || []));
 		localStorage.setItem('currentUserToken', response.token);
         return response; 
 
@@ -65,6 +66,8 @@ export async function signupUser(dispatch, signupPayload) {
 		// }
         dispatch({ type: 'SIGNUP_SUCCESS', payload: response });
 		localStorage.setItem('currentUser', JSON.stringify(response.user));
+		localStorage.setItem('currentUserWishList', JSON.stringify(response.wishList || []));
+		localStorage.setItem('currentUserToken', response.token);
         return response; 
 
 	} catch (error) {
@@ -75,7 +78,19 @@ export async function signupUser(dispatch, signupPayload) {
 export async function logout(dispatch) {
 	dispatch({ type: 'LOGOUT' });
 	localStorage.removeItem('currentUser');
-	localStorage.removeItem('token');
+	localStorage.removeItem('currentUserWishList');
+	localStorage.removeItem('currentUserToken');
+}
+
+export async function getWishList(dispatch, userId) {
+	const formData = new FormData();
+	formData.append('user_id', userId);
+    const getWishListResponse = await API.post('/wishList.php', formData);
+	if( getWishListResponse ) {
+		dispatch({ type: 'SET_WISHLIST', payload: getWishListResponse });
+		localStorage.setItem('currentUserWishList', JSON.stringify(getWishListResponse.wishList || []));
+		return getWishListResponse;
+	} return { wishList: [] };
 }
 
 export async function getAllCategories(dispatch) {

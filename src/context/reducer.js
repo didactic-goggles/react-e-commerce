@@ -1,6 +1,9 @@
 let user = localStorage.getItem('currentUser')
 	? JSON.parse(localStorage.getItem('currentUser'))
 	: '';
+let wishList = user && localStorage.getItem('currentUserWishList')
+	? JSON.parse(localStorage.getItem('currentUserWishList'))
+	: [];
 let token = localStorage.getItem('currentUserToken');
 
 export const initialState = {
@@ -11,7 +14,7 @@ export const initialState = {
     categories: null,
 	brands: null,
 	products: [],
-	wishList: []
+	wishList: wishList
 };
 
 export const AuthReducer = (initialState, action) => {
@@ -26,6 +29,7 @@ export const AuthReducer = (initialState, action) => {
 				...initialState,
 				user: action.payload.user,
 				token: action.payload.auth_token,
+				wishList: [],
 				errorMessage: null,
 				loading: false,
 			};
@@ -44,7 +48,7 @@ export const AuthReducer = (initialState, action) => {
 			return {
 				...initialState,
 				user: action.payload.user,
-				token: action.payload.auth_token,
+				token: action.payload.token,
 				wishList: action.payload.wishList,
 				errorMessage: null,
 				loading: false,
@@ -62,6 +66,11 @@ export const AuthReducer = (initialState, action) => {
 				loading: false,
 				errorMessage: action.error,
 			};
+		case 'SET_WISHLIST':
+			return {
+				...initialState,
+				wishList: action.payload.wishList
+			}
         case 'SET_ALL_CATEGORIES':
             return {
                 ...initialState,
