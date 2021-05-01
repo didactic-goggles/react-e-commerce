@@ -91,7 +91,7 @@ $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
     border-radius: 1rem;
 }
 
-.card:hover .image-overlay {
+.product:hover .image-overlay {
     opacity: 1;
 }
 
@@ -126,6 +126,7 @@ $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
 
 .nav-categories {
     .scrollbar-container {
+        display: flex;
         max-height: 330px;
     }
 
@@ -376,7 +377,7 @@ $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
                 font-size: 22px;
             }
         }
-
+border-radius: $border-radius;
         transition: background-color .3s ease;
         // width: 100%;
         position: relative;
@@ -471,10 +472,39 @@ $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
 // }
 
 .form-signin, .form-signup {
+    min-height: 400px;
     width: 100%;
     max-width: 530px;
     padding: 15px;
     margin: auto;
+}
+
+.form-signup {
+    .form-floating {
+        input {
+            margin-bottom: -1px;
+        }
+    }
+    .form-floating:not(:last-of-type) {
+        input {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+    .form-floating:not(:first-of-type) {
+        input {
+            border-radius: 0;
+        }
+    }
+    .form-floating:last-of-type {
+        input {
+            border-bottom-left-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+        }
+    }
+    // input:not(:last-of-type) {
+        
+    // }
 }
 
 .form-signin .checkbox {
@@ -708,7 +738,7 @@ $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
 .nav-tabs {
     .nav-link.active {
         color: #495057;
-        background-color: #fff;
+        background-color: transparent !important;
         border-color: transparent transparent var(--bs-primary);
     }
 }

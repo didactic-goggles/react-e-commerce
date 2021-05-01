@@ -61,7 +61,7 @@ const Signup = () => {
           <div className="col-md-6">
             <div className="card-body">
               <form
-                className="form-signin py-5 px-2 px-md-5"
+                className="form-signup py-5 px-2 px-md-5"
                 onSubmit={handleSignup}
               >
                 <h1 className="h3 mb-3 fw-normal">Kayıt Olun</h1>
@@ -73,7 +73,7 @@ const Signup = () => {
                   ''
                 )}
 
-                <div className="form-floating mb-3">
+                <div className="form-floating">
                   <input
                     type="text"
                     className="form-control"
@@ -86,7 +86,7 @@ const Signup = () => {
                   />
                   <label htmlFor="floatingUsername">Kullanıcı Adı</label>
                 </div>
-                <div className="form-floating mb-3">
+                <div className="form-floating">
                   <input
                     type="text"
                     className="form-control"
@@ -99,7 +99,7 @@ const Signup = () => {
                   />
                   <label htmlFor="floatingFirstname">Ad</label>
                 </div>
-                <div className="form-floating mb-3">
+                <div className="form-floating">
                   <input
                     type="text"
                     className="form-control"
@@ -112,7 +112,7 @@ const Signup = () => {
                   />
                   <label htmlFor="floatingLastname">Soyad</label>
                 </div>
-                <div className="form-floating mb-3">
+                <div className="form-floating">
                   <input
                     type="email"
                     className="form-control"
@@ -125,7 +125,7 @@ const Signup = () => {
                   />
                   <label htmlFor="floatingInput">E-posta adresi</label>
                 </div>
-                <div className="form-floating mb-3">
+                <div className="form-floating">
                   <input
                     type="password"
                     className="form-control"

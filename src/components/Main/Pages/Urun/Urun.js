@@ -98,7 +98,7 @@ const Urun = () => {
   return (
     <section className="container py-3">
       {productInfo.categories && (
-      <div className="card card-body p-2 mb-3 rounded-0 shadow-sm d-block align-items-center">
+      <div className="card card-body p-2 mb-3 shadow-sm d-block align-items-center">
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb mb-0">
             <li className="breadcrumb-item">
@@ -138,205 +138,209 @@ const Urun = () => {
         </nav>
       </div>
       )}
-      <div className="row">
-        <div className="col-sm-5">
-          <div className="mb-2 text-center" id="zoomContainer">
-            {productInfo.activeImageProduct && (
-              <ReactImageMagnify
-                {...{
-                  smallImage: {
-                    alt: 'Wristwatch by Ted Baker London',
-                    // style: {
-                    //   maxHeight: '500px'
-                    // },
-                    isFluidWidth: true,
-                    src: `${baseURL}${productInfo.activeImageProduct.image_path}`,
-                  },
-                  largeImage: {
-                    src: `${baseURL}${productInfo.activeImageProduct.image_path}`,
-                    width: 1200,
-                    height: 1800,
-                  },
-                  shouldUsePositiveSpaceLens: true
-                }}
-                style={{
-                  zIndex: 100,
-                  // maxHeight: '500px'
-                }}
-                // alt={productInfo.product.name}
-                // img={`${baseURL}${productInfo.activeImageProduct.image_path}`}
-                // key={productInfo.activeImageProduct.id}
-                // className="img-fluid"
-                // width={500}
-                // height="auto"
-                // style={{ maxHeight: '500px' }}
-              />
-              // <img
-              //   alt={productInfo.product.name}
-              //   src={`${baseURL}${productInfo.activeImageProduct.image_path}`}
-              //   key={productInfo.activeImageProduct.id}
-              //   className="img-fluid"
-              //   style={{ maxHeight: '500px' }}
-              // />
-            )}
-          </div>
-          <div>
-            <OwlCarousel
-              // items={1}
-              margin={8}
-              autoplay={true}
-              dots={false}
-              // center={true}
-              merge={true}
-              // loop={true}
-              // items={4}
-              autoWidth={true}
-              ref={refCarousel}
-              // autoHeight={true}
-              // ref={specialCarousel}
-              // onChanged={(e) => {
-              //   console.log(e)
-              // }}
-            >
-              {productInfo.productImages.map((productImage) => (
-                <img
-                  alt={productInfo.product.name}
-                  src={`${baseURL}${productImage.image_path}`}
-                  key={productImage.id}
-                  // className={productInfo.activeImageProduct.id === productImage.id ? 'img-thumbnail' : ''}
-                  style={{
-                    maxWidth: '60px',
-                    height: '60px',
-                    cursor: 'pointer',
-                  }}
-                  onClick={(event) => {
-                    handleActiveProductImageChange(productImage.id);
-                    // event.target.classList.add('img-thumbnail');
-                  }}
-                />
-              ))}
-              {/* {allProducts.map((product) => (
-              <Product product={product} key={product.id} />
-            ))} */}
-            </OwlCarousel>
-          </div>
-        </div>
-        <div className="col-sm-7">
-          <h5>{productInfo.product.name}</h5>
-          {/* <span className="d-block mb-1">Ürün Kısa Açıklaması</span> */}
-          <span className="d-block mb-1">
-            Stok Durumu:{' '}
-            <span
-              className={`${
-                productInfo.productDetails &&
-                productInfo.productDetails.quantity > 0
-                  ? 'text-success'
-                  : 'text-danger'
-              } fw-bold`}
-            >
-              {productInfo.productDetails &&
-              productInfo.productDetails.quantity > 0
-                ? 'Mevcut'
-                : 'Mevcut Değil'}
-            </span>
-          </span>
-          <div className="d-flex align-items-center mb-3">
-            <span className="me-2">Ürünü Puanı: </span>
-            {userDetails.user ? (
-              <ReactStars {...starsSettings} />
-            ) : (
-              <span>
-                <span data-tip data-for="infoForLogin">
-                  <ReactStars {...starsSettings} />
-                </span>
-                <ReactTooltip
-                  id="infoForLogin"
-                  place="top"
-                  // type="light"
-                  effect="solid"
-                  className="extraClass"
-                  delayHide={1000}
-                >
-                  <div>
-                    Ürünü puanlamak için{' '}
-                    <NavLink to="/giris">giriş yapın</NavLink>
-                  </div>
-                </ReactTooltip>
-              </span>
-            )}
-            {productInfo.comments.length > 0 ? (
-              <a
-                href="#comments"
-                className="btn btn-link text-warning"
-                onClick={(event) => {
-                  event.preventDefault();
-                  // document.querySelector('#comments').scrollIntoView();
-                  var firstTabEl = document.querySelector('#pills-comments-tab')
-                  var firstTab = new bootstrap.Tab(firstTabEl)
-
-                  firstTab.show()
-                }}
-              >
-                {' '}
-                {productInfo.comments.length} Değerlendirme
-              </a>
-            ) : (
-              ''
-            )}
-          </div>
-          <div>
-            <ul className="nav nav-tabs mb-3" id="pills-tab" role="tablist">
-              <li className="nav-item" role="presentation">
-                <button
-                  className="nav-link active"
-                  id="pills-home-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-home"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-home"
-                  aria-selected="true"
-                >
-                  Ürün Özellikleri
-                </button>
-              </li>
-              <li className="nav-item" role="presentation">
-                <button
-                  className="nav-link"
-                  id="pills-comments-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-comments"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-comments"
-                  aria-selected="false"
-                >
-                  Yorumlar {productInfo.comments.length > 0 ? `(${productInfo.comments.length})` : ''}
-                </button>
-              </li>
-            </ul>
-            <div className="tab-content" id="pills-tabContent">
-              <div
-                className="tab-pane fade show active"
-                id="pills-home"
-                role="tabpanel"
-                aria-labelledby="pills-home-tab"
-              >
-                {(productInfo.productDetails &&
-                  productInfo.productDetails.description) ||
-                  'Ürün özellikleri mevcut değil'}
+      <div className="card shadow">
+        <div className="card-body p-0">
+          <div className="row mx-0">
+            <div className="col-sm-5 py-3">
+              <div className="mb-2 text-center" id="zoomContainer">
+                {productInfo.activeImageProduct && (
+                  <ReactImageMagnify
+                    {...{
+                      smallImage: {
+                        alt: 'Wristwatch by Ted Baker London',
+                        // style: {
+                        //   maxHeight: '500px'
+                        // },
+                        isFluidWidth: true,
+                        src: `${baseURL}${productInfo.activeImageProduct.image_path}`,
+                      },
+                      largeImage: {
+                        src: `${baseURL}${productInfo.activeImageProduct.image_path}`,
+                        width: 1200,
+                        height: 1800,
+                      },
+                      shouldUsePositiveSpaceLens: true
+                    }}
+                    style={{
+                      zIndex: 100,
+                      // maxHeight: '500px'
+                    }}
+                    // alt={productInfo.product.name}
+                    // img={`${baseURL}${productInfo.activeImageProduct.image_path}`}
+                    // key={productInfo.activeImageProduct.id}
+                    // className="img-fluid"
+                    // width={500}
+                    // height="auto"
+                    // style={{ maxHeight: '500px' }}
+                  />
+                  // <img
+                  //   alt={productInfo.product.name}
+                  //   src={`${baseURL}${productInfo.activeImageProduct.image_path}`}
+                  //   key={productInfo.activeImageProduct.id}
+                  //   className="img-fluid"
+                  //   style={{ maxHeight: '500px' }}
+                  // />
+                )}
               </div>
-              <div
-                className="tab-pane fade"
-                id="pills-comments"
-                role="tabpanel"
-                aria-labelledby="pills-comments-tab"
-              >
-                <Comments
-                  comments={productInfo.comments}
-                  userDetails={userDetails}
-                  productId={productId}
-                />
+              <div>
+                <OwlCarousel
+                  // items={1}
+                  margin={8}
+                  autoplay={true}
+                  dots={false}
+                  // center={true}
+                  merge={true}
+                  // loop={true}
+                  // items={4}
+                  autoWidth={true}
+                  ref={refCarousel}
+                  // autoHeight={true}
+                  // ref={specialCarousel}
+                  // onChanged={(e) => {
+                  //   console.log(e)
+                  // }}
+                >
+                  {productInfo.productImages.map((productImage) => (
+                    <img
+                      alt={productInfo.product.name}
+                      src={`${baseURL}${productImage.image_path}`}
+                      key={productImage.id}
+                      // className={productInfo.activeImageProduct.id === productImage.id ? 'img-thumbnail' : ''}
+                      style={{
+                        maxWidth: '60px',
+                        height: '60px',
+                        cursor: 'pointer',
+                      }}
+                      onClick={(event) => {
+                        handleActiveProductImageChange(productImage.id);
+                        // event.target.classList.add('img-thumbnail');
+                      }}
+                    />
+                  ))}
+                  {/* {allProducts.map((product) => (
+                  <Product product={product} key={product.id} />
+                ))} */}
+                </OwlCarousel>
+              </div>
+            </div>
+            <div className="col-sm-7 bg-light py-3 px-3">
+              <h4 className="fw-bold text-primary">{productInfo.product.name}</h4>
+              {/* <span className="d-block mb-1">Ürün Kısa Açıklaması</span> */}
+              <span className="d-block mb-1">
+                Stok Durumu:{' '}
+                <span
+                  className={`${
+                    productInfo.productDetails &&
+                    productInfo.productDetails.quantity > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  } fw-bold`}
+                >
+                  {productInfo.productDetails &&
+                  productInfo.productDetails.quantity > 0
+                    ? 'Mevcut'
+                    : 'Mevcut Değil'}
+                </span>
+              </span>
+              <div className="d-flex align-items-center mb-3">
+                <span className="me-2">Ürünü Puanı: </span>
+                {userDetails.user ? (
+                  <ReactStars {...starsSettings} />
+                ) : (
+                  <span>
+                    <span data-tip data-for="infoForLogin">
+                      <ReactStars {...starsSettings} />
+                    </span>
+                    <ReactTooltip
+                      id="infoForLogin"
+                      place="top"
+                      // type="light"
+                      effect="solid"
+                      className="extraClass"
+                      delayHide={1000}
+                    >
+                      <div>
+                        Ürünü puanlamak için{' '}
+                        <NavLink to="/giris">giriş yapın</NavLink>
+                      </div>
+                    </ReactTooltip>
+                  </span>
+                )}
+                {productInfo.comments.length > 0 ? (
+                  <a
+                    href="#comments"
+                    className="btn btn-link text-warning"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      // document.querySelector('#comments').scrollIntoView();
+                      var firstTabEl = document.querySelector('#pills-comments-tab')
+                      var firstTab = new bootstrap.Tab(firstTabEl)
+
+                      firstTab.show()
+                    }}
+                  >
+                    {' '}
+                    {productInfo.comments.length} Değerlendirme
+                  </a>
+                ) : (
+                  ''
+                )}
+              </div>
+              <div>
+                <ul className="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+                  <li className="nav-item" role="presentation">
+                    <button
+                      className="nav-link active"
+                      id="pills-home-tab"
+                      data-bs-toggle="pill"
+                      data-bs-target="#pills-home"
+                      type="button"
+                      role="tab"
+                      aria-controls="pills-home"
+                      aria-selected="true"
+                    >
+                      Ürün Özellikleri
+                    </button>
+                  </li>
+                  <li className="nav-item" role="presentation">
+                    <button
+                      className="nav-link"
+                      id="pills-comments-tab"
+                      data-bs-toggle="pill"
+                      data-bs-target="#pills-comments"
+                      type="button"
+                      role="tab"
+                      aria-controls="pills-comments"
+                      aria-selected="false"
+                    >
+                      Yorumlar {productInfo.comments.length > 0 ? `(${productInfo.comments.length})` : ''}
+                    </button>
+                  </li>
+                </ul>
+                <div className="tab-content" id="pills-tabContent">
+                  <div
+                    className="tab-pane fade show active"
+                    id="pills-home"
+                    role="tabpanel"
+                    aria-labelledby="pills-home-tab"
+                  >
+                    {(productInfo.productDetails &&
+                      productInfo.productDetails.description) ||
+                      'Ürün özellikleri mevcut değil'}
+                  </div>
+                  <div
+                    className="tab-pane fade"
+                    id="pills-comments"
+                    role="tabpanel"
+                    aria-labelledby="pills-comments-tab"
+                  >
+                    <Comments
+                      comments={productInfo.comments}
+                      userDetails={userDetails}
+                      productId={productId}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>

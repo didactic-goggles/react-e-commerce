@@ -413,7 +413,7 @@ const Urunler = () => {
                 </button>
               </div> */}
               <div className="col-auto d-flex align-items-center mb-3">
-                <span className="me-2 text-muted">
+                <label className="me-2 text-muted" for="sortSelect">
                   <FaSortAlphaDown style={{ fontSize: '20px' }} />
                   {/* {sorting === 'name:desc' ? (
                     
@@ -422,9 +422,10 @@ const Urunler = () => {
                   ) : (
                     sorting === 'rating:desc'
                   )} */}
-                </span>
+                </label>
                 <select
-                  className="form-control rounded-0"
+                  id="sortSelect"
+                  className="form-control"
                   value={sorting}
                   onChange={(event) => setSorting(event.target.value)}
                 >

@@ -7456,7 +7456,7 @@ textarea.form-control-lg {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 1rem; }
 
-.card:hover .image-overlay {
+.product:hover .image-overlay {
   opacity: 1; }
 
 @media (min-width: 768px) {
@@ -7475,6 +7475,7 @@ textarea.form-control-lg {
     text-align: center; } }
 
 .nav-categories .scrollbar-container {
+  display: flex;
   max-height: 330px; }
 
 .nav-categories .bd-links {
@@ -7645,6 +7646,7 @@ textarea.form-control-lg {
   top: .7rem; }
 
 #mainNav li.nav-item {
+  border-radius: 0.25rem;
   transition: background-color .3s ease;
   position: relative; }
   #mainNav li.nav-item > a.nav-link {
@@ -7659,10 +7661,25 @@ textarea.form-control-lg {
 
 /*Styling Tabs*/
 .form-signin, .form-signup {
+  min-height: 400px;
   width: 100%;
   max-width: 530px;
   padding: 15px;
   margin: auto; }
+
+.form-signup .form-floating input {
+  margin-bottom: -1px; }
+
+.form-signup .form-floating:not(:last-of-type) input {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0; }
+
+.form-signup .form-floating:not(:first-of-type) input {
+  border-radius: 0; }
+
+.form-signup .form-floating:last-of-type input {
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem; }
 
 .form-signin .checkbox {
   font-weight: 400; }
@@ -7789,7 +7806,7 @@ textarea.form-control-lg {
 
 .nav-tabs .nav-link.active {
   color: #495057;
-  background-color: #fff;
+  background-color: transparent !important;
   border-color: transparent transparent var(--bs-primary); }
 
 .border-x {

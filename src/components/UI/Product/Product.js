@@ -76,7 +76,7 @@ const Product = (props) => {
   };
 
   return (
-    <div className="card rounded-lg w-100 border-0" key={product.id}>
+    <div className="card product rounded-lg w-100 border-0" key={product.id}>
       <div
         className="card-image bg-transparent"
         style={{ borderRadius: '1rem' }}
