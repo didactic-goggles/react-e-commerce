@@ -52,7 +52,6 @@ const Navbar = () => {
   //     products: allResponses[2].products,
   //   });
   // };
-  
 
   useEffect(() => {
     const getAllBrandsAndCategories = async () => {
@@ -290,10 +289,7 @@ const Navbar = () => {
                 onChange={() => handleSearch()}
                 onBlur={(event) => handleSearchBlur(event)}
               />
-              <a
-                className="ico-btn search-btn"
-                onClick={() => handleSearch()}
-              >
+              <a className="ico-btn search-btn" onClick={() => handleSearch()}>
                 <FaSearch />
               </a>
               <a
@@ -321,54 +317,6 @@ const Navbar = () => {
             id="mainNav"
             className="nav nav-pills justify-content-center w-100"
           >
-            <li className="nav-item">
-              <NavLink
-                to="/"
-                exact
-                activeClassName="active"
-                className="nav-link"
-              >
-                <FaHome className="me-1" />
-                Anasayfa
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                to="/kurumsal"
-                exact
-                activeClassName="active"
-                className="nav-link"
-              >
-                <FaUsers className="me-1" />
-                Kurumsal
-              </NavLink>
-            </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                data-bs-toggle="dropdown"
-                href="#"
-                role="button"
-                aria-expanded="false"
-                data-bs-offset="0,-1"
-              >
-                <FaTags className="me-1" />
-                Markalar
-              </a>
-              <ul className="dropdown-menu">
-                {allMenuTypes.brands &&
-                  allMenuTypes.brands.map((brand) => (
-                    <li key={brand.id}>
-                      <Link
-                        className="dropdown-item"
-                        to={`/urunler?brands=${brand.id}`}
-                      >
-                        {brand.name}
-                      </Link>
-                    </li>
-                  ))}
-              </ul>
-            </li>
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
@@ -467,6 +415,54 @@ const Navbar = () => {
                       </li>
                     );
                   })}
+              </ul>
+            </li>
+            {/* <li className="nav-item">
+              <NavLink
+                to="/"
+                exact
+                activeClassName="active"
+                className="nav-link"
+              >
+                <FaHome className="me-1" />
+                Anasayfa
+              </NavLink>
+            </li> */}
+            <li className="nav-item">
+              <NavLink
+                to="/kurumsal"
+                exact
+                activeClassName="active"
+                className="nav-link"
+              >
+                <FaUsers className="me-1" />
+                Kurumsal
+              </NavLink>
+            </li>
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                data-bs-toggle="dropdown"
+                href="#"
+                role="button"
+                aria-expanded="false"
+                data-bs-offset="0,-1"
+              >
+                <FaTags className="me-1" />
+                Markalar
+              </a>
+              <ul className="dropdown-menu">
+                {allMenuTypes.brands &&
+                  allMenuTypes.brands.map((brand) => (
+                    <li key={brand.id}>
+                      <Link
+                        className="dropdown-item"
+                        to={`/urunler?brands=${brand.id}`}
+                      >
+                        {brand.name}
+                      </Link>
+                    </li>
+                  ))}
               </ul>
             </li>
             <li className="nav-item">
