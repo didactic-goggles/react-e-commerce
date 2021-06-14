@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import {
   FaSearch,
   FaTimes,
-  FaHome,
+  // FaHome,
   FaUsers,
   FaTags,
   FaBoxOpen,
@@ -34,6 +34,7 @@ const Navbar = () => {
     subCategories: [],
     childCategories: [],
     brands: [],
+    subBrands: [],
     products: [],
   });
   // const getAllBrandsAndCategories = async () => {
@@ -277,7 +278,7 @@ const Navbar = () => {
       <section className="pt-3">
         <div className="container d-flex align-items-center flex-column flex-md-row mb-2">
           <NavLink to="/" exact className="text-decoration-none logo">
-            <h3 className="mb-0 text-dark">LOGO</h3>
+            <img src='https://comfortmedikal.com/img/logo/comfort-logo-white.jpg' alt='Comfort Medikal İstanbul' className='header-logo'/>
           </NavLink>
           <div className="dropdown w-100 searchbox-container">
             <div className="searchbox mx-0 mx-md-5 shadow-sm rounded-pill">
@@ -452,17 +453,54 @@ const Navbar = () => {
                 Markalar
               </a>
               <ul className="dropdown-menu">
-                {allMenuTypes.brands &&
-                  allMenuTypes.brands.map((brand) => (
-                    <li key={brand.id}>
-                      <Link
-                        className="dropdown-item"
-                        to={`/urunler?brands=${brand.id}`}
-                      >
-                        {brand.name}
-                      </Link>
-                    </li>
-                  ))}
+              {allMenuTypes.brands &&
+                  allMenuTypes.brands.map((brand) => {
+                    if (brand.subBrands.length > 0) {
+                      return (
+                        <li key={brand.id}>
+                          <div className="dropend">
+                            <a
+                              className="dropdown-item dropdown-toggle"
+                              href="#"
+                              role="button"
+                              id={`brand-${brand.id}`}
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                            >
+                              {brand.name}
+                            </a>
+                            <ul
+                              className="dropdown-menu"
+                              aria-labelledby={`brand-${brand.id}`}
+                            >
+                              {brand.subBrands.map((subBrand) => {
+                                return (
+                                  <li key={subBrand.id}>
+                                    <Link
+                                      className="dropdown-item"
+                                      to={`/urunler?brands=${brand.id}&subBrands=${subBrand.id}`}
+                                    >
+                                      {subBrand.sub_brand_name}
+                                    </Link>
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </div>
+                        </li>
+                      );
+                    }
+                    return (
+                      <li key={brand.id}>
+                        <Link
+                          className="dropdown-item"
+                          to={`/urunler?brands=${brand.id}`}
+                        >
+                          {brand.name}
+                        </Link>
+                      </li>
+                    );
+                  })}
               </ul>
             </li>
             <li className="nav-item">

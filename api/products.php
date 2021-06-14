@@ -96,7 +96,8 @@ try {
         // }
     } else {
         $query = "SELECT p.id, p.name, pc.category_id as pcCategoryId, pc.type as pcType, pi.image_path as productPrimaryImage,
-        pd.brand_id as brandId, AVG(com.rating) as rating FROM Products p 
+        pb.brand_id as pbBrandId, pb.type as pbType, AVG(com.rating) as rating FROM Products p 
+        LEFT JOIN Product_Brand pb ON p.id = pb.product_id
         LEFT JOIN Product_Category pc ON p.id = pc.product_id
         LEFT JOIN Product_Details pd on pd.product_id = p.id
         LEFT JOIN Product_Images pi on pi.id = pd.product_base_image_id
@@ -141,6 +142,28 @@ try {
                     $r["subCategoryId"] = $rChildCategory['subCategoryId'];
                     $r["category"] = $rChildCategory['category'];
                     $r["categoryId"] = $rChildCategory['categoryId'];
+                }
+            }
+            if($r['pbType'] == 'brand') {
+                $brandQuery = "SELECT name, id from Brands where id=".$r['pbBrandId'];
+                $sthBrand = mysqli_query($con, $brandQuery);
+                // $rows1 = array();
+                while ($rBrand= mysqli_fetch_assoc($sthBrand)) {
+                    $r["brand"] = $rBrand['name'];
+                    $r["brandId"] = $rBrand['id'];
+                }
+            } else if($r['pbType'] == 'subBrand') {
+                $subBrandQuery = "SELECT sb.sub_brand_name as subBrand,sb.id as subBrandId, 
+                    b.name as brand, b.id as brandId FROM `Sub_Brands` sb 
+                    LEFT JOIN Brands b on b.id =  sb.brand_id
+                    WHERE sb.id=".$r['pbBrandId'];
+                $sthSubBrand = mysqli_query($con, $subBrandQuery);
+                // $rows1 = array();
+                while ($rSubBrand = mysqli_fetch_assoc($sthSubBrand)) {
+                    $r["subBrand"] = $rSubBrand['subBrand'];
+                    $r["subBrandId"] = $rSubBrand['subBrandId'];
+                    $r["brand"] = $rSubBrand['brand'];
+                    $r["brandId"] = $rSubBrand['brandId'];
                 }
             }
             $rows[] = $r;

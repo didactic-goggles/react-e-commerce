@@ -6,10 +6,9 @@ const Iletisim = () => {
     <section className="container py-3">
       <div className="row">
         <div className="col-md-6">
-          <h3>LOGO</h3>
+          <img src='https://comfortmedikal.com/img/logo/comfort-logo-white.jpg' alt='Comfort Medikal İstanbul' className='header-logo'/>
           <h5>
-            Labore irure ut nostrud ut consectetur et consectetur sint est nulla
-            minim.
+            COMFORT MEDİKAL SAĞLIK ÜRÜNLERİ A.Ş.
           </h5>
           <span className="d-flex align-items-center mb-2">
             <FaMapMarked className="me-2" />

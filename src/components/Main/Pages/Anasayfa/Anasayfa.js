@@ -1,4 +1,4 @@
-import { FaRegClock, FaHeadset, FaTruck } from 'react-icons/fa';
+// import { FaRegClock, FaHeadset, FaTruck } from 'react-icons/fa';
 import CategoriesVerticalNav from './CategoriesVerticalNav';
 import ProductsSlider from './ProductsSlider';
 
@@ -30,59 +30,67 @@ const Anasayfa = () => {
               data-bs-slide-to="2"
               aria-label="Slide 3"
             ></button>
+            <button
+              type="button"
+              data-bs-target="#myCarousel"
+              data-bs-slide-to="3"
+              aria-label="Slide 4"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#myCarousel"
+              data-bs-slide-to="4"
+              aria-label="Slide 5"
+            ></button>
           </div>
           <div className="carousel-inner">
             <div className="carousel-item active">
-              <svg
-                className="bd-placeholder-img bd-placeholder-img-lg d-block w-100"
-                width="800"
-                height="600"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: First slide"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Ürün Foto</title>
-                <rect width="100%" height="100%" fill="#777" />
-                <text x="50%" y="50%" fill="#555" dy=".3em">
-                  Ürün 1
-                </text>
-              </svg>
-
+              <img
+                src="https://comfortmedikal.com/img/anasayfa/1.png"
+                className="w-100"
+                alt="Evony"
+              />
               <div className="container">
-                <div className="carousel-caption text-start">
-                  <h1>Ürün Başlığı</h1>
-                  <p>Ürün Açıklaması</p>
+                <div className="carousel-caption text-center text-dark">
+                  <h1>EVONY</h1>
+                  <p>DAYANIKLI HASTA BEZLERİ</p>
                   <p>
                     <button className="btn btn-lg btn-primary">
-                      Ürün Detayına Git
+                      İnceleyin
                     </button>
                   </p>
                 </div>
               </div>
             </div>
             <div className="carousel-item">
-              <svg
-                className="bd-placeholder-img bd-placeholder-img-lg d-block w-100"
-                width="800"
-                height="600"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: First slide"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#777" />
-                <text x="50%" y="50%" fill="#555" dy=".3em">
-                  Ürün 2
-                </text>
-              </svg>
+              <img
+                src="https://comfortmedikal.com/img/anasayfa/2.png"
+                className="w-100"
+                alt="Evony"
+              />
 
               <div className="container">
                 <div className="carousel-caption">
-                  <h1>Ürün Başlığı</h1>
+                  <h1>TENA</h1>
+                  <p>Ürün Açıklaması</p>
+                  <p>
+                    <button className="btn btn-lg btn-primary">
+                      İnceleyin
+                    </button>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="carousel-item">
+              <img
+                src="https://comfortmedikal.com/img/anasayfa/3.PNG"
+                className="w-100"
+                alt="Evony"
+              />
+
+              <div className="container">
+                <div className="carousel-caption text-end text-primary">
+                  <h1>JOLY</h1>
                   <p>Ürün Açıklaması</p>
                   <p>
                     <button className="btn btn-lg btn-primary">
@@ -93,26 +101,34 @@ const Anasayfa = () => {
               </div>
             </div>
             <div className="carousel-item">
-              <svg
-                className="bd-placeholder-img bd-placeholder-img-lg d-block w-100"
-                width="800"
-                height="600"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: First slide"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#777" />
-                <text x="50%" y="50%" fill="#555" dy=".3em">
-                  Ürün 3
-                </text>
-              </svg>
+              <img
+                src="https://comfortmedikal.com/img/anasayfa/4.jpg"
+                className="w-100"
+                alt="Evony"
+              />
+
+              <div className="container">
+                <div className="carousel-caption text-end text-dark">
+                  <h1>SLEEPY</h1>
+                  <p>Ürün Açıklaması</p>
+                  <p>
+                    <button className="btn btn-lg btn-primary">
+                      Ürün Detayına Git
+                    </button>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="carousel-item">
+              <img
+                src="https://comfortmedikal.com/img/anasayfa/5.jpg"
+                className="w-100"
+                alt="Evony"
+              />
 
               <div className="container">
                 <div className="carousel-caption text-end">
-                  <h1>Ürün Başlığı</h1>
+                  <h1>MOLFİX</h1>
                   <p>Ürün Açıklaması</p>
                   <p>
                     <button className="btn btn-lg btn-primary">
@@ -151,7 +167,7 @@ const Anasayfa = () => {
       </section>
       {/* end:: Slider */}
       {/* begin:: Section: Info */}
-      <section className="bg-light bg-gradient px-5 py-4 my-5 shadow">
+      {/* <section className="bg-light bg-gradient px-5 py-4 my-5 shadow">
         <div className="container">
           <div className="row justify-content-center align-items-stretch">
             <div className="col-md-4 col-12 mb-3">
@@ -192,7 +208,7 @@ const Anasayfa = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* end:: Section: Info */}
       {/* begin:: Cards: Product */}
       <section className="container mb-3">

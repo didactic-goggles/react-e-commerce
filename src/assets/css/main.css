@@ -7994,3 +7994,6 @@ textarea.form-control-lg {
     border-bottom: 0 !important; }
   .border-left-xxl-0 {
     border-left: 0 !important; } }
+
+.header-logo {
+  width: 220px; }

@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="bg-dark mt-auto text-white py-5">
       <div className="container">
-        <div className="row">
+        <div className="row align-items-center">
           <div
             className="col-md-2 border-right-md border-sm-0 flex-fill d-flex align-items-center justify-content-center mb-3"
             ref={(el) =>
@@ -13,7 +13,7 @@ const Footer = () => {
               el.style.setProperty('border-color', '#6c757d3d', 'important')
             }
           >
-            <h5>Logo</h5>
+            <img src='https://comfortmedikal.com/img/logo/comfort-logo-white.jpg' alt='Comfort Medikal İstanbul' className='header-logo'/>
           </div>
           <div
             className="col-md-5 border-right-md border-sm-0 flex-fill mb-3"

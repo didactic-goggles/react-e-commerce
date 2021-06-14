@@ -54,6 +54,14 @@ const Urunler = () => {
             .map((item) => Number(item))
         : []),
     ],
+    subBrands: [
+      ...(query.get('subBrands')
+        ? query
+            .get('subBrands')
+            .split(',')
+            .map((item) => Number(item))
+        : []),
+    ],
     ratings: [
       ...(query.get('ratings')
         ? query
@@ -221,43 +229,87 @@ const Urunler = () => {
   };
 
   const BrandsFilter = () => {
-    if (!userDetails.brands || userDetails.brands.length === 0) return null;
-
-    const brandElements = [];
-    userDetails.brands.forEach((brand) => {
-      brandElements.push(
+    if (!userDetails.brands || userDetails.brands.length === 0) {
+      return null;
+    }
+    const Brands = () =>
+      userDetails.brands.map((brand) => (
         <div className="form-check" key={brand.id}>
           <input
             className="form-check-input"
             type="checkbox"
             value={brand.id}
+            name="brandId"
             id={`brand-checkbox-${brand.id}`}
             onChange={(event) => {
+              const brandElement = document.getElementById(
+                `brand-checkbox-collapse-${brand.id}`
+              );
+              const brandCollapse = new bootstrap.Collapse(brandElement);
               const tempFilters = { ...filters };
               if (event.target.checked) {
                 tempFilters.brands.push(Number(brand.id));
+                brandCollapse.show();
               } else {
-                tempFilters.brands = tempFilters.brands.filter(
+                tempFilters.brands = tempFilters.categories.filter(
                   (brandId) => Number(brand.id) !== brandId
                 );
+                brandCollapse.hide();
               }
               setFilters(tempFilters);
             }}
             checked={filters.brands.includes(Number(brand.id))}
           />
           <label
-            className="form-check-label d-flex align-items-center"
+            className="form-check-label"
             htmlFor={`brand-checkbox-${brand.id}`}
           >
             {brand.name}
           </label>
+          <div
+            className={`collapse ps-2 ${
+              filters.brands.includes(Number(brand.id)) && 'show'
+            }`}
+            id={`brand-checkbox-collapse-${brand.id}`}
+          >
+            {brand.subBrands.map((subBrand) => (
+              <div key={subBrand.id}>
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id={`sub-brand-checkbox-${subBrand.id}`}
+                  onChange={(event) => {
+                    const tempFilters = { ...filters };
+                    if (event.target.checked) {
+                      tempFilters.subBrands.push(Number(subBrand.id));
+                    } else {
+                      tempFilters.subBrands = tempFilters.subBrands.filter(
+                        (subBrandId) =>
+                          Number(subBrand.id) !== subBrandId
+                      );
+                    }
+                    setFilters(tempFilters);
+                  }}
+                  checked={filters.subBrands.includes(
+                    Number(subBrand.id)
+                  )}
+                />
+                <label
+                  className="form-check-label"
+                  htmlFor={`sub-brand-checkbox-${subBrand.id}`}
+                >
+                  {subBrand.sub_brand_name}
+                </label>
+              </div>
+            ))}
+          </div>
         </div>
-      );
-    });
+      ));
     return (
       <div className="form-group mb-3">
         <h6 className="fw-bolder">Markalar</h6>
-        {brandElements}
+        <Brands />
       </div>
     );
   };
@@ -340,6 +392,11 @@ const Urunler = () => {
           !filters.brands.includes(Number(product.brandId))
         )
           return false;
+        if (
+            filters.subBrands.length > 0 &&
+            !filters.subBrands.includes(Number(product.subBrandId))
+          )
+            return false;
         if (
           filters.ratings.length > 0 &&
           !filters.ratings.includes(Math.round(Number(product.rating)))
