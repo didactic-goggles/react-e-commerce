@@ -7999,6 +7999,15 @@ textarea.form-control-lg {
   width: 220px; }
 
 #myCarousel .carousel-item {
-  text-align: center; }
-  #myCarousel .carousel-item img {
-    width: 100%; }
+  text-align: center;
+  height: 550px; }
+
+.lg-1 {
+  background-image: linear-gradient(90deg, #daeedf, #80c88a); }
+  .lg-1 img {
+    width: 80%; }
+
+.lg-2 {
+  background-image: linear-gradient(180deg, #416771, #4dabb6); }
+  .lg-2 img {
+    width: 80%; }

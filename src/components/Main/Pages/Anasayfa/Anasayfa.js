@@ -42,18 +42,18 @@ const Anasayfa = () => {
               data-bs-slide-to="4"
               aria-label="Slide 5"
             ></button>
-            <button
+            {/* <button
               type="button"
               data-bs-target="#myCarousel"
               data-bs-slide-to="5"
               aria-label="Slide 6"
-            ></button>
+            ></button> */}
           </div>
           <div className="carousel-inner">
             <div className="carousel-item active">
               <img
-                src="https://comfortmedikal.com/img/anasayfa/2.png"
-                // className="w-100"
+                src="/assets/img/anasayfa/222.png"
+                className="w-100"
                 alt="Evony"
               />
 
@@ -69,10 +69,10 @@ const Anasayfa = () => {
                 </div>
               </div>
             </div>
-            <div className="carousel-item">
+            <div className="carousel-item lg-1">
               <img
-                src="https://comfortmedikal.com/img/anasayfa/12.png"
-                // className="w-100"
+                src="/assets/img/anasayfa/12.png"
+                className=""
                 alt="Evony"
               />
               <div className="container d-none">
@@ -87,9 +87,9 @@ const Anasayfa = () => {
                 </div>
               </div>
             </div>
-            <div className="carousel-item">
+            <div className="carousel-item lg-2">
               <img
-                src="https://comfortmedikal.com/img/anasayfa/33.png"
+                src="/assets/img/anasayfa/33.png"
                 // className="w-100"
                 alt="Evony"
               />
@@ -108,8 +108,8 @@ const Anasayfa = () => {
             </div>
             <div className="carousel-item">
               <img
-                src="https://comfortmedikal.com/img/anasayfa/4.jpg"
-                // className="w-100"
+                src="/assets/img/anasayfa/4.jpg"
+                className="w-100 h-100"
                 alt="Evony"
               />
 
@@ -127,8 +127,8 @@ const Anasayfa = () => {
             </div>
             <div className="carousel-item">
               <img
-                src="https://comfortmedikal.com/img/anasayfa/5.jpg"
-                // className="w-100"
+                src="/assets/img/anasayfa/5.jpg"
+                className="w-100"
                 alt="Evony"
               />
 
@@ -144,25 +144,19 @@ const Anasayfa = () => {
                 </div>
               </div>
             </div>
-            <div className="carousel-item">
+            {/* <div className="carousel-item">
               <img
-                src="https://comfortmedikal.com/img/anasayfa/6.jpg"
-                // className="w-100"
+                src="/assets/img/anasayfa/6.jpg"
+                className="w-100"
                 alt="Evony"
               />
 
               <div className="container d-none">
                 <div className="carousel-caption text-end">
                   <h1>Hisleep</h1>
-                  {/* <p>Ürün Açıklaması</p>
-                  <p>
-                    <button className="btn btn-lg btn-primary">
-                      Ürün Detayına Git
-                    </button>
-                  </p> */}
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <button
             className="carousel-control-prev"
