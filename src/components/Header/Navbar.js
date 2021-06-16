@@ -278,7 +278,7 @@ const Navbar = () => {
       <section className="pt-3">
         <div className="container d-flex align-items-center flex-column flex-md-row mb-2">
           <NavLink to="/" exact className="text-decoration-none logo">
-            <img src='https://comfortmedikal.com/img/logo/comfort-logo-white.jpg' alt='Comfort Medikal İstanbul' className='header-logo'/>
+            <img src='https://comfortmedikal.com/img/logo/comfort-logo-transparent.png' alt='Comfort Medikal İstanbul' className='header-logo'/>
           </NavLink>
           <div className="dropdown w-100 searchbox-container">
             <div className="searchbox mx-0 mx-md-5 shadow-sm rounded-pill">
@@ -307,7 +307,7 @@ const Navbar = () => {
               <SearchResults />
             </div>
           </div>
-          <div>YAZI yada RESIM</div>
+          <div className='d-none'>YAZI yada RESIM</div>
           {/* <a>Get in</a> */}
         </div>
         <nav

@@ -8,7 +8,7 @@ const Anasayfa = () => {
     <>
       {/* // begin:: Slider */}
       <section className="mb-3">
-        <div id="myCarousel" className="carousel slide" data-bs-ride="carousel">
+        <div id="myCarousel" className="carousel slide" data-bs-ride="carousel" data-interval="false">
           <div className="carousel-indicators">
             <button
               type="button"
@@ -42,34 +42,22 @@ const Anasayfa = () => {
               data-bs-slide-to="4"
               aria-label="Slide 5"
             ></button>
+            <button
+              type="button"
+              data-bs-target="#myCarousel"
+              data-bs-slide-to="5"
+              aria-label="Slide 6"
+            ></button>
           </div>
           <div className="carousel-inner">
             <div className="carousel-item active">
               <img
-                src="https://comfortmedikal.com/img/anasayfa/1.png"
-                className="w-100"
-                alt="Evony"
-              />
-              <div className="container">
-                <div className="carousel-caption text-center text-dark">
-                  <h1>EVONY</h1>
-                  <p>DAYANIKLI HASTA BEZLERİ</p>
-                  <p>
-                    <button className="btn btn-lg btn-primary">
-                      İnceleyin
-                    </button>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="carousel-item">
-              <img
                 src="https://comfortmedikal.com/img/anasayfa/2.png"
-                className="w-100"
+                // className="w-100"
                 alt="Evony"
               />
 
-              <div className="container">
+              <div className="container d-none">
                 <div className="carousel-caption">
                   <h1>TENA</h1>
                   <p>Ürün Açıklaması</p>
@@ -83,58 +71,95 @@ const Anasayfa = () => {
             </div>
             <div className="carousel-item">
               <img
-                src="https://comfortmedikal.com/img/anasayfa/3.PNG"
-                className="w-100"
+                src="https://comfortmedikal.com/img/anasayfa/12.png"
+                // className="w-100"
+                alt="Evony"
+              />
+              <div className="container d-none">
+                <div className="carousel-caption text-center text-dark">
+                  <h1>EVONY</h1>
+                  {/* <p>DAYANIKLI HASTA BEZLERİ</p>
+                  <p>
+                    <button className="btn btn-lg btn-primary">
+                      İnceleyin
+                    </button>
+                  </p> */}
+                </div>
+              </div>
+            </div>
+            <div className="carousel-item">
+              <img
+                src="https://comfortmedikal.com/img/anasayfa/33.png"
+                // className="w-100"
                 alt="Evony"
               />
 
-              <div className="container">
+              <div className="container d-none">
                 <div className="carousel-caption text-end text-primary">
                   <h1>JOLY</h1>
-                  <p>Ürün Açıklaması</p>
+                  {/* <p>Ürün Açıklaması</p>
                   <p>
                     <button className="btn btn-lg btn-primary">
                       Ürün Detayına Git
                     </button>
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>
             <div className="carousel-item">
               <img
                 src="https://comfortmedikal.com/img/anasayfa/4.jpg"
-                className="w-100"
+                // className="w-100"
                 alt="Evony"
               />
 
-              <div className="container">
+              <div className="container d-none">
                 <div className="carousel-caption text-end text-dark">
                   <h1>SLEEPY</h1>
-                  <p>Ürün Açıklaması</p>
+                  {/* <p>Ürün Açıklaması</p>
                   <p>
                     <button className="btn btn-lg btn-primary">
                       Ürün Detayına Git
                     </button>
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>
             <div className="carousel-item">
               <img
                 src="https://comfortmedikal.com/img/anasayfa/5.jpg"
-                className="w-100"
+                // className="w-100"
                 alt="Evony"
               />
 
-              <div className="container">
+              <div className="container d-none">
                 <div className="carousel-caption text-end">
                   <h1>MOLFİX</h1>
-                  <p>Ürün Açıklaması</p>
+                  {/* <p>Ürün Açıklaması</p>
                   <p>
                     <button className="btn btn-lg btn-primary">
                       Ürün Detayına Git
                     </button>
-                  </p>
+                  </p> */}
+                </div>
+              </div>
+            </div>
+            <div className="carousel-item">
+              <img
+                src="https://comfortmedikal.com/img/anasayfa/6.jpg"
+                // className="w-100"
+                alt="Evony"
+              />
+
+              <div className="container d-none">
+                <div className="carousel-caption text-end">
+                  <h1>Hisleep</h1>
+                  {/* <p>Ürün Açıklaması</p>
+                  <p>
+                    <button className="btn btn-lg btn-primary">
+                      Ürün Detayına Git
+                    </button>
+                  </p> */}
                 </div>
               </div>
             </div>

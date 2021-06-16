@@ -775,3 +775,15 @@ border-radius: $border-radius;
 .header-logo {
     width: 220px;
 }
+
+// CarouselImages
+#myCarousel {
+    .carousel-item {
+        text-align: center;
+        img {
+            // height: 400px !important;
+            // width: 80%;
+            width: 100%;
+        }
+    }
+}

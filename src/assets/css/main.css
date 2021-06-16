@@ -7997,3 +7997,8 @@ textarea.form-control-lg {
 
 .header-logo {
   width: 220px; }
+
+#myCarousel .carousel-item {
+  text-align: center; }
+  #myCarousel .carousel-item img {
+    width: 100%; }

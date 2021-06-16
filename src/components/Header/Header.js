@@ -30,7 +30,7 @@ const Header = () => {
       <div className="border-bottom d-none d-md-block">
         <nav className="navbar navbar-dark container py-0 px-0">
           <div className="border-end px-2">
-            <a href="mailto:info@comfortmedikal.com" className="text-decoration-none text-dark">
+            <a href="mailto:info@comfortmedikal.com" className="text-decoration-none text-dark text-lowercase">
               <FaEnvelope className="me-2" />
               info@comfortmedikal.com
             </a>

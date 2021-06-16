@@ -3,7 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { FaMapMarked, FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
 const Footer = () => {
   return (
-    <footer className="bg-dark mt-auto text-white py-5">
+    <footer className="mt-auto text-dark py-5" style={{
+      backgroundColor: '#21252970'
+    }}>
       <div className="container">
         <div className="row align-items-center">
           <div
@@ -13,7 +15,7 @@ const Footer = () => {
               el.style.setProperty('border-color', '#6c757d3d', 'important')
             }
           >
-            <img src='https://comfortmedikal.com/img/logo/comfort-logo-white.jpg' alt='Comfort Medikal İstanbul' className='header-logo'/>
+            <img src='https://comfortmedikal.com/img/logo/comfort-logo-transparent.png' alt='Comfort Medikal İstanbul' className='header-logo'/>
           </div>
           <div
             className="col-md-5 border-right-md border-sm-0 flex-fill mb-3"
@@ -24,27 +26,27 @@ const Footer = () => {
           >
             <ul className="nav flex-row">
               <li className="nav-item">
-                <NavLink to="/" className="nav-link text-white">
+                <NavLink to="/" className="nav-link text-dark">
                   Anasayfa
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/kurumsal" className="nav-link text-white">
+                <NavLink to="/kurumsal" className="nav-link text-dark">
                   Kurumsal
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/urunler" className="nav-link text-white">
+                <NavLink to="/urunler" className="nav-link text-dark">
                   Ürünler
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/diger" className="nav-link text-white">
+                <NavLink to="/diger" className="nav-link text-dark">
                   Diğer
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/iletisim" className="nav-link text-white">
+                <NavLink to="/iletisim" className="nav-link text-dark">
                   İletişim
                 </NavLink>
               </li>
@@ -54,7 +56,7 @@ const Footer = () => {
             <div className="d-flex flex-column">
               <span className="mb-2">
                 <FaMapMarked className="me-2" style={{ fontSize: '25px' }} />{' '}
-                Adres: Molla Gürani Mahallesi Emin Ali Yasin Sk. No: 3 34093 Fatih/İstanbul
+                Adres: Molla Gürani Mah. Emin Ali Yaşin Sk. No:3/A Fatih/İstanbul
               </span>
               <span className="mb-2">
                 <FaPhoneAlt className="me-2" style={{ fontSize: '25px' }} />{' '}
@@ -62,7 +64,7 @@ const Footer = () => {
               </span>
               <span>
                 <FaEnvelope className="me-2" style={{ fontSize: '25px' }} />{' '}
-                <a href="mailto:info@comfortmedikal.com" class="text-decoration-none text-white">info@comfortmedikal.com</a>
+                <a href="mailto:info@comfortmedikal.com" class="text-decoration-none text-dark text-lowercase">info@comfortmedikal.com</a>
               </span>
             </div>
           </div>
