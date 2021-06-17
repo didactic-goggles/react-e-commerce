@@ -778,28 +778,33 @@ border-radius: $border-radius;
 
 // CarouselImages
 #myCarousel {
+    width: 100%;
+    // height: 270px;
+    .carousel-inner {
+        // height: 100%;
+    }
     .carousel-item {
         text-align: center;
-        height: 550px;
+        // height: 100%;
+        // height: 40rem;
+        // height: 30rem;
         img {
             // height: 400px !important;
             // width: 80%;
-            // width: 100%;
+            margin: 5rem 0;
+            width: 80%;
         }
     }
 }
 
 .lg {
     &-1 {
-        background-image: linear-gradient(90deg , #daeedf, #80c88a);
-        img {
-            width: 80%;
-        }
+        background-image: linear-gradient(90deg, #2890a3, #05278e);
     }
     &-2 {
-        background-image: linear-gradient(180deg, #416771, #4dabb6);
-        img {
-            width: 80%;
-        }
+        background-image: linear-gradient(90deg , #daeedf, #80c88a);
+    }
+    &-3 {
+        background-image: linear-gradient(180deg,#436972,#d5d5d5);
     }
 }

@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { FaMapMarked, FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
 const Footer = () => {
   return (
-    <footer className="mt-auto text-dark py-5" style={{
-      backgroundColor: '#21252970'
+    <footer className="mt-auto py-5 bg-dark text-white" style={{
+      // backgroundColor: '#21252970'
     }}>
       <div className="container">
         <div className="row align-items-center">
@@ -26,27 +26,27 @@ const Footer = () => {
           >
             <ul className="nav flex-row">
               <li className="nav-item">
-                <NavLink to="/" className="nav-link text-dark">
+                <NavLink to="/" className="nav-link text-white">
                   Anasayfa
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/kurumsal" className="nav-link text-dark">
+                <NavLink to="/kurumsal" className="nav-link text-white">
                   Kurumsal
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/urunler" className="nav-link text-dark">
+                <NavLink to="/urunler" className="nav-link text-white">
                   Ürünler
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/diger" className="nav-link text-dark">
+                <NavLink to="/diger" className="nav-link text-white">
                   Diğer
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/iletisim" className="nav-link text-dark">
+                <NavLink to="/iletisim" className="nav-link text-white">
                   İletişim
                 </NavLink>
               </li>
@@ -60,11 +60,11 @@ const Footer = () => {
               </span>
               <span className="mb-2">
                 <FaPhoneAlt className="me-2" style={{ fontSize: '25px' }} />{' '}
-                Telefon: 555 555 55 55
+                Telefon: 212 635 94 51
               </span>
               <span>
                 <FaEnvelope className="me-2" style={{ fontSize: '25px' }} />{' '}
-                <a href="mailto:info@comfortmedikal.com" class="text-decoration-none text-dark text-lowercase">info@comfortmedikal.com</a>
+                <a href="mailto:info@comfortmedikal.com" class="text-white text-lowercase">info@comfortmedikal.com</a>
               </span>
             </div>
           </div>

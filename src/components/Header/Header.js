@@ -38,7 +38,7 @@ const Header = () => {
           <div className="px-2 ms-2 me-auto">
             <a href="#" className="text-decoration-none text-dark">
               <FaPhoneAlt className="me-2" />
-              <span>222 222 22 22</span>
+              <span>212 635 94 51</span>
             </a>
           </div>
           <div className="d-flex">

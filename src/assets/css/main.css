@@ -7998,16 +7998,19 @@ textarea.form-control-lg {
 .header-logo {
   width: 220px; }
 
-#myCarousel .carousel-item {
-  text-align: center;
-  height: 550px; }
+#myCarousel {
+  width: 100%; }
+  #myCarousel .carousel-item {
+    text-align: center; }
+    #myCarousel .carousel-item img {
+      margin: 5rem 0;
+      width: 80%; }
 
 .lg-1 {
-  background-image: linear-gradient(90deg, #daeedf, #80c88a); }
-  .lg-1 img {
-    width: 80%; }
+  background-image: linear-gradient(90deg, #2890a3, #05278e); }
 
 .lg-2 {
-  background-image: linear-gradient(180deg, #416771, #4dabb6); }
-  .lg-2 img {
-    width: 80%; }
+  background-image: linear-gradient(90deg, #daeedf, #80c88a); }
+
+.lg-3 {
+  background-image: linear-gradient(180deg, #436972, #d5d5d5); }

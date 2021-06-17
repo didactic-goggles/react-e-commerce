@@ -8,7 +8,7 @@ const Iletisim = () => {
         <div className="col-md-6">
           <img src='https://comfortmedikal.com/img/logo/comfort-logo-white.jpg' alt='Comfort Medikal İstanbul' className='header-logo'/>
           <h5>
-            COMFORT MEDİKAL SAĞLIK ÜRÜNLERİ A.Ş.
+            COMFORT MEDİKAL SAN. TİC. LTD. ŞTİ.
           </h5>
           <span className="d-flex align-items-center mb-2">
             <FaMapMarked className="me-2" />
@@ -18,12 +18,12 @@ const Iletisim = () => {
           </span>
           <span className="d-flex align-items-center mb-2">
             <FaPhoneAlt className="me-2" />
-            <span>555 4545 554</span>
+            <span>212 635 94 51</span>
           </span>
           <span className="d-flex align-items-center mb-2">
             <a
               href="mailto:info@comfortmedikal.com"
-              className="text-decoration-none text-dark"
+              className="text-dark"
             >
               <FaEnvelope className="me-2" /> <span className="text-lowercase">info@comfortmedikal.com</span>
             </a>

@@ -30,18 +30,6 @@ const Anasayfa = () => {
               data-bs-slide-to="2"
               aria-label="Slide 3"
             ></button>
-            <button
-              type="button"
-              data-bs-target="#myCarousel"
-              data-bs-slide-to="3"
-              aria-label="Slide 4"
-            ></button>
-            <button
-              type="button"
-              data-bs-target="#myCarousel"
-              data-bs-slide-to="4"
-              aria-label="Slide 5"
-            ></button>
             {/* <button
               type="button"
               data-bs-target="#myCarousel"
@@ -50,10 +38,10 @@ const Anasayfa = () => {
             ></button> */}
           </div>
           <div className="carousel-inner">
-            <div className="carousel-item active">
+            <div className="carousel-item active lg-1">
               <img
-                src="/assets/img/anasayfa/222.png"
-                className="w-100"
+                src="/assets/img/anasayfa/rs/1.png"
+                // className="w-100"
                 alt="Evony"
               />
 
@@ -69,9 +57,9 @@ const Anasayfa = () => {
                 </div>
               </div>
             </div>
-            <div className="carousel-item lg-1">
+            <div className="carousel-item lg-2">
               <img
-                src="/assets/img/anasayfa/12.png"
+                src="/assets/img/anasayfa/rs/2.png"
                 className=""
                 alt="Evony"
               />
@@ -87,10 +75,10 @@ const Anasayfa = () => {
                 </div>
               </div>
             </div>
-            <div className="carousel-item lg-2">
+            <div className="carousel-item lg-3">
               <img
-                src="/assets/img/anasayfa/33.png"
-                // className="w-100"
+                src="/assets/img/anasayfa/rs/3.png"
+                className=""
                 alt="Evony"
               />
 
@@ -106,57 +94,6 @@ const Anasayfa = () => {
                 </div>
               </div>
             </div>
-            <div className="carousel-item">
-              <img
-                src="/assets/img/anasayfa/4.jpg"
-                className="w-100 h-100"
-                alt="Evony"
-              />
-
-              <div className="container d-none">
-                <div className="carousel-caption text-end text-dark">
-                  <h1>SLEEPY</h1>
-                  {/* <p>Ürün Açıklaması</p>
-                  <p>
-                    <button className="btn btn-lg btn-primary">
-                      Ürün Detayına Git
-                    </button>
-                  </p> */}
-                </div>
-              </div>
-            </div>
-            <div className="carousel-item">
-              <img
-                src="/assets/img/anasayfa/5.jpg"
-                className="w-100"
-                alt="Evony"
-              />
-
-              <div className="container d-none">
-                <div className="carousel-caption text-end">
-                  <h1>MOLFİX</h1>
-                  {/* <p>Ürün Açıklaması</p>
-                  <p>
-                    <button className="btn btn-lg btn-primary">
-                      Ürün Detayına Git
-                    </button>
-                  </p> */}
-                </div>
-              </div>
-            </div>
-            {/* <div className="carousel-item">
-              <img
-                src="/assets/img/anasayfa/6.jpg"
-                className="w-100"
-                alt="Evony"
-              />
-
-              <div className="container d-none">
-                <div className="carousel-caption text-end">
-                  <h1>Hisleep</h1>
-                </div>
-              </div>
-            </div> */}
           </div>
           <button
             className="carousel-control-prev"
