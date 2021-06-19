@@ -27,7 +27,7 @@ const Product = (props) => {
   } else {
     isInWishList = 0;
   }
-  console.log(isInWishList);
+  // console.log(isInWishList);
   // console.log(user);
   const starsSettings = {
     isHalf: true,

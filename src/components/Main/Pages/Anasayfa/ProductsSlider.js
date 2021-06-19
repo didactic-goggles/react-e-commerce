@@ -20,7 +20,29 @@ const ProductsSlider = () => {
   const mostLikedCarousel = useRef();
   // const [activeCarousel, setActiveCarousel] = useState('special');
   let activeCarousel = 'special';
-
+  const carouselOptions = {
+    items: 4,
+    margin: 8,
+    autoplay: true,
+    dots: false,
+    lazyLoad : true,
+    responsiveClass: true,
+    responsive: {
+      0: {
+        items: 1,
+        nav: true,
+      },
+      600: {
+        items: 3,
+        nav: false,
+      },
+      1000: {
+        items: 4,
+        nav: true,
+        loop: false,
+      },
+    },
+  };
   // useEffect(() => {
   //   console.log('Start');
   //   const getProducts = async () => {
@@ -129,16 +151,11 @@ const ProductsSlider = () => {
           role="tabpanel"
           aria-labelledby="pills-special-tab"
         >
-          <OwlCarousel
-            items={4}
-            margin={8}
-            autoplay={true}
-            dots={false}
-            ref={specialCarousel}
-          >
-            {userDetails.products && userDetails.products.map((product) => (
-              <Product product={product} key={product.id} />
-            ))}
+          <OwlCarousel {...carouselOptions} ref={specialCarousel}>
+            {userDetails.products &&
+              userDetails.products.map((product) => (
+                <Product product={product} key={product.id} />
+              ))}
           </OwlCarousel>
         </div>
         <div
@@ -147,16 +164,11 @@ const ProductsSlider = () => {
           role="tabpanel"
           aria-labelledby="pills-mostLiked-tab"
         >
-          <OwlCarousel
-            items={4}
-            margin={8}
-            autoplay={true}
-            dots={false}
-            ref={mostLikedCarousel}
-          >
-            {userDetails.products && userDetails.products.map((product) => (
-              <Product product={product} key={product.id} />
-            ))}
+          <OwlCarousel {...carouselOptions} ref={mostLikedCarousel}>
+            {userDetails.products &&
+              userDetails.products.map((product) => (
+                <Product product={product} key={product.id} />
+              ))}
           </OwlCarousel>
         </div>
         <div
@@ -165,16 +177,11 @@ const ProductsSlider = () => {
           role="tabpanel"
           aria-labelledby="pills-latest-tab"
         >
-          <OwlCarousel
-            items={4}
-            margin={8}
-            autoplay={true}
-            dots={false}
-            ref={latestCarousel}
-          >
-            {userDetails.products && userDetails.products.map((product) => (
-              <Product product={product} key={product.id} />
-            ))}
+          <OwlCarousel {...carouselOptions} ref={latestCarousel}>
+            {userDetails.products &&
+              userDetails.products.map((product) => (
+                <Product product={product} key={product.id} />
+              ))}
           </OwlCarousel>
         </div>
       </div>

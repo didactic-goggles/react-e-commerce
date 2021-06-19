@@ -5,7 +5,7 @@ import { useAuthState } from '../../../../context';
 const CategoriesVerticalNav = () => {
   // const dispatch = useAuthDispatch();
   const userDetails = useAuthState();
-  console.log(userDetails);
+  // console.log(userDetails);
   return (
     <div className="nav-categories card card-body ps-1 shadow-sm">
       <PerfectScrollbar>

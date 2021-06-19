@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Kurumsal = () => {
+  console.log('Rendering => Kurumsal');
   return (
     <div className="container py-4">
       <div className="text-center mb-3">

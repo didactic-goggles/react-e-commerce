@@ -64,7 +64,7 @@ const Footer = () => {
               </span>
               <span>
                 <FaEnvelope className="me-2" style={{ fontSize: '25px' }} />{' '}
-                <a href="mailto:info@comfortmedikal.com" class="text-white text-lowercase">info@comfortmedikal.com</a>
+                <a href="mailto:info@comfortmedikal.com" className="text-white text-lowercase">info@comfortmedikal.com</a>
               </span>
             </div>
           </div>

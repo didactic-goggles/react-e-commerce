@@ -7998,13 +7998,16 @@ textarea.form-control-lg {
 .header-logo {
   width: 220px; }
 
+.product .card-image {
+  min-height: 170px; }
+
 #myCarousel {
   width: 100%; }
   #myCarousel .carousel-item {
     text-align: center; }
     #myCarousel .carousel-item img {
       margin: 5rem 0;
-      width: 80%; }
+      width: 60%; }
 
 .lg-1 {
   background-image: linear-gradient(90deg, #2890a3, #05278e); }

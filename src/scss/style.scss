@@ -776,6 +776,12 @@ border-radius: $border-radius;
     width: 220px;
 }
 
+.product {
+    .card-image {
+        min-height: 170px;
+    }
+}
+
 // CarouselImages
 #myCarousel {
     width: 100%;
@@ -792,7 +798,7 @@ border-radius: $border-radius;
             // height: 400px !important;
             // width: 80%;
             margin: 5rem 0;
-            width: 80%;
+            width: 60%;
         }
     }
 }

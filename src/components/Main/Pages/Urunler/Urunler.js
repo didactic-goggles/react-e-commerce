@@ -62,6 +62,14 @@ const Urunler = () => {
             .map((item) => Number(item))
         : []),
     ],
+    sizes: [
+      ...(query.get('sizes')
+        ? query
+            .get('sizes')
+            .split(',')
+            .map((item) => Number(item))
+        : []),
+    ],
     ratings: [
       ...(query.get('ratings')
         ? query
@@ -156,10 +164,11 @@ const Urunler = () => {
                       tempFilters.subCategories.push(Number(subCategory.id));
                       subCategoryCollapse.show();
                     } else {
-                      tempFilters.subCategories = tempFilters.subCategories.filter(
-                        (subCategoryId) =>
-                          Number(subCategory.id) !== subCategoryId
-                      );
+                      tempFilters.subCategories =
+                        tempFilters.subCategories.filter(
+                          (subCategoryId) =>
+                            Number(subCategory.id) !== subCategoryId
+                        );
                       subCategoryCollapse.hide();
                     }
                     setFilters(tempFilters);
@@ -195,10 +204,11 @@ const Urunler = () => {
                               Number(childCategory.id)
                             );
                           } else {
-                            tempFilters.childCategories = tempFilters.childCategories.filter(
-                              (childCategoryId) =>
-                                Number(childCategory.id) !== childCategoryId
-                            );
+                            tempFilters.childCategories =
+                              tempFilters.childCategories.filter(
+                                (childCategoryId) =>
+                                  Number(childCategory.id) !== childCategoryId
+                              );
                           }
                           setFilters(tempFilters);
                         }}
@@ -285,15 +295,12 @@ const Urunler = () => {
                       tempFilters.subBrands.push(Number(subBrand.id));
                     } else {
                       tempFilters.subBrands = tempFilters.subBrands.filter(
-                        (subBrandId) =>
-                          Number(subBrand.id) !== subBrandId
+                        (subBrandId) => Number(subBrand.id) !== subBrandId
                       );
                     }
                     setFilters(tempFilters);
                   }}
-                  checked={filters.subBrands.includes(
-                    Number(subBrand.id)
-                  )}
+                  checked={filters.subBrands.includes(Number(subBrand.id))}
                 />
                 <label
                   className="form-check-label"
@@ -313,6 +320,52 @@ const Urunler = () => {
       </div>
     );
   };
+
+  const SizesFilter = () => {
+    const Sizes = () => {
+      const sizeElements = [];
+      const sizes = ['XS', 'S', 'M', 'L', 'XL'];
+      sizes.forEach((size, index) => {
+        sizeElements.push(
+          <div className="form-check" key={index}>
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value={index}
+              id={`size-checkbox-${index}`}
+              onChange={(event) => {
+                const sizeValue = event.target.value;
+                const tempFilters = { ...filters };
+                if (event.target.checked) {
+                  tempFilters.sizes.push(sizeValue);
+                } else {
+                  tempFilters.sizes = tempFilters.sizes.filter(
+                    (size) => size !== sizeValue
+                  );
+                }
+                setFilters(tempFilters);
+              }}
+              checked={filters.sizes.includes(index)}
+            />
+            <label
+              className="form-check-label d-flex align-items-center"
+              htmlFor={`size-checkbox-${index}`}
+            >
+              {size}
+            </label>
+          </div>
+        );
+      })
+      return sizeElements;
+    };
+    return (
+      <div className="form-group mb-3">
+        <h6 className="fw-bolder">Beden</h6>
+        <Sizes />
+      </div>
+    );
+  };
+
   const RatingsFilter = () => {
     const Ratings = () => {
       const ratingElements = [];
@@ -393,15 +446,18 @@ const Urunler = () => {
         )
           return false;
         if (
-            filters.subBrands.length > 0 &&
-            !filters.subBrands.includes(Number(product.subBrandId))
-          )
-            return false;
-        if (
-          filters.ratings.length > 0 &&
-          !filters.ratings.includes(Math.round(Number(product.rating)))
+          filters.subBrands.length > 0 &&
+          !filters.subBrands.includes(Number(product.subBrandId))
         )
           return false;
+        if (filters.sizes.length > 0 && !filters.sizes.includes(product.rating))
+          return false;
+        if (
+          filters.ratings.length > 0 && 
+          filters.ratings.filter(rating => rating <= Math.round(Number(product.rating))).length === 0
+        ) {
+          return false;
+        }
       } catch (error) {}
       return true;
     });
@@ -428,6 +484,7 @@ const Urunler = () => {
         );
       }
     }
+    console.log(tempProducts);
     setProducts(tempProducts);
     setLoading(false);
     console.log(loading);
@@ -438,7 +495,7 @@ const Urunler = () => {
         filtersString += `${key}=${filters[key].toString()}&`;
       }
     });
-    if(filtersString !== '' && filtersString !== window.location.search) {
+    if (filtersString !== '' && filtersString !== window.location.search) {
       console.log(filters);
       console.log(window.location.search);
       history.push({
@@ -456,6 +513,7 @@ const Urunler = () => {
               <form>
                 <CategoriesFilter />
                 <BrandsFilter />
+                <SizesFilter />
                 <RatingsFilter />
               </form>
             </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {FaSearch} from 'react-icons/fa';
+import { FaSearch } from 'react-icons/fa';
 import Product from '../../../UI/Product/Product';
 
 const Sonuc = (props) => {
@@ -35,8 +35,15 @@ const Sonuc = (props) => {
           )
             return false;
           if (
+            filters.sizes.length > 0 &&
+            !filters.sizes.includes(product.rating)
+          )
+            return false;
+          if (
             filters.ratings.length > 0 &&
-            !filters.ratings.includes(Math.round(Number(product.rating)))
+            filters.ratings.filter(
+              (rating) => rating <= Math.round(Number(product.rating))
+            ).length === 0
           )
             return false;
         } catch (error) {}
@@ -67,7 +74,9 @@ const Sonuc = (props) => {
         {filteredProducts.length < 1 ? (
           <>
             <FaSearch className="fs-2 my-3" />
-            <h5 className="text-center">Aradığınız kriterlere uygun ürün bulunamadı</h5>
+            <h5 className="text-center">
+              Aradığınız kriterlere uygun ürün bulunamadı
+            </h5>
           </>
         ) : (
           filteredProducts.map((product) => (
