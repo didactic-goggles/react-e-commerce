@@ -36,7 +36,7 @@ const Sonuc = (props) => {
             return false;
           if (
             filters.sizes.length > 0 &&
-            !filters.sizes.includes(product.rating)
+            !filters.sizes.includes(product.size)
           )
             return false;
           if (

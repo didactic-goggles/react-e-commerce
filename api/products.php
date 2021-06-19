@@ -96,7 +96,7 @@ try {
         // }
     } else {
         $query = "SELECT p.id, p.name, pc.category_id as pcCategoryId, pc.type as pcType, pi.image_path as productPrimaryImage,
-        pb.brand_id as pbBrandId, pb.type as pbType, AVG(com.rating) as rating FROM Products p 
+        pb.brand_id as pbBrandId, pb.type as pbType, AVG(com.rating) as rating, pd.size FROM Products p 
         LEFT JOIN Product_Brand pb ON p.id = pb.product_id
         LEFT JOIN Product_Category pc ON p.id = pc.product_id
         LEFT JOIN Product_Details pd on pd.product_id = p.id

@@ -67,7 +67,7 @@ const Urunler = () => {
         ? query
             .get('sizes')
             .split(',')
-            .map((item) => Number(item))
+            .map((item) => item)
         : []),
     ],
     ratings: [
@@ -331,7 +331,7 @@ const Urunler = () => {
             <input
               className="form-check-input"
               type="checkbox"
-              value={index}
+              value={size}
               id={`size-checkbox-${index}`}
               onChange={(event) => {
                 const sizeValue = event.target.value;
@@ -345,7 +345,7 @@ const Urunler = () => {
                 }
                 setFilters(tempFilters);
               }}
-              checked={filters.sizes.includes(index)}
+              checked={filters.sizes.includes(size)}
             />
             <label
               className="form-check-label d-flex align-items-center"
@@ -450,7 +450,7 @@ const Urunler = () => {
           !filters.subBrands.includes(Number(product.subBrandId))
         )
           return false;
-        if (filters.sizes.length > 0 && !filters.sizes.includes(product.rating))
+        if (filters.sizes.length > 0 && !filters.sizes.includes(product.size))
           return false;
         if (
           filters.ratings.length > 0 && 
@@ -484,10 +484,8 @@ const Urunler = () => {
         );
       }
     }
-    console.log(tempProducts);
     setProducts(tempProducts);
     setLoading(false);
-    console.log(loading);
     let filtersString = '';
 
     Object.keys(filters).forEach((key) => {
@@ -496,8 +494,6 @@ const Urunler = () => {
       }
     });
     if (filtersString !== '' && filtersString !== window.location.search) {
-      console.log(filters);
-      console.log(window.location.search);
       history.push({
         search: `?${filtersString}`,
       });
@@ -528,7 +524,7 @@ const Urunler = () => {
                 </button>
               </div> */}
               <div className="col-auto d-flex align-items-center mb-3">
-                <label className="me-2 text-muted" for="sortSelect">
+                <label className="me-2 text-muted" htmlFor="sortSelect">
                   <FaSortAlphaDown style={{ fontSize: '20px' }} />
                   {/* {sorting === 'name:desc' ? (
                     
