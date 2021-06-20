@@ -6,7 +6,7 @@ const Kurumsal = () => {
     <div className="container py-4">
       <div className="text-center mb-3">
         <img
-          src="https://comfortmedikal.com/img/logo/comfort-logo-transparent.png"
+          src="https://comfortmedikal.com/img/logo/logo-transparent.png"
           alt="Comfort Medikal İstanbul"
           className="w-50"
         />

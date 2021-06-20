@@ -1,5 +1,5 @@
 // import { FaRegClock, FaHeadset, FaTruck } from 'react-icons/fa';
-import CategoriesVerticalNav from './CategoriesVerticalNav';
+// import CategoriesVerticalNav from './CategoriesVerticalNav';
 import ProductsSlider from './ProductsSlider';
 
 const Anasayfa = () => {
@@ -182,7 +182,7 @@ const Anasayfa = () => {
                   <div className="col-6">
                     <img
                       className="w-100"
-                      src="https://comfortmedikal.com/img/resim_orjinal/test-transparent1.png"
+                      src="https://comfortmedikal.com/img/resim_orjinal/test-transparent2.png"
                       alt="test"
                       style={{ maxWidth: '200px' }}
                     />
@@ -204,7 +204,7 @@ const Anasayfa = () => {
                   <div className="col-6">
                     <img
                       className="w-100"
-                      src="https://comfortmedikal.com/img/resim_orjinal/test-transparent1.png"
+                      src="https://comfortmedikal.com/img/resim_orjinal/test-transparent2.png"
                       alt="test"
                       style={{ maxWidth: '200px' }}
                     />
@@ -226,7 +226,7 @@ const Anasayfa = () => {
                   <div className="col-6">
                     <img
                       className="w-100"
-                      src="https://comfortmedikal.com/img/resim_orjinal/test-transparent1.png"
+                      src="https://comfortmedikal.com/img/resim_orjinal/test-transparent2.png"
                       alt="test"
                       style={{ maxWidth: '200px' }}
                     />

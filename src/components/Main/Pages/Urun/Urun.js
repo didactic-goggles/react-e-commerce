@@ -224,7 +224,9 @@ const Urun = () => {
               </div>
             </div>
             <div className="col-sm-7 bg-light py-3 px-3">
-              <h4 className="fw-bold text-primary">{productInfo.product.name}</h4>
+              <h4 className="fw-bold text-primary">
+                {productInfo.productDetails.sub_title}
+              </h4>
               {/* <span className="d-block mb-1">Ürün Kısa Açıklaması</span> */}
               <span className="d-block mb-1">
                 Stok Durumu:{' '}

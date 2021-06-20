@@ -1,5 +1,6 @@
 // import axios from 'axios';
 import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import OwlCarousel from 'react-owl-carousel';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 // import API from '../../../../api';
@@ -18,9 +19,10 @@ const ProductsSlider = (props) => {
 
   const carouselOptions = {
     items: 4,
-    margin: 8,
+    margin: 16,
     autoplay: true,
     dots: false,
+    // loop: true,
     lazyLoad: true,
     responsiveClass: true,
     responsive: {
@@ -44,7 +46,20 @@ const ProductsSlider = (props) => {
     isPrev ? carousel.current.prev() : carousel.current.next();
   };
 
-  const filteredProductsByMode = userDetails.products.filter((product) => product.subCategory === mode);
+  let subCategoryId;
+  const filteredProductsBrands = [];
+  const filteredProductsByMode = [];
+  userDetails.products.forEach((product) => {
+    if (
+      product.subCategory === mode &&
+      !filteredProductsBrands.includes(product.subBrand)
+    ) {
+      subCategoryId = product.subCategoryId;
+      filteredProductsByMode.push(product);
+      filteredProductsBrands.push(product.subBrand);
+    }
+  });
+
   return (
     <div id="productSlider">
       <ul className="nav mb-3">
@@ -65,15 +80,24 @@ const ProductsSlider = (props) => {
         </li>
       </ul>
       <div>
-        {
-          filteredProductsByMode.length > 1 ?
+        {filteredProductsByMode.length > 1 ? (
           <OwlCarousel {...carouselOptions} ref={carousel}>
-          {userDetails.products && filteredProductsByMode.map((product) => (
-              <Product product={product} key={product.id} />
-            ))}
-        </OwlCarousel> : <h5>Ürünler bulunamadı</h5>
-        }
-        
+            {userDetails.products &&
+              filteredProductsByMode.map((product) => (
+                <Product product={product} key={product.id} />
+              ))}
+          </OwlCarousel>
+        ) : (
+          <h5>Ürünler bulunamadı</h5>
+        )}
+      </div>
+      <div className="d-flex justify-content-end">
+        <Link
+          className="btn btn-link"
+          to={`/urunler?categories=2&subCategories=${subCategoryId}`}
+        >
+          Tümünü Gör
+        </Link>
       </div>
     </div>
   );

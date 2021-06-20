@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import {
   FaSearch,
   FaTimes,
-  // FaHome,
+  FaHome,
   FaUsers,
   FaTags,
   FaBoxOpen,
@@ -278,7 +278,7 @@ const Navbar = () => {
       <section className="pt-3">
         <div className="container d-flex align-items-center flex-column flex-md-row mb-2">
           <NavLink to="/" exact className="text-decoration-none logo">
-            <img src='https://comfortmedikal.com/img/logo/comfort-logo-transparent.png' alt='Comfort Medikal İstanbul' className='header-logo'/>
+            <img src='https://comfortmedikal.com/img/logo/logo-transparent.png' alt='Comfort Medikal İstanbul' className='header-logo'/>
           </NavLink>
           <div className="dropdown w-100 searchbox-container">
             <div className="searchbox mx-0 mx-md-5 shadow-sm rounded-pill">
@@ -318,6 +318,16 @@ const Navbar = () => {
             id="mainNav"
             className="nav nav-pills justify-content-center w-100"
           >
+            <li className="nav-item">
+              <NavLink
+                to="/"
+                exact
+                activeClassName="active"
+                className="nav-link"
+              >
+                <FaHome/>
+              </NavLink>
+            </li>
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
@@ -418,17 +428,6 @@ const Navbar = () => {
                   })}
               </ul>
             </li>
-            {/* <li className="nav-item">
-              <NavLink
-                to="/"
-                exact
-                activeClassName="active"
-                className="nav-link"
-              >
-                <FaHome className="me-1" />
-                Anasayfa
-              </NavLink>
-            </li> */}
             <li className="nav-item">
               <NavLink
                 to="/kurumsal"
@@ -454,8 +453,8 @@ const Navbar = () => {
               </a>
               <ul className="dropdown-menu">
               {allMenuTypes.brands &&
-                  allMenuTypes.brands.map((brand) => {
-                    if (brand.subBrands.length > 0) {
+                  allMenuTypes.brands.filter(brand => brand.show_as_menu !== "0" ).map((brand) => {
+                    if (brand.subBrands.filter(subBrand => subBrand.show_as_menu !== "0" ).length > 0) {
                       return (
                         <li key={brand.id}>
                           <div className="dropend">
@@ -473,7 +472,7 @@ const Navbar = () => {
                               className="dropdown-menu"
                               aria-labelledby={`brand-${brand.id}`}
                             >
-                              {brand.subBrands.map((subBrand) => {
+                              {brand.subBrands.filter(subBrand => subBrand.show_as_menu !== "0" ).map((subBrand) => {
                                 return (
                                   <li key={subBrand.id}>
                                     <Link

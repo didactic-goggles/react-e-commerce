@@ -7636,7 +7636,8 @@ textarea.form-control-lg {
   border: 1px solid var(--bs-primary);
   border-top: 5px solid var(--bs-primary); }
 
-#mainNav .dropdown:hover > .dropdown-menu, #mainNav .dropend:hover > .dropdown-menu {
+#mainNav .dropdown:hover > .dropdown-menu,
+#mainNav .dropend:hover > .dropdown-menu {
   display: block;
   margin-top: 0; }
 
@@ -7660,7 +7661,8 @@ textarea.form-control-lg {
     border-radius: 0.25rem; }
 
 /*Styling Tabs*/
-.form-signin, .form-signup {
+.form-signin,
+.form-signup {
   min-height: 400px;
   width: 100%;
   max-width: 530px;
@@ -7720,6 +7722,15 @@ textarea.form-control-lg {
   display: -ms-flexbox;
   display: flex;
   height: auto !important; }
+
+#productSlider .owl-carousel .owl-item img {
+  width: unset !important;
+  display: inline !important; }
+
+#productSlider .btn-circle:active, #productSlider .btn-circle:focus {
+  outline: 0;
+  box-shadow: none;
+  color: var(--bs-white); }
 
 .btn.btn-icon {
   display: inline-flex;

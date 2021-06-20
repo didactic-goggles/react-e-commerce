@@ -19,6 +19,7 @@ const Urunler = () => {
   console.log('Rendering => Ürünler');
   const history = useHistory();
   function useQuery() {
+    console.log('query');
     return new URLSearchParams(useLocation().search);
   }
   let query = useQuery();
@@ -81,7 +82,7 @@ const Urunler = () => {
         : []),
     ],
   });
-  const [sorting, setSorting] = useState('');
+  const [sorting, setSorting] = useState('name:asc');
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   // const filters = {
@@ -245,76 +246,80 @@ const Urunler = () => {
       return null;
     }
     const Brands = () =>
-      userDetails.brands.map((brand) => (
-        <div className="form-check" key={brand.id}>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value={brand.id}
-            name="brandId"
-            id={`brand-checkbox-${brand.id}`}
-            onChange={(event) => {
-              const brandElement = document.getElementById(
-                `brand-checkbox-collapse-${brand.id}`
-              );
-              const brandCollapse = new bootstrap.Collapse(brandElement);
-              const tempFilters = { ...filters };
-              if (event.target.checked) {
-                tempFilters.brands.push(Number(brand.id));
-                brandCollapse.show();
-              } else {
-                tempFilters.brands = tempFilters.categories.filter(
-                  (brandId) => Number(brand.id) !== brandId
+      userDetails.brands
+        .filter((brand) => brand.show_as_menu !== '0')
+        .map((brand) => (
+          <div className="form-check" key={brand.id}>
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value={brand.id}
+              name="brandId"
+              id={`brand-checkbox-${brand.id}`}
+              onChange={(event) => {
+                const brandElement = document.getElementById(
+                  `brand-checkbox-collapse-${brand.id}`
                 );
-                brandCollapse.hide();
-              }
-              setFilters(tempFilters);
-            }}
-            checked={filters.brands.includes(Number(brand.id))}
-          />
-          <label
-            className="form-check-label"
-            htmlFor={`brand-checkbox-${brand.id}`}
-          >
-            {brand.name}
-          </label>
-          <div
-            className={`collapse ps-2 ${
-              filters.brands.includes(Number(brand.id)) && 'show'
-            }`}
-            id={`brand-checkbox-collapse-${brand.id}`}
-          >
-            {brand.subBrands.map((subBrand) => (
-              <div key={subBrand.id}>
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id={`sub-brand-checkbox-${subBrand.id}`}
-                  onChange={(event) => {
-                    const tempFilters = { ...filters };
-                    if (event.target.checked) {
-                      tempFilters.subBrands.push(Number(subBrand.id));
-                    } else {
-                      tempFilters.subBrands = tempFilters.subBrands.filter(
-                        (subBrandId) => Number(subBrand.id) !== subBrandId
-                      );
-                    }
-                    setFilters(tempFilters);
-                  }}
-                  checked={filters.subBrands.includes(Number(subBrand.id))}
-                />
-                <label
-                  className="form-check-label"
-                  htmlFor={`sub-brand-checkbox-${subBrand.id}`}
-                >
-                  {subBrand.sub_brand_name}
-                </label>
-              </div>
-            ))}
+                const brandCollapse = new bootstrap.Collapse(brandElement);
+                const tempFilters = { ...filters };
+                if (event.target.checked) {
+                  tempFilters.brands.push(Number(brand.id));
+                  brandCollapse.show();
+                } else {
+                  tempFilters.brands = tempFilters.brands.filter(
+                    (brandId) => Number(brand.id) !== brandId
+                  );
+                  brandCollapse.hide();
+                }
+                setFilters(tempFilters);
+              }}
+              checked={filters.brands.includes(Number(brand.id))}
+            />
+            <label
+              className="form-check-label"
+              htmlFor={`brand-checkbox-${brand.id}`}
+            >
+              {brand.name}
+            </label>
+            <div
+              className={`collapse ps-2 ${
+                filters.brands.includes(Number(brand.id)) && 'show'
+              }`}
+              id={`brand-checkbox-collapse-${brand.id}`}
+            >
+              {brand.subBrands
+                .filter((subBrand) => subBrand.show_as_menu !== '0')
+                .map((subBrand) => (
+                  <div key={subBrand.id}>
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id={`sub-brand-checkbox-${subBrand.id}`}
+                      onChange={(event) => {
+                        const tempFilters = { ...filters };
+                        if (event.target.checked) {
+                          tempFilters.subBrands.push(Number(subBrand.id));
+                        } else {
+                          tempFilters.subBrands = tempFilters.subBrands.filter(
+                            (subBrandId) => Number(subBrand.id) !== subBrandId
+                          );
+                        }
+                        setFilters(tempFilters);
+                      }}
+                      checked={filters.subBrands.includes(Number(subBrand.id))}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor={`sub-brand-checkbox-${subBrand.id}`}
+                    >
+                      {subBrand.sub_brand_name}
+                    </label>
+                  </div>
+                ))}
+            </div>
           </div>
-        </div>
-      ));
+        ));
     return (
       <div className="form-group mb-3">
         <h6 className="fw-bolder">Markalar</h6>
@@ -326,7 +331,13 @@ const Urunler = () => {
   const SizesFilter = () => {
     const Sizes = () => {
       const sizeElements = [];
-      const sizes = ['XS', 'S', 'M', 'L', 'XL'];
+      console.log(filters);
+      let sizes = ['XS', 'S', 'M', 'L', 'XL'];
+      if (filters.subCategories.includes(2) && filters.subCategories.includes(3)) {
+        sizes = [];
+      } else if (filters.subCategories.includes(2)) {
+        sizes = ["1", "2", "3", "4", "5", "6", "7"];
+      }
       sizes.forEach((size, index) => {
         sizeElements.push(
           <div className="form-check" key={index}>
@@ -493,6 +504,7 @@ const Urunler = () => {
     let filtersString = '';
 
     Object.keys(filters).forEach((key) => {
+      console.log(filters);
       if (filters[key].length > 0) {
         filtersString += `${key}=${filters[key].toString()}&`;
       }
@@ -500,6 +512,10 @@ const Urunler = () => {
     if (filtersString !== '' && filtersString !== window.location.search) {
       history.push({
         search: `?${filtersString}`,
+      });
+    } else {
+      history.push({
+        search: ``,
       });
     }
   }, [filters, history, loading, sorting, userDetails]);
@@ -538,10 +554,13 @@ const Urunler = () => {
                       className="btn-check"
                       name="btnradio"
                       id="btnradio1"
-                      autocomplete="off"
-                      checked
+                      autoComplete="off"
+                      defaultChecked
                     />
-                    <label className="btn btn-outline-primary" for="btnradio1">
+                    <label
+                      className="btn btn-outline-primary"
+                      htmlFor="btnradio1"
+                    >
                       <FaTh />
                     </label>
 
@@ -550,9 +569,12 @@ const Urunler = () => {
                       className="btn-check"
                       name="btnradio"
                       id="btnradio2"
-                      autocomplete="off"
+                      autoComplete="off"
                     />
-                    <label className="btn btn-outline-primary" for="btnradio2">
+                    <label
+                      className="btn btn-outline-primary"
+                      htmlFor="btnradio2"
+                    >
                       <FaThList />
                     </label>
                   </div>
@@ -574,6 +596,7 @@ const Urunler = () => {
                   className="form-control"
                   value={sorting}
                   onChange={(event) => setSorting(event.target.value)}
+                  // defaultValue='name:asc'
                 >
                   <option>Sıralama Seçin</option>
                   <option value="name:asc">İsme göre: A'dan Z'ye</option>

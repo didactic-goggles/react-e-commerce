@@ -15,7 +15,7 @@ const Footer = () => {
               el.style.setProperty('border-color', '#6c757d3d', 'important')
             }
           >
-            <img src='https://comfortmedikal.com/img/logo/comfort-logo-transparent.png' alt='Comfort Medikal İstanbul' className='header-logo'/>
+            <img src='https://comfortmedikal.com/img/logo/logo-transparent.png' alt='Comfort Medikal İstanbul' className='header-logo'/>
           </div>
           <div
             className="col-md-5 border-right-md border-sm-0 flex-fill mb-3"

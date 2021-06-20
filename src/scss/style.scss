@@ -206,6 +206,7 @@ $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
 .searchbox-container {
     animation: moveInBottom .5s ease-out .5s backwards;
 }
+
 /*Styling Search Textbox*/
 .searchbox {
     background: rgba(0, 0, 0, 0.12);
@@ -340,21 +341,26 @@ $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
 #mainNav {
     .dropdown-item {
         transition: padding-left .5s ease;
+
         &:hover {
             padding-left: 1.3rem;
         }
     }
+
     .dropdown-menu {
         border: 1px solid var(--bs-primary);
         border-top: 5px solid var(--bs-primary);
     }
-    .dropdown:hover, .dropend:hover {
-        & > .dropdown-menu {
-            
+
+    .dropdown:hover,
+    .dropend:hover {
+        &>.dropdown-menu {
+
             display: block;
             margin-top: 0; // remove the gap so it doesn't close
         }
     }
+
     .dropend {
         .dropdown-toggle {
             &:after {
@@ -364,7 +370,9 @@ $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
             }
         }
     }
+
     li.nav-item {
+
         // &:hover {
         //     transform: translateY(-2px);
         // }
@@ -372,12 +380,14 @@ $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
             display: flex;
             align-items: center;
             color: white;
+
             // transition: all .2s ease-out;
             svg {
                 font-size: 22px;
             }
         }
-border-radius: $border-radius;
+
+        border-radius: $border-radius;
         transition: background-color .3s ease;
         // width: 100%;
         position: relative;
@@ -471,7 +481,8 @@ border-radius: $border-radius;
 //     }
 // }
 
-.form-signin, .form-signup {
+.form-signin,
+.form-signup {
     min-height: 400px;
     width: 100%;
     max-width: 530px;
@@ -485,25 +496,29 @@ border-radius: $border-radius;
             margin-bottom: -1px;
         }
     }
+
     .form-floating:not(:last-of-type) {
         input {
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
         }
     }
+
     .form-floating:not(:first-of-type) {
         input {
             border-radius: 0;
         }
     }
+
     .form-floating:last-of-type {
         input {
             border-bottom-left-radius: 0.25rem;
             border-bottom-right-radius: 0.25rem;
         }
     }
+
     // input:not(:last-of-type) {
-        
+
     // }
 }
 
@@ -560,6 +575,27 @@ border-radius: $border-radius;
         display: flex;
         height: auto !important;
         // width: 100% !important;
+    }
+
+    // carousel
+
+    .owl-carousel {
+        .owl-item {
+            img {
+                width: unset !important;
+                display: inline !important;
+            }
+        }
+    }
+
+    .btn-circle {
+
+        &:active,
+        &:focus {
+            outline: 0;
+            box-shadow: none;
+            color: var(--bs-white);
+        }
     }
 }
 
@@ -690,6 +726,7 @@ border-radius: $border-radius;
         border-left-color: var(--bs-primary);
         border-left-style: solid;
         transition: border-left-width .15s ease;
+
         // margin-left: -2px;
         &:hover {
             border-left-width: 5px;
@@ -749,24 +786,66 @@ border-radius: $border-radius;
     @include media-breakpoint-up($breakpoint) {
         $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
-        .border-x#{$infix}              { border-left: $border-width solid $border-color !important; border-right: $border-width solid $border-color !important; }
-        .border-y#{$infix}              { border-top: $border-width solid $border-color !important; border-bottom: $border-width solid $border-color !important; }
+        .border-x#{$infix} {
+            border-left: $border-width solid $border-color !important;
+            border-right: $border-width solid $border-color !important;
+        }
 
-        .border-x#{$infix}-0            { border-left: 0 !important; border-right: 0 !important; }
-        .border-y#{$infix}-0            { border-top: 0 !important; border-bottom: 0 !important; }
+        .border-y#{$infix} {
+            border-top: $border-width solid $border-color !important;
+            border-bottom: $border-width solid $border-color !important;
+        }
 
-        @if $infix != '' {
-            .border#{$infix}            { border: $border-width solid $border-color !important; }
-            .border-top#{$infix}        { border-top: $border-width solid $border-color !important; }
-            .border-right#{$infix}      { border-right: $border-width solid $border-color !important; }
-            .border-bottom#{$infix}     { border-bottom: $border-width solid $border-color !important; }
-            .border-left#{$infix}       { border-left: $border-width solid $border-color !important; }
+        .border-x#{$infix}-0 {
+            border-left: 0 !important;
+            border-right: 0 !important;
+        }
 
-            .border#{$infix}-0          { border: 0 !important; }
-            .border-top#{$infix}-0      { border-top: 0 !important; }
-            .border-right#{$infix}-0    { border-right: 0 !important; }
-            .border-bottom#{$infix}-0   { border-bottom: 0 !important; }
-            .border-left#{$infix}-0     { border-left: 0 !important; }
+        .border-y#{$infix}-0 {
+            border-top: 0 !important;
+            border-bottom: 0 !important;
+        }
+
+        @if $infix !='' {
+            .border#{$infix} {
+                border: $border-width solid $border-color !important;
+            }
+
+            .border-top#{$infix} {
+                border-top: $border-width solid $border-color !important;
+            }
+
+            .border-right#{$infix} {
+                border-right: $border-width solid $border-color !important;
+            }
+
+            .border-bottom#{$infix} {
+                border-bottom: $border-width solid $border-color !important;
+            }
+
+            .border-left#{$infix} {
+                border-left: $border-width solid $border-color !important;
+            }
+
+            .border#{$infix}-0 {
+                border: 0 !important;
+            }
+
+            .border-top#{$infix}-0 {
+                border-top: 0 !important;
+            }
+
+            .border-right#{$infix}-0 {
+                border-right: 0 !important;
+            }
+
+            .border-bottom#{$infix}-0 {
+                border-bottom: 0 !important;
+            }
+
+            .border-left#{$infix}-0 {
+                border-left: 0 !important;
+            }
         }
     }
 }
@@ -780,6 +859,7 @@ border-radius: $border-radius;
     .card-image {
         height: 170px;
         text-align: center;
+
         img {
             height: 100%;
             width: unset;
@@ -791,12 +871,15 @@ border-radius: $border-radius;
 // CarouselImages
 #myCarousel {
     width: 100%;
+
     // height: 270px;
     .carousel-inner {
         // height: 100%;
     }
+
     .carousel-item {
         text-align: center;
+
         // height: 100%;
         // height: 40rem;
         // height: 30rem;
@@ -813,10 +896,12 @@ border-radius: $border-radius;
     &-1 {
         background-image: linear-gradient(90deg, #2890a3, #05278e);
     }
+
     &-2 {
-        background-image: linear-gradient(90deg , #daeedf, #80c88a);
+        background-image: linear-gradient(90deg, #daeedf, #80c88a);
     }
+
     &-3 {
-        background-image: linear-gradient(180deg,#436972,#d5d5d5);
+        background-image: linear-gradient(180deg, #436972, #d5d5d5);
     }
 }
