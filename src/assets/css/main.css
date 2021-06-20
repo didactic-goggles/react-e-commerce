@@ -7453,7 +7453,7 @@ textarea.form-control-lg {
   width: 100%;
   opacity: 0;
   transition: .5s ease;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.03);
   border-radius: 1rem; }
 
 .product:hover .image-overlay {
@@ -7999,7 +7999,12 @@ textarea.form-control-lg {
   width: 220px; }
 
 .product .card-image {
-  min-height: 170px; }
+  height: 170px;
+  text-align: center; }
+  .product .card-image img {
+    height: 100%;
+    width: unset;
+    max-width: 155px; }
 
 #myCarousel {
   width: 100%; }

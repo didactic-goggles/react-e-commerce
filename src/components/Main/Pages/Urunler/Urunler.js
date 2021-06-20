@@ -4,6 +4,8 @@ import * as bootstrap from 'bootstrap/dist/js/bootstrap.bundle';
 import ReactStars from 'react-rating-stars-component';
 import {
   FaRegStar,
+  FaTh,
+  FaThList,
   FaStarHalfAlt,
   FaStar,
   // FaSortAlphaDownAlt,
@@ -355,7 +357,7 @@ const Urunler = () => {
             </label>
           </div>
         );
-      })
+      });
       return sizeElements;
     };
     return (
@@ -453,8 +455,10 @@ const Urunler = () => {
         if (filters.sizes.length > 0 && !filters.sizes.includes(product.size))
           return false;
         if (
-          filters.ratings.length > 0 && 
-          filters.ratings.filter(rating => rating <= Math.round(Number(product.rating))).length === 0
+          filters.ratings.length > 0 &&
+          filters.ratings.filter(
+            (rating) => rating <= Math.round(Number(product.rating))
+          ).length === 0
         ) {
           return false;
         }
@@ -517,12 +521,43 @@ const Urunler = () => {
         </div>
         <div className="col-md-9">
           <div className="border-bottom mb-3">
-            <div className="row form-group justify-content-end mb-0">
-              {/* <div className="col-auto">
-                <button className="btn btn-light">
+            <div className="row form-group justify-content-between mb-0">
+              <div className="col-auto">
+                <div
+                  className="btn-group"
+                  role="group"
+                  aria-label="Basic outlined example"
+                >
+                  <div
+                    className="btn-group"
+                    role="group"
+                    aria-label="Basic radio toggle button group"
+                  >
+                    <input
+                      type="radio"
+                      className="btn-check"
+                      name="btnradio"
+                      id="btnradio1"
+                      autocomplete="off"
+                      checked
+                    />
+                    <label className="btn btn-outline-primary" for="btnradio1">
+                      <FaTh />
+                    </label>
 
-                </button>
-              </div> */}
+                    <input
+                      type="radio"
+                      className="btn-check"
+                      name="btnradio"
+                      id="btnradio2"
+                      autocomplete="off"
+                    />
+                    <label className="btn btn-outline-primary" for="btnradio2">
+                      <FaThList />
+                    </label>
+                  </div>
+                </div>
+              </div>
               <div className="col-auto d-flex align-items-center mb-3">
                 <label className="me-2 text-muted" htmlFor="sortSelect">
                   <FaSortAlphaDown style={{ fontSize: '20px' }} />

@@ -241,11 +241,23 @@ const Anasayfa = () => {
       {/* begin:: Collapse: Categories */}
       <section className="container mb-3">
         <div className="row">
-          <div className="col-md-4 col-lg-3 mb-3">
+          {/* <div className="col-md-4 col-lg-3 mb-3">
             <CategoriesVerticalNav />
           </div>
           <div className="col-md-8 col-lg-9">
             <ProductsSlider />
+          </div> */}
+          <div className="col-12 border-bottom mb-3">
+            <ProductsSlider mode='YETİŞKİN BEZLERİ' />
+          </div>
+          <div className="col-12 border-bottom mb-3">
+            <ProductsSlider mode='ÇOCUK BEZLERİ' />
+          </div>
+          <div className="col-12 border-bottom mb-3">
+            <ProductsSlider mode='YATAK KORUYUCULARI' />
+          </div>
+          <div className="col-12">
+            <ProductsSlider mode='MESANE PEDLERİ' />
           </div>
         </div>
       </section>
