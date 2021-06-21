@@ -75,6 +75,12 @@ export async function signupUser(dispatch, signupPayload) {
 	}
 }
 
+export function showErrorMessage(dispatch, payload) {
+	dispatch({
+		type: 'ERROR', message: payload
+	})
+}
+
 export async function logout(dispatch) {
 	dispatch({ type: 'LOGOUT' });
 	localStorage.removeItem('currentUser');

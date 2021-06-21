@@ -82,6 +82,7 @@ const Urunler = () => {
         : []),
     ],
   });
+  const [mode, setMode] = useState('grid');
   const [sorting, setSorting] = useState('name:asc');
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
@@ -333,10 +334,13 @@ const Urunler = () => {
       const sizeElements = [];
       console.log(filters);
       let sizes = ['XS', 'S', 'M', 'L', 'XL'];
-      if (filters.subCategories.includes(2) && filters.subCategories.includes(3)) {
+      if (
+        filters.subCategories.includes(2) &&
+        filters.subCategories.includes(3)
+      ) {
         sizes = [];
       } else if (filters.subCategories.includes(2)) {
-        sizes = ["1", "2", "3", "4", "5", "6", "7"];
+        sizes = ['1', '2', '3', '4', '5', '6', '7'];
       }
       sizes.forEach((size, index) => {
         sizeElements.push(
@@ -497,6 +501,17 @@ const Urunler = () => {
             ? -1
             : 1
         );
+      } else if (sorting.indexOf('size') !== -1) {
+        const sizes = ['XS', 'S', 'M', 'L', 'XL', '1', '2', '3', '4', '5', '6', '7'];
+        tempProducts = tempProducts.sort((a, b) =>
+          sizes.indexOf(a.size) < sizes.indexOf(b.size)
+            ? sorting.indexOf('desc') !== -1
+              ? 1
+              : -1
+            : sorting.indexOf('desc') !== -1
+            ? -1
+            : 1
+        );
       }
     }
     setProducts(tempProducts);
@@ -555,10 +570,12 @@ const Urunler = () => {
                       name="btnradio"
                       id="btnradio1"
                       autoComplete="off"
-                      defaultChecked
+                      value="grid"
+                      checked={mode === 'grid'}
+                      onChange={(e) => setMode(e.target.value)}
                     />
                     <label
-                      className="btn btn-outline-primary"
+                      className="btn btn-outline-primary no-active"
                       htmlFor="btnradio1"
                     >
                       <FaTh />
@@ -570,9 +587,12 @@ const Urunler = () => {
                       name="btnradio"
                       id="btnradio2"
                       autoComplete="off"
+                      value="list"
+                      checked={mode === 'list'}
+                      onChange={(e) => setMode(e.target.value)}
                     />
                     <label
-                      className="btn btn-outline-primary"
+                      className="btn btn-outline-primary no-active"
                       htmlFor="btnradio2"
                     >
                       <FaThList />
@@ -607,6 +627,10 @@ const Urunler = () => {
                   <option value="rating:desc">
                     Puana göre: Büyükten Küçüğe
                   </option>
+                  <option value="size:asc">Bedene göre: Küçükten Büyüğe</option>
+                  <option value="size:desc">
+                    Bedene göre: Büyükten Küçüğe
+                  </option>
                 </select>
               </div>
             </div>
@@ -614,7 +638,7 @@ const Urunler = () => {
           {loading ? (
             <LoadingIndicator text="Ürünler Yükleniyor..." />
           ) : (
-            <Sonuc filters={filters} allProducts={products} />
+            <Sonuc filters={filters} allProducts={products} mode={mode} />
           )}
         </div>
       </div>

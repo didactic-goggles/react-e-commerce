@@ -5647,6 +5647,9 @@ textarea.form-control-lg {
 .rounded-pill {
   border-radius: 50rem !important; }
 
+.rounded-4 {
+  border-radius: 1rem !important; }
+
 .rounded-top {
   border-top-left-radius: 0.25rem !important;
   border-top-right-radius: 0.25rem !important; }
@@ -7453,7 +7456,7 @@ textarea.form-control-lg {
   width: 100%;
   opacity: 0;
   transition: .5s ease;
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(0, 0, 0, 0);
   border-radius: 1rem; }
 
 .product:hover .image-overlay {
@@ -7726,11 +7729,6 @@ textarea.form-control-lg {
 #productSlider .owl-carousel .owl-item img {
   width: unset !important;
   display: inline !important; }
-
-#productSlider .btn-circle:active, #productSlider .btn-circle:focus {
-  outline: 0;
-  box-shadow: none;
-  color: var(--bs-white); }
 
 .btn.btn-icon {
   display: inline-flex;
@@ -8009,13 +8007,13 @@ textarea.form-control-lg {
 .header-logo {
   width: 220px; }
 
-.product .card-image {
+.product .card-image, .product-list .card-image {
   height: 170px;
   text-align: center; }
-  .product .card-image img {
+  .product .card-image img, .product-list .card-image img {
     height: 100%;
-    width: unset;
-    max-width: 155px; }
+    width: auto;
+    max-width: 100%; }
 
 #myCarousel {
   width: 100%; }
@@ -8033,3 +8031,11 @@ textarea.form-control-lg {
 
 .lg-3 {
   background-image: linear-gradient(180deg, #436972, #d5d5d5); }
+
+.no-active:active, .no-active:focus {
+  outline: 0;
+  box-shadow: none;
+  color: var(--bs-white); }
+
+.btn-check:focus + .btn-outline-primary, .btn-outline-primary:focus {
+  box-shadow: none; }

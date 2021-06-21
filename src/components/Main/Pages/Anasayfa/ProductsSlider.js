@@ -13,7 +13,7 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 const ProductsSlider = (props) => {
   console.log('Rendering => ProductsSlider');
-  const { mode } = props;
+  const { category, subCategory, childCategory } = props;
   const userDetails = useAuthState();
   const carousel = useRef();
 
@@ -22,7 +22,7 @@ const ProductsSlider = (props) => {
     margin: 16,
     autoplay: true,
     dots: false,
-    // loop: true,
+    loop: true,
     lazyLoad: true,
     responsiveClass: true,
     responsive: {
@@ -47,32 +47,36 @@ const ProductsSlider = (props) => {
   };
 
   let subCategoryId;
+  let childCategoryId;
   const filteredProductsBrands = [];
   const filteredProductsByMode = [];
   userDetails.products.forEach((product) => {
     if (
-      product.subCategory === mode &&
-      !filteredProductsBrands.includes(product.subBrand)
+      product.category === category &&
+      !filteredProductsBrands.includes(product.subBrand || product.brand) &&
+      (product.subCategory !== '' && subCategory ? product.subCategory === subCategory : true) &&
+      (product.childCategory !== '' && childCategory ? product.childCategory === childCategory : true)
     ) {
       subCategoryId = product.subCategoryId;
+      childCategoryId = product.childCategoryId;
       filteredProductsByMode.push(product);
-      filteredProductsBrands.push(product.subBrand);
+      filteredProductsBrands.push(product.subBrand || product.brand);
     }
   });
 
   return (
     <div id="productSlider">
       <ul className="nav mb-3">
-        <h4>{mode}</h4>
+        <h4>{childCategory || subCategory || category}</h4>
         <li className="ms-auto">
           <button
-            className="btn btn-primary btn-circle me-2 btn-icon"
+            className="btn btn-primary btn-circle me-2 btn-icon no-active"
             onClick={() => sliderNavClickHandler(true)}
           >
             <FaChevronLeft />
           </button>
           <button
-            className="btn btn-primary btn-circle btn-icon"
+            className="btn btn-primary btn-circle btn-icon no-active"
             onClick={() => sliderNavClickHandler(false)}
           >
             <FaChevronRight />
@@ -94,7 +98,7 @@ const ProductsSlider = (props) => {
       <div className="d-flex justify-content-end">
         <Link
           className="btn btn-link"
-          to={`/urunler?categories=2&subCategories=${subCategoryId}`}
+          to={`/urunler?categories=2&subCategories=${subCategoryId}${childCategory ? `&childCategories=${childCategoryId}` : ''}`}
         >
           Tümünü Gör
         </Link>

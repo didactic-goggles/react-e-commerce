@@ -56,7 +56,7 @@ const Footer = () => {
             <div className="d-flex flex-column">
               <span className="mb-2">
                 <FaMapMarked className="me-2" style={{ fontSize: '25px' }} />{' '}
-                Adres: Molla Gürani Mah. Emin Ali Yaşin Sk. No:3/A Fatih/İstanbul
+                Adres: Molla Gürani Mah. Emin Ali Yaşin Sk. No:3/A <span style={{whiteSpace: 'nowrap'}}>Fatih/İstanbul</span>
               </span>
               <span className="mb-2">
                 <FaPhoneAlt className="me-2" style={{ fontSize: '25px' }} />{' '}

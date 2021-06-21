@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import Product from '../../../UI/Product/Product';
+import ProductList from '../../../UI/Product/ProductList';
 
 const Sonuc = (props) => {
   console.log('Rendering => Sonuç');
 
-  const { filters, allProducts } = props;
+  const { filters, allProducts, mode } = props;
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   // const [sortedProducts, setSortedProducts] = useState([]);
@@ -80,9 +81,12 @@ const Sonuc = (props) => {
           </>
         ) : (
           filteredProducts.map((product) => (
+            mode === 'grid' ? (
             <div className="col-md-4 mb-2" key={product.id}>
               <Product product={product} />
-            </div>
+            </div>) : (<div className="col-12 mb-4" key={product.id}>
+              <ProductList product={product} />
+            </div>)
           ))
         )}
       </div>

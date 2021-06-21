@@ -149,6 +149,7 @@ const Navbar = () => {
   const handleSearchBlur = (event) => {
     setTimeout(() => {
       searchDropdown.current.classList.remove('show');
+      searchInput.current.value = '';
       setSearchResults(null);
     }, 100);
   };
@@ -272,13 +273,44 @@ const Navbar = () => {
       </>
     );
   };
+
+  const Message = () => {
+    return (
+      <div className="position-fixed top-0 end-0 p-3" style={{ zIndex: 5 }}>
+        <div
+          className="toast align-items-center text-white bg-danger border-0 fade show"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          data-bs-delay="5000"
+          data-bs-autohide="true"
+        >
+          <div className="d-flex">
+            <div className="toast-body">{userDetails.error}</div>
+            <button
+              type="button"
+              className="btn-close btn-close-white me-2 m-auto"
+              data-bs-dismiss="toast"
+              
+              aria-label="Close"
+            ></button>
+          </div>
+        </div>
+      </div>
+    );
+  };
   return (
     <>
       {/* begin:: Main Nav */}
       <section className="pt-3">
+        {userDetails.error && <Message /> }
         <div className="container d-flex align-items-center flex-column flex-md-row mb-2">
           <NavLink to="/" exact className="text-decoration-none logo">
-            <img src='https://comfortmedikal.com/img/logo/logo-transparent.png' alt='Comfort Medikal İstanbul' className='header-logo'/>
+            <img
+              src="https://comfortmedikal.com/img/logo/logo-transparent.png"
+              alt="Comfort Medikal İstanbul"
+              className="header-logo"
+            />
           </NavLink>
           <div className="dropdown w-100 searchbox-container">
             <div className="searchbox mx-0 mx-md-5 shadow-sm rounded-pill">
@@ -307,7 +339,7 @@ const Navbar = () => {
               <SearchResults />
             </div>
           </div>
-          <div className='d-none'>YAZI yada RESIM</div>
+          <div className="d-none">YAZI yada RESIM</div>
           {/* <a>Get in</a> */}
         </div>
         <nav
@@ -318,17 +350,17 @@ const Navbar = () => {
             id="mainNav"
             className="nav nav-pills justify-content-center w-100"
           >
-            <li className="nav-item">
+            <li className="nav-item me-1">
               <NavLink
                 to="/"
                 exact
                 activeClassName="active"
-                className="nav-link"
+                className="nav-link h-100"
               >
-                <FaHome/>
+                <FaHome />
               </NavLink>
             </li>
-            <li className="nav-item dropdown">
+            <li className="nav-item dropdown me-1">
               <a
                 className="nav-link dropdown-toggle"
                 data-bs-toggle="dropdown"
@@ -428,7 +460,7 @@ const Navbar = () => {
                   })}
               </ul>
             </li>
-            <li className="nav-item">
+            <li className="nav-item me-1">
               <NavLink
                 to="/kurumsal"
                 exact
@@ -439,7 +471,7 @@ const Navbar = () => {
                 Kurumsal
               </NavLink>
             </li>
-            <li className="nav-item dropdown">
+            <li className="nav-item dropdown me-1">
               <a
                 className="nav-link dropdown-toggle"
                 data-bs-toggle="dropdown"
@@ -452,57 +484,67 @@ const Navbar = () => {
                 Markalar
               </a>
               <ul className="dropdown-menu">
-              {allMenuTypes.brands &&
-                  allMenuTypes.brands.filter(brand => brand.show_as_menu !== "0" ).map((brand) => {
-                    if (brand.subBrands.filter(subBrand => subBrand.show_as_menu !== "0" ).length > 0) {
+                {allMenuTypes.brands &&
+                  allMenuTypes.brands
+                    .filter((brand) => brand.show_as_menu !== '0')
+                    .map((brand) => {
+                      if (
+                        brand.subBrands.filter(
+                          (subBrand) => subBrand.show_as_menu !== '0'
+                        ).length > 0
+                      ) {
+                        return (
+                          <li key={brand.id}>
+                            <div className="dropend">
+                              <a
+                                className="dropdown-item dropdown-toggle"
+                                href="#"
+                                role="button"
+                                id={`brand-${brand.id}`}
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                              >
+                                {brand.name}
+                              </a>
+                              <ul
+                                className="dropdown-menu"
+                                aria-labelledby={`brand-${brand.id}`}
+                              >
+                                {brand.subBrands
+                                  .filter(
+                                    (subBrand) => subBrand.show_as_menu !== '0'
+                                  )
+                                  .map((subBrand) => {
+                                    return (
+                                      <li key={subBrand.id}>
+                                        <Link
+                                          className="dropdown-item"
+                                          to={`/urunler?brands=${brand.id}&subBrands=${subBrand.id}`}
+                                        >
+                                          {subBrand.sub_brand_name}
+                                        </Link>
+                                      </li>
+                                    );
+                                  })}
+                              </ul>
+                            </div>
+                          </li>
+                        );
+                      }
                       return (
                         <li key={brand.id}>
-                          <div className="dropend">
-                            <a
-                              className="dropdown-item dropdown-toggle"
-                              href="#"
-                              role="button"
-                              id={`brand-${brand.id}`}
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                            >
-                              {brand.name}
-                            </a>
-                            <ul
-                              className="dropdown-menu"
-                              aria-labelledby={`brand-${brand.id}`}
-                            >
-                              {brand.subBrands.filter(subBrand => subBrand.show_as_menu !== "0" ).map((subBrand) => {
-                                return (
-                                  <li key={subBrand.id}>
-                                    <Link
-                                      className="dropdown-item"
-                                      to={`/urunler?brands=${brand.id}&subBrands=${subBrand.id}`}
-                                    >
-                                      {subBrand.sub_brand_name}
-                                    </Link>
-                                  </li>
-                                );
-                              })}
-                            </ul>
-                          </div>
+                          <Link
+                            className="dropdown-item"
+                            to={`/urunler?brands=${brand.id}`}
+                          >
+                            {brand.name}
+                          </Link>
                         </li>
                       );
-                    }
-                    return (
-                      <li key={brand.id}>
-                        <Link
-                          className="dropdown-item"
-                          to={`/urunler?brands=${brand.id}`}
-                        >
-                          {brand.name}
-                        </Link>
-                      </li>
-                    );
-                  })}
+                    })}
               </ul>
             </li>
-            <li className="nav-item">
+            <li className="nav-item me-1">
               <NavLink
                 to="/diger"
                 exact
@@ -513,7 +555,7 @@ const Navbar = () => {
                 Diğer
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li className="nav-item me-1">
               <NavLink
                 to="/iletisim"
                 exact

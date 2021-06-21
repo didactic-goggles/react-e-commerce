@@ -1,4 +1,25 @@
-import { loginUser, signupUser, logout, getWishList, getAllCategories, getAllBrands, getAllProducts } from './actions';
+import {
+  loginUser,
+  signupUser,
+  logout,
+  showErrorMessage,
+  getWishList,
+  getAllCategories,
+  getAllBrands,
+  getAllProducts,
+} from './actions';
 import { AuthProvider, useAuthDispatch, useAuthState } from './context';
 
-export { AuthProvider, useAuthState, useAuthDispatch, loginUser, signupUser, logout, getWishList, getAllCategories, getAllBrands, getAllProducts };
+export {
+  AuthProvider,
+  useAuthState,
+  useAuthDispatch,
+  loginUser,
+  signupUser,
+  logout,
+  showErrorMessage,
+  getWishList,
+  getAllCategories,
+  getAllBrands,
+  getAllProducts,
+};

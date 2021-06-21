@@ -11,6 +11,7 @@ export const initialState = {
 	token: '' || token,
 	loading: false,
 	errorMessage: null,
+	error: null,
     categories: null,
 	brands: null,
 	products: [],
@@ -65,6 +66,11 @@ export const AuthReducer = (initialState, action) => {
 				...initialState,
 				loading: false,
 				errorMessage: action.error,
+			};
+		case 'ERROR':
+			return {
+				...initialState,
+				error: action.message,
 			};
 		case 'SET_WISHLIST':
 			return {
