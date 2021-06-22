@@ -248,19 +248,19 @@ const Anasayfa = () => {
             <ProductsSlider />
           </div> */}
           <div className="col-12 border-bottom mb-3">
-            <ProductsSlider category='HASTA BEZLERİ' subCategory='YETİŞKİN BEZLERİ' childCategory='EMİCİ KÜLOTLU BEZLER' />
+            <ProductsSlider category='HASTA BEZLERİ' subCategory='YETİŞKİN BEZLERİ' childCategory='EMİCİ KÜLOTLU BEZLER' special={true}/>
           </div>
           <div className="col-12 border-bottom mb-3">
-            <ProductsSlider category='HASTA BEZLERİ' subCategory='YETİŞKİN BEZLERİ' childCategory='BELBANTLI BEZLER' />
+            <ProductsSlider category='HASTA BEZLERİ' subCategory='YETİŞKİN BEZLERİ' childCategory='BELBANTLI BEZLER' special={true}/>
           </div>
           <div className="col-12 border-bottom mb-3">
-            <ProductsSlider category='HASTA BEZLERİ' subCategory='ÇOCUK BEZLERİ'/>
+            <ProductsSlider category='HASTA BEZLERİ' subCategory='ÇOCUK BEZLERİ' special={true}/>
           </div>
           <div className="col-12 border-bottom mb-3">
-            <ProductsSlider category='HASTA BEZLERİ' subCategory='YATAK KORUYUCULARI'/>
+            <ProductsSlider category='YATAK KORUYUCULARI'/>
           </div>
           <div className="col-12">
-            <ProductsSlider category='HASTA BEZLERİ' subCategory='MESANE PEDLERİ'/>
+            <ProductsSlider category='MESANE PEDLERİ' special={true} />
           </div>
         </div>
       </section>

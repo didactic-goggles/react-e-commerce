@@ -330,18 +330,21 @@ const Urunler = () => {
   };
 
   const SizesFilter = () => {
+    let sizes = [];
+    if (
+      filters.subCategories.includes(2) &&
+      filters.subCategories.includes(3)
+    ) {
+      sizes = ['1', '2', '3', '4', '5', '6', '7', 'XS', 'S', 'M', 'L', 'XL'];
+    } else if (filters.subCategories.includes(2)) {
+      sizes = ['1', '2', '3', '4', '5', '6', '7'];
+    } else if (filters.subCategories.includes(3)) {
+      sizes = ['XS', 'S', 'M', 'L', 'XL']
+    }
     const Sizes = () => {
       const sizeElements = [];
       console.log(filters);
-      let sizes = ['XS', 'S', 'M', 'L', 'XL'];
-      if (
-        filters.subCategories.includes(2) &&
-        filters.subCategories.includes(3)
-      ) {
-        sizes = [];
-      } else if (filters.subCategories.includes(2)) {
-        sizes = ['1', '2', '3', '4', '5', '6', '7'];
-      }
+
       sizes.forEach((size, index) => {
         sizeElements.push(
           <div className="form-check" key={index}>
@@ -375,6 +378,7 @@ const Urunler = () => {
       });
       return sizeElements;
     };
+    if(sizes.length === 0) return <div></div>;
     return (
       <div className="form-group mb-3">
         <h6 className="fw-bolder">Beden</h6>

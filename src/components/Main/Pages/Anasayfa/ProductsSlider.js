@@ -13,7 +13,7 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 const ProductsSlider = (props) => {
   console.log('Rendering => ProductsSlider');
-  const { category, subCategory, childCategory } = props;
+  const { category, subCategory, childCategory, special } = props;
   const userDetails = useAuthState();
   const carousel = useRef();
 
@@ -46,24 +46,44 @@ const ProductsSlider = (props) => {
     isPrev ? carousel.current.prev() : carousel.current.next();
   };
 
+  let categoryId;
   let subCategoryId;
   let childCategoryId;
   const filteredProductsBrands = [];
   const filteredProductsByMode = [];
-  userDetails.products.forEach((product) => {
-    if (
-      product.category === category &&
-      !filteredProductsBrands.includes(product.subBrand || product.brand) &&
-      (product.subCategory !== '' && subCategory ? product.subCategory === subCategory : true) &&
-      (product.childCategory !== '' && childCategory ? product.childCategory === childCategory : true)
-    ) {
-      subCategoryId = product.subCategoryId;
-      childCategoryId = product.childCategoryId;
-      filteredProductsByMode.push(product);
-      filteredProductsBrands.push(product.subBrand || product.brand);
+  if(special) {
+    if(subCategory === 'ÇOCUK BEZLERİ') {
+      const ids = [9, 10, 14, 15];
+      filteredProductsByMode.push(...userDetails.products.filter(p => ids.includes(Number(p.id))));
+    } else if(childCategory === 'EMİCİ KÜLOTLU BEZLER') {
+      const ids = [40, 42, 34, 43];
+      filteredProductsByMode.push(...userDetails.products.filter(p => ids.includes(Number(p.id))));
+    } else if(childCategory === 'BELBANTLI BEZLER') {
+      const ids = [17, 20, 23, 28, 33];
+      filteredProductsByMode.push(...userDetails.products.filter(p => ids.includes(Number(p.id))));
+    } else if(category === 'MESANE PEDLERİ') {
+      const ids = [57, 58, 59, 60];
+      filteredProductsByMode.push(...userDetails.products.filter(p => ids.includes(Number(p.id))));
     }
-  });
-
+    categoryId = filteredProductsByMode[0].categoryId;
+    subCategoryId = filteredProductsByMode[0].subCategoryId;
+    childCategoryId = filteredProductsByMode[0].childCategoryId;
+  } else {
+    userDetails.products.forEach((product) => {
+      if (
+        product.category === category &&
+        !filteredProductsBrands.includes(product.subBrand || product.brand) &&
+        (product.subCategory !== '' && subCategory ? product.subCategory === subCategory : true) &&
+        (product.childCategory !== '' && childCategory ? product.childCategory === childCategory : true)
+      ) {
+        categoryId = product.categoryId;
+        subCategoryId = product.subCategoryId || undefined;
+        childCategoryId = product.childCategoryId ||undefined;
+        filteredProductsByMode.push(product);
+        filteredProductsBrands.push(product.subBrand || product.brand);
+      }
+    });
+  }
   return (
     <div id="productSlider">
       <ul className="nav mb-3">
@@ -84,7 +104,7 @@ const ProductsSlider = (props) => {
         </li>
       </ul>
       <div>
-        {filteredProductsByMode.length > 1 ? (
+        {filteredProductsByMode.length > 0 ? (
           <OwlCarousel {...carouselOptions} ref={carousel}>
             {userDetails.products &&
               filteredProductsByMode.map((product) => (
@@ -98,7 +118,7 @@ const ProductsSlider = (props) => {
       <div className="d-flex justify-content-end">
         <Link
           className="btn btn-link"
-          to={`/urunler?categories=2&subCategories=${subCategoryId}${childCategory ? `&childCategories=${childCategoryId}` : ''}`}
+          to={`/urunler?categories=${categoryId}${subCategory ? `&subCategories=${subCategoryId}` : ''}${childCategory ? `&childCategories=${childCategoryId}` : ''}`}
         >
           Tümünü Gör
         </Link>
