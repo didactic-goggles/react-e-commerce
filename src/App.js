@@ -2,7 +2,6 @@ import React from 'react';
 import './assets/css/main.css';
 import './assets/js/index';
 import { BrowserRouter as Router } from 'react-router-dom';
-import 'react-perfect-scrollbar/dist/css/styles.css';
 // import PerfectScrollbar from 'react-perfect-scrollbar';
 import { AuthProvider } from './context';
 import Header from './components/Header/Header';

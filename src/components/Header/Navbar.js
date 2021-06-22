@@ -11,7 +11,7 @@ import {
   FaLocationArrow,
   FaMapMarkedAlt,
 } from 'react-icons/fa';
-
+import {Alert} from 'rsuite';
 // import API from '../../api';
 import {
   useAuthDispatch,
@@ -19,6 +19,7 @@ import {
   getAllBrands,
   getAllProducts,
   useAuthState,
+  showErrorMessage
 } from '../../context';
 
 const Navbar = () => {
@@ -274,36 +275,22 @@ const Navbar = () => {
     );
   };
 
-  const Message = () => {
-    return (
-      <div className="position-fixed top-0 end-0 p-3" style={{ zIndex: 5 }}>
-        <div
-          className="toast align-items-center text-white bg-danger border-0 fade show"
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
-          data-bs-delay="5000"
-          data-bs-autohide="true"
-        >
-          <div className="d-flex">
-            <div className="toast-body">{userDetails.error}</div>
-            <button
-              type="button"
-              className="btn-close btn-close-white me-2 m-auto"
-              data-bs-dismiss="toast"
-              
-              aria-label="Close"
-            ></button>
-          </div>
-        </div>
-      </div>
-    );
-  };
+  useEffect(() => {
+    if(userDetails.error) {
+      Alert.error(userDetails.error, 5000, () => {
+        showErrorMessage(dispatch, null);
+      });
+    }
+  }, [dispatch, userDetails.error])
+  // if (userDetails.error) {
+  //   Alert.error(userDetails.error, 5000, () => {
+  //     showErrorMessage(dispatch, null);
+  //   });
+  // }
   return (
     <>
       {/* begin:: Main Nav */}
       <section className="pt-3">
-        {userDetails.error && <Message /> }
         <div className="container d-flex align-items-center flex-column flex-md-row mb-2">
           <NavLink to="/" exact className="text-decoration-none logo">
             <img

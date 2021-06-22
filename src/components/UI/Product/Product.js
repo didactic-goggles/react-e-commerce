@@ -44,7 +44,7 @@ const Product = (props) => {
 
   const handleWishList = async (event) => {
     if(isInWishList === -1) {
-      showErrorMessage(dispatch, 'You must be logged in');
+      showErrorMessage(dispatch, 'Bu ürünü beğendiklerine eklemek için giriş yapmalısın');
       console.log('must be logged in')
     } else {
       try {

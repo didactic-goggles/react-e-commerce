@@ -918,3 +918,201 @@ $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
 .btn-check:focus + .btn-outline-primary, .btn-outline-primary:focus {
     box-shadow: none;
 }
+
+@font-face {
+    font-family: 'rsuite-icon-font';
+    src: url('https://cdn.jsdelivr.net/npm/rsuite/dist/styles/fonts/rsuite-icon-font.ttf') format('truetype'), url('https://cdn.jsdelivr.net/npm/rsuite/dist/styles/fonts/rsuite-icon-font.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+.rs-alert {
+    position: fixed;
+    z-index: 1080;
+    pointer-events: none;
+  }
+  .rs-alert-item {
+    pointer-events: auto;
+  }
+  .rs-alert-item-wrapper:not(.rs-alert-fade-exited) + .rs-alert-item-wrapper {
+    margin-top: 10px;
+  }
+  .rs-alert-container {
+    left: 50%;
+  }
+  .rs-alert-item-wrapper {
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin-left: -50%;
+  }
+  .rs-alert-item-wrapper .rs-alert-item {
+    display: inline-block;
+    position: relative;
+  }
+  .rs-alert-item-content {
+    text-align: left;
+    padding: 20px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.12), 0 0 10px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.12), 0 0 10px rgba(0, 0, 0, 0.06);
+    max-width: 400px;
+    padding-left: 42px;
+    padding-right: 46px;
+    position: relative;
+  }
+  .rs-alert-item-content p {
+    margin-bottom: 0;
+  }
+  .rs-alert-item-content .rs-icon {
+    position: absolute;
+    top: 23px;
+    left: 20px;
+    margin-right: 10px;
+    font-size: 12px;
+    line-height: 12px;
+  }
+  .rs-alert-item-close {
+    position: absolute;
+    top: 20px;
+    right: 16px;
+    padding: 4px;
+    font-size: 12px;
+    line-height: 1;
+    outline: none !important;
+    cursor: pointer;
+  }
+  .rs-alert-item-close-x::before {
+    font-family: 'rsuite-icon-font';
+    font-style: normal;
+    line-height: 1;
+    content: '\f00d';
+  }
+  .rs-alert-fade-exited,
+  .rs-alert-fade-entering {
+    opacity: 0;
+  }
+  .rs-alert-fade-exited {
+    -webkit-transform-origin: 0% 0%;
+            transform-origin: 0% 0%;
+    -webkit-transform: scaleY(0.8);
+            transform: scaleY(0.8);
+    max-height: 0;
+    overflow: hidden;
+  }
+  .rs-alert-fade-entered {
+    -webkit-animation: alertMoverIn 0.3s ease-in forwards;
+            animation: alertMoverIn 0.3s ease-in forwards;
+  }
+  .rs-alert-fade-leave-active {
+    -webkit-animation: alertMoveOut 0.3s ease-out forwards;
+            animation: alertMoveOut 0.3s ease-out forwards;
+  }
+  .rs-alert-container .rs-alert-success .rs-alert-item-content {
+    background-color: #edfae1;
+    color: #575757;
+  }
+  .rs-alert-container .rs-alert-success .rs-alert-item-content .rs-icon {
+    color: #4caf50;
+  }
+  .rs-alert-container .rs-alert-success .rs-alert-item-close {
+    color: #4caf50;
+  }
+  .rs-alert-container .rs-alert-info .rs-alert-item-content {
+    background-color: #e9f5fe;
+    color: #575757;
+  }
+  .rs-alert-container .rs-alert-info .rs-alert-item-content .rs-icon {
+    color: #2196f3;
+  }
+  .rs-alert-container .rs-alert-info .rs-alert-item-close {
+    color: #2196f3;
+  }
+  .rs-alert-container .rs-alert-warning .rs-alert-item-content {
+    background-color: #fff9e6;
+    color: #575757;
+  }
+  .rs-alert-container .rs-alert-warning .rs-alert-item-content .rs-icon {
+    color: #ffb300;
+  }
+  .rs-alert-container .rs-alert-warning .rs-alert-item-close {
+    color: #ffb300;
+  }
+  .rs-alert-container .rs-alert-error .rs-alert-item-content {
+    background-color: #fde9ef;
+    color: #575757;
+  }
+  .rs-alert-container .rs-alert-error .rs-alert-item-content .rs-icon {
+    color: #f44336;
+  }
+  .rs-alert-container .rs-alert-error .rs-alert-item-close {
+    color: #f44336;
+  }
+  .slide-out {
+    -webkit-animation-duration: 0.3s;
+            animation-duration: 0.3s;
+    -webkit-animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
+            animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+  }
+  .slide-in {
+    -webkit-animation-duration: 0.3s;
+            animation-duration: 0.3s;
+    -webkit-animation-timing-function: ease-in-out;
+            animation-timing-function: ease-in-out;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+  }
+  .right.slide-in {
+    -webkit-animation-name: slideInRight;
+            animation-name: slideInRight;
+  }
+  .right.slide-out {
+    -webkit-animation-name: slideOutRight;
+            animation-name: slideOutRight;
+  }
+  .left.slide-in {
+    -webkit-animation-name: slideInLeft;
+            animation-name: slideInLeft;
+  }
+  .left.slide-out {
+    -webkit-animation-name: slideOutLeft;
+            animation-name: slideOutLeft;
+  }
+  .top.slide-in {
+    -webkit-animation-name: slideInTop;
+            animation-name: slideInTop;
+  }
+  .top.slide-out {
+    -webkit-animation-name: slideOutTop;
+            animation-name: slideOutTop;
+  }
+  .bottom.slide-in {
+    -webkit-animation-name: slideInBottom;
+            animation-name: slideInBottom;
+  }
+  .bottom.slide-out {
+    -webkit-animation-name: slideOutBottom;
+            animation-name: slideOutBottom;
+  }
+  .bounce-in {
+    -webkit-animation-name: bounceIn;
+            animation-name: bounceIn;
+    -webkit-animation-duration: 0.3s;
+            animation-duration: 0.3s;
+    -webkit-animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+  }
+  .bounce-out {
+    -webkit-animation-name: bounceOut;
+            animation-name: bounceOut;
+    -webkit-animation-duration: 0.3s;
+            animation-duration: 0.3s;
+    -webkit-animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
+            animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+  }
