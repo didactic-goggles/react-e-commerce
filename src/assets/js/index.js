@@ -39,7 +39,7 @@ $(document).on('focusout', 'input.search-textbox', function(){
   }
 });
 $(document).on('click', '.searchbox', function(){
-  $(this).children('input.search-textbox').focus();
+  $(this).children('input.search-textbox').trigger('focus');
 });
 
 /*Text Key Events for Animating Icons i.e. .ico-btn*/

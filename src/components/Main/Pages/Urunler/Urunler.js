@@ -15,8 +15,11 @@ import {
 import { useAuthState } from '../../../../context';
 import Sonuc from './Sonuc';
 import LoadingIndicator from '../../../UI/LoadingIndicator';
-const Urunler = () => {
+const Urunler = (props) => {
   console.log('Rendering => Ürünler');
+  // const [search1, setSearch1] = useState(props.location.search);
+  console.log(props);
+  // console.log('timeStamp', timeStamp);
   const history = useHistory();
   function useQuery() {
     console.log('query');
@@ -265,7 +268,7 @@ const Urunler = () => {
     }
     const Brands = () =>
       userDetails.brands
-        .filter((brand) => brand.show_as_menu !== '0')
+        // .filter((brand) => brand.show_as_menu !== '0')
         .map((brand) => (
           <div className="form-check" key={brand.id}>
             <input
@@ -306,7 +309,7 @@ const Urunler = () => {
               id={`brand-checkbox-collapse-${brand.id}`}
             >
               {brand.subBrands
-                .filter((subBrand) => subBrand.show_as_menu !== '0')
+                // .filter((subBrand) => subBrand.show_as_menu !== '0')
                 .map((subBrand) => (
                   <div key={subBrand.id}>
                     <input

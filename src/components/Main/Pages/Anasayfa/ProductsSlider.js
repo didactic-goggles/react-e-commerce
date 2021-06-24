@@ -51,19 +51,27 @@ const ProductsSlider = (props) => {
   let childCategoryId;
   const filteredProductsBrands = [];
   const filteredProductsByMode = [];
-  if(special) {
-    if(subCategory === 'ÇOCUK BEZLERİ') {
+  if (special) {
+    if (subCategory === 'ÇOCUK BEZLERİ') {
       const ids = [9, 10, 14, 15];
-      filteredProductsByMode.push(...userDetails.products.filter(p => ids.includes(Number(p.id))));
-    } else if(childCategory === 'EMİCİ KÜLOTLU BEZLER') {
+      filteredProductsByMode.push(
+        ...userDetails.products.filter((p) => ids.includes(Number(p.id)))
+      );
+    } else if (childCategory === 'EMİCİ KÜLOTLU BEZLER') {
       const ids = [40, 42, 34, 43];
-      filteredProductsByMode.push(...userDetails.products.filter(p => ids.includes(Number(p.id))));
-    } else if(childCategory === 'BELBANTLI BEZLER') {
+      filteredProductsByMode.push(
+        ...userDetails.products.filter((p) => ids.includes(Number(p.id)))
+      );
+    } else if (childCategory === 'BELBANTLI BEZLER') {
       const ids = [17, 20, 23, 28, 33];
-      filteredProductsByMode.push(...userDetails.products.filter(p => ids.includes(Number(p.id))));
-    } else if(category === 'MESANE PEDLERİ') {
-      const ids = [57, 58, 59, 60];
-      filteredProductsByMode.push(...userDetails.products.filter(p => ids.includes(Number(p.id))));
+      filteredProductsByMode.push(
+        ...userDetails.products.filter((p) => ids.includes(Number(p.id)))
+      );
+    } else if (category === 'MESANE PEDLERİ') {
+      const ids = [58, 60, 61, 62];
+      filteredProductsByMode.push(
+        ...userDetails.products.filter((p) => ids.includes(Number(p.id)))
+      );
     }
     categoryId = filteredProductsByMode[0].categoryId;
     subCategoryId = filteredProductsByMode[0].subCategoryId;
@@ -73,12 +81,16 @@ const ProductsSlider = (props) => {
       if (
         product.category === category &&
         !filteredProductsBrands.includes(product.subBrand || product.brand) &&
-        (product.subCategory !== '' && subCategory ? product.subCategory === subCategory : true) &&
-        (product.childCategory !== '' && childCategory ? product.childCategory === childCategory : true)
+        (product.subCategory !== '' && subCategory
+          ? product.subCategory === subCategory
+          : true) &&
+        (product.childCategory !== '' && childCategory
+          ? product.childCategory === childCategory
+          : true)
       ) {
         categoryId = product.categoryId;
         subCategoryId = product.subCategoryId || undefined;
-        childCategoryId = product.childCategoryId ||undefined;
+        childCategoryId = product.childCategoryId || undefined;
         filteredProductsByMode.push(product);
         filteredProductsBrands.push(product.subBrand || product.brand);
       }
@@ -118,7 +130,9 @@ const ProductsSlider = (props) => {
       <div className="d-flex justify-content-end">
         <Link
           className="btn btn-link"
-          to={`/urunler?categories=${categoryId}${subCategory ? `&subCategories=${subCategoryId}` : ''}${childCategory ? `&childCategories=${childCategoryId}` : ''}`}
+          to={`/urunler?categories=${categoryId}${
+            subCategory ? `&subCategories=${subCategoryId}` : ''
+          }${childCategory ? `&childCategories=${childCategoryId}` : ''}`}
         >
           Tümünü Gör
         </Link>

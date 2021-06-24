@@ -288,18 +288,16 @@ const Navbar = () => {
   //     showErrorMessage(dispatch, null);
   //   });
   // }
-  const handleActiveLinkForDropdown = (mode, match) => {
-    // const myDropdown = bootstrap.Dropdown.getOrCreateInstance(document.querySelector(`#${mode}Dropdown`));
-    if (match) {
-      console.log(match);
-      document.querySelector(`#${mode}Dropdown`).classList.add('active');
-      document.querySelector(`#${mode}Dropdown`).parentElement.style.pointerEvents = 'none';
-    } else {
-      document.querySelector(`#${mode}Dropdown`).classList.remove('active');
-      document.querySelector(`#${mode}Dropdown`).parentElement.removeAttribute('style');
-
-    }
-  }
+  // const handleActiveLinkForDropdown = (mode, match) => {
+  //   // const myDropdown = bootstrap.Dropdown.getOrCreateInstance(document.querySelector(`#${mode}Dropdown`));
+  //   // if (match) {
+  //   //   document.querySelector(`#${mode}Dropdown`).classList.add('active');
+  //   //   document.querySelector(`#${mode}Dropdown`).parentElement.style.pointerEvents = 'none';
+  //   // } else {
+  //   //   document.querySelector(`#${mode}Dropdown`).classList.remove('active');
+  //   //   document.querySelector(`#${mode}Dropdown`).parentElement.removeAttribute('style');
+  //   // }
+  // }
   return (
     <>
       {/* begin:: Main Nav */}
@@ -400,7 +398,7 @@ const Navbar = () => {
                                     <li key={subCategory.id}>
                                       <div className="dropend">
                                         <a
-                                          className="dropdown-item dropdown-toggle"
+                                          className="dropdown-item dropdown-toggle pe-5"
                                           href="#"
                                           role="button"
                                           id={`sub-category-${subCategory.id}`}
@@ -416,15 +414,15 @@ const Navbar = () => {
                                           {subCategory.childCategories.map(
                                             (childCategory) => (
                                               <li key={childCategory.id}>
-                                                <NavLink
+                                                <Link
                                                   className="dropdown-item"
                                                   to={`/urunler?categories=${category.id}&subCategories=${subCategory.id}&childCategories=${childCategory.id}`}
-                                                  isActive={(match) => handleActiveLinkForDropdown('products', match)}
+                                                  // isActive={(match) => handleActiveLinkForDropdown('products', match)}
                                                 >
                                                   {
                                                     childCategory.child_category_name
                                                   }
-                                                </NavLink>
+                                                </Link>
                                               </li>
                                             )
                                           )}
@@ -435,13 +433,13 @@ const Navbar = () => {
                                 }
                                 return (
                                   <li key={subCategory.id}>
-                                    <NavLink
+                                    <Link
                                       className="dropdown-item"
                                       to={`/urunler?categories=${category.id}&subCategories=${subCategory.id}`}
-                                      isActive={(match) => handleActiveLinkForDropdown('products', match)}
+                                      // isActive={(match) => handleActiveLinkForDropdown('products', match)}
                                     >
                                       {subCategory.sub_category_name}
-                                    </NavLink>
+                                    </Link>
                                   </li>
                                 );
                               })}
@@ -452,13 +450,13 @@ const Navbar = () => {
                     }
                     return (
                       <li key={category.id}>
-                        <NavLink
+                        <Link
                           className="dropdown-item"
                           to={`/urunler?categories=${category.id}`}
-                          isActive={(match) => handleActiveLinkForDropdown('products', match)}
+                          // isActive={(match) => handleActiveLinkForDropdown('products', match)}
                         >
                           {category.name}
-                        </NavLink>
+                        </Link>
                       </li>
                     );
                   })}
@@ -522,13 +520,13 @@ const Navbar = () => {
                                   .map((subBrand) => {
                                     return (
                                       <li key={subBrand.id}>
-                                        <NavLink
+                                        <Link
                                           className="dropdown-item"
-                                          to={`/markalar?brands=${brand.id}&subBrands=${subBrand.id}`}
-                                          isActive={(match) => handleActiveLinkForDropdown('brands', match)}
+                                          to={`/urunler?brands=${brand.id}&subBrands=${subBrand.id}`}
+                                          // isActive={(match) => handleActiveLinkForDropdown('brands', match)}
                                         >
                                           {subBrand.sub_brand_name}
-                                        </NavLink>
+                                        </Link>
                                       </li>
                                     );
                                   })}
@@ -539,13 +537,13 @@ const Navbar = () => {
                       }
                       return (
                         <li key={brand.id}>
-                          <NavLink
+                          <Link
                             className="dropdown-item"
-                            to={`/markalar?brands=${brand.id}`}
-                            isActive={(match) => handleActiveLinkForDropdown('brands', match)}
+                            to={`/urunler?brands=${brand.id}`}
+                            // isActive={(match) => handleActiveLinkForDropdown('brands', match)}
                           >
                             {brand.name}
-                          </NavLink>
+                          </Link>
                         </li>
                       );
                     })}

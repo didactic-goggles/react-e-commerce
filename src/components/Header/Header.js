@@ -36,7 +36,7 @@ const Header = () => {
             </a>
           </div>
           <div className="px-2 ms-2 me-auto">
-            <a href="#" className="text-decoration-none text-dark">
+            <a href="tel:212 635 94 51" className="text-decoration-none text-dark">
               <FaPhoneAlt className="me-2" />
               <span>212 635 94 51</span>
             </a>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
-import { NavLink, Link} from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import OwlCarousel from 'react-owl-carousel';
 import ReactStars from 'react-rating-stars-component';
 import { FaRegStar, FaStarHalfAlt, FaStar } from 'react-icons/fa';
@@ -15,23 +15,29 @@ import LoadingIndicator from '../../../UI/LoadingIndicator';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import Comments from './Comments';
+import Slider from './Slider';
 const Urun = () => {
   console.log('Rendering => Urun');
   const baseURL = 'https://comfortmedikal.com/';
   // let history = useHistory();
   // const dispatch = useAuthDispatch();
   const userDetails = useAuthState();
-  console.log(userDetails);
+  // console.log(userDetails);
   // const starRating = useRef();
   // const [activeProductImage, setActiveProductImage] = useState(null);
   const refCarousel = useRef();
   const [productInfo, setProductInfo] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [lastVisitedProducts, setLastVisitedProducts] = useState([]);
+  const [suggestedProducts, setSuggestedProducts] = useState([]);
   let { productId } = useParams();
   const starsSettings = {
     isHalf: true,
     size: 20,
-    value: productInfo && productInfo.overallRating ? Math.round(Number(productInfo.overallRating) * 2) / 2 : 0,
+    value:
+      productInfo && productInfo.overallRating
+        ? Math.round(Number(productInfo.overallRating) * 2) / 2
+        : 0,
     emptyIcon: <FaRegStar />,
     halfIcon: <FaStarHalfAlt />,
     filledIcon: <FaStar />,
@@ -52,7 +58,60 @@ const Urun = () => {
       const getProductDetailsResponse = await API.get(
         `/products.php?product_id=${productId}`
       );
-  
+
+      const currentProduct = userDetails.products.filter(
+        (p) => p.id === productId
+        )[0];
+      if (currentProduct) {
+        // Set Last Visited Products
+        if (localStorage) {
+          if (localStorage.getItem('comfort-visited-products')) {
+            const products = JSON.parse(
+              localStorage.getItem('comfort-visited-products')
+            ).products;
+            const productIndex = products.findIndex(
+              (p) => p.id === currentProduct.id
+            );
+            console.log(productIndex);
+            if (productIndex === -1) {
+              products.push(currentProduct);
+              localStorage.setItem(
+                'comfort-visited-products',
+                JSON.stringify({
+                  products,
+                })
+              );
+              console.log(1);
+            }
+            setLastVisitedProducts(products.filter(p => p.id !== currentProduct.id).reverse().slice(0, 5));
+          } else {
+            localStorage.setItem(
+              'comfort-visited-products',
+              JSON.stringify({
+                products: [currentProduct],
+              })
+            );
+            // setLastVisitedProducts(products);
+          }
+        }
+        // Set Suggested Products
+        console.log(currentProduct);
+        const tempSuggestedProducts = [];
+        let sameSizeCount = 0;
+        let sameBrandCount = 0;
+        const filterBrandMode = currentProduct.subBrand ? 'subBrand' : 'brand'
+        userDetails.products.forEach(p => {
+          if (p.size === currentProduct.size && p[filterBrandMode] !== currentProduct[filterBrandMode] && sameSizeCount < 2) {
+            tempSuggestedProducts.push(p);
+            sameSizeCount++;
+          } else if (p.size !== currentProduct.size && p[filterBrandMode] === currentProduct[filterBrandMode] && sameBrandCount < 2) {
+            tempSuggestedProducts.push(p);
+            sameBrandCount++;
+          }
+        });
+        setSuggestedProducts(tempSuggestedProducts);
+      }
+
       const tempProductInfo = {
         product: getProductDetailsResponse.product,
         productDetails: getProductDetailsResponse.productDetails,
@@ -61,13 +120,14 @@ const Urun = () => {
         productImages: getProductDetailsResponse.productImages,
       };
       if (getProductDetailsResponse.productImages.length > 0) {
-        tempProductInfo.activeImageProduct = tempProductInfo.productImages.filter(
-          (productImage) =>
-            productImage.id ===
-            tempProductInfo.productDetails.product_base_image_id
-        )[0];
+        tempProductInfo.activeImageProduct =
+          tempProductInfo.productImages.filter(
+            (productImage) =>
+              productImage.id ===
+              tempProductInfo.productDetails.product_base_image_id
+          )[0];
       }
-  
+
       if (getProductDetailsResponse.comments.length > 0)
         tempProductInfo.overallRating =
           getProductDetailsResponse.comments.reduce(
@@ -75,10 +135,11 @@ const Urun = () => {
             0
           ) / getProductDetailsResponse.comments.length;
       setProductInfo(tempProductInfo);
+      // setSliders();
       setLoading(false);
     };
     getProductDetails();
-  }, [productId]);
+  }, [productId, userDetails]);
 
   const handleActiveProductImageChange = (productImageId) => {
     // const targetIndex = productInfo.productImages.findIndex(productImage => productImage.id === productImageId);
@@ -87,56 +148,64 @@ const Urun = () => {
       ...productInfo,
       activeImageProduct: productInfo.productImages.filter(
         (productImage) => productImage.id === productImageId
-      )[0],
+        )[0],
     });
   };
-
+  
   if (loading) return <LoadingIndicator text="Ürün Yükleniyor..." />;
-
+  
   if (!productInfo) return <h5>Ürün yüklenemedi</h5>;
-
+  
+  console.log(productInfo);
   return (
     <section className="container py-3">
       {productInfo.categories && (
-      <div className="card card-body p-2 mb-3 shadow-sm d-block align-items-center">
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb mb-0">
-            <li className="breadcrumb-item">
-              <NavLink to="/urunler" className="text-decoration-none fw-bold" exact>
-                Ürünler
-              </NavLink>
-            </li>
-            <li className="breadcrumb-item" aria-current="page">
-              <Link to={`/urunler?categories=${productInfo.categories.categoryId}`} className="text-decoration-none fw-bold">
-                {productInfo.categories.category}
-              </Link>
-            </li>
-            {productInfo.categories.subCategoryId && (
-              <li className="breadcrumb-item" aria-current="page">
+        <div className="card card-body p-2 mb-3 shadow-sm d-block align-items-center">
+          <nav aria-label="breadcrumb">
+            <ol className="breadcrumb mb-0">
+              <li className="breadcrumb-item">
                 <NavLink
-                  to={`/urunler?categories=${productInfo.categories.categoryId}&subCategories=${productInfo.categories.subCategoryId}`}
+                  to="/urunler"
                   className="text-decoration-none fw-bold"
+                  exact
                 >
-                  {productInfo.categories.subCategory}
+                  Ürünler
                 </NavLink>
               </li>
-            )}
-            {productInfo.categories.childCategoryId && (
               <li className="breadcrumb-item" aria-current="page">
-                <NavLink
-                  to={`/urunler?categories=${productInfo.categories.categoryId}&subCategories=${productInfo.categories.subCategoryId}&childCategories=${productInfo.categories.childCategoryId}`}
+                <Link
+                  to={`/urunler?categories=${productInfo.categories.categoryId}`}
                   className="text-decoration-none fw-bold"
                 >
-                  {productInfo.categories.childCategory}
-                </NavLink>
+                  {productInfo.categories.category}
+                </Link>
               </li>
-            )}
-            <li className="breadcrumb-item active" aria-current="page">
-              {productInfo.product.name}
-            </li>
-          </ol>
-        </nav>
-      </div>
+              {productInfo.categories.subCategoryId && (
+                <li className="breadcrumb-item" aria-current="page">
+                  <NavLink
+                    to={`/urunler?categories=${productInfo.categories.categoryId}&subCategories=${productInfo.categories.subCategoryId}`}
+                    className="text-decoration-none fw-bold"
+                  >
+                    {productInfo.categories.subCategory}
+                  </NavLink>
+                </li>
+              )}
+              {productInfo.categories.childCategoryId && (
+                <li className="breadcrumb-item" aria-current="page">
+                  <NavLink
+                    to={`/urunler?categories=${productInfo.categories.categoryId}&subCategories=${productInfo.categories.subCategoryId}&childCategories=${productInfo.categories.childCategoryId}`}
+                    className="text-decoration-none fw-bold"
+                  >
+                    {productInfo.categories.childCategory}
+                  </NavLink>
+                </li>
+              )}
+              <li className="breadcrumb-item active" aria-current="page">
+                {productInfo.product.name}
+              </li>
+            </ol>
+          </nav>
+        </div>
       )}
       <div className="card shadow">
         <div className="card-body p-0">
@@ -159,7 +228,7 @@ const Urun = () => {
                         width: 1200,
                         height: 1800,
                       },
-                      shouldUsePositiveSpaceLens: true
+                      shouldUsePositiveSpaceLens: true,
                     }}
                     style={{
                       zIndex: 100,
@@ -275,10 +344,12 @@ const Urun = () => {
                     onClick={(event) => {
                       event.preventDefault();
                       // document.querySelector('#comments').scrollIntoView();
-                      var firstTabEl = document.querySelector('#pills-comments-tab')
-                      var firstTab = new bootstrap.Tab(firstTabEl)
+                      var firstTabEl = document.querySelector(
+                        '#pills-comments-tab'
+                      );
+                      var firstTab = new bootstrap.Tab(firstTabEl);
 
-                      firstTab.show()
+                      firstTab.show();
                     }}
                   >
                     {' '}
@@ -315,7 +386,10 @@ const Urun = () => {
                       aria-controls="pills-comments"
                       aria-selected="false"
                     >
-                      Yorumlar {productInfo.comments.length > 0 ? `(${productInfo.comments.length})` : ''}
+                      Yorumlar{' '}
+                      {productInfo.comments.length > 0
+                        ? `(${productInfo.comments.length})`
+                        : ''}
                     </button>
                   </li>
                 </ul>
@@ -347,6 +421,12 @@ const Urun = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="my-4">
+        <Slider products={lastVisitedProducts} title="Son Gezdiğiniz Ürünler" />
+      </div>
+      <div className="mb.-2">
+        <Slider products={suggestedProducts} title="Önerilen Ürünler" />
       </div>
     </section>
   );

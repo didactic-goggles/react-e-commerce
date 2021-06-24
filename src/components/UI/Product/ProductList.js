@@ -1,13 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import ReactStars from 'react-rating-stars-component';
+// import ReactStars from 'react-rating-stars-component';
+import Rate from 'rsuite/lib/Rate';
 import {
   FaEye,
   FaHeart,
   FaRegHeart,
-  FaRegStar,
-  FaStarHalfAlt,
-  FaStar,
+  // FaRegStar,
+  // FaStarHalfAlt,
+  // FaStar,
 } from 'react-icons/fa';
 import { useAuthState, useAuthDispatch, getWishList, showErrorMessage } from '../../../context';
 import API from '../../../api';
@@ -33,13 +34,10 @@ const ProductList = (props) => {
   // console.log(isInWishList);
   // console.log(user);
   const starsSettings = {
-    isHalf: true,
-    size: 16,
+    allowHalf: true,
+    // size: 16,
     value: Math.round(Number(product.rating) * 2) / 2 || 0,
-    edit: false,
-    emptyIcon: <FaRegStar />,
-    halfIcon: <FaStarHalfAlt />,
-    filledIcon: <FaStar />,
+    readOnly: true,
     onChange: (newValue) => {
       console.log(`Example 2: new value is ${newValue}`);
     },
@@ -104,7 +102,8 @@ const ProductList = (props) => {
           <div className="card-body">
             <h5 className="text-start mb-2">{product.name}</h5>
             <div className="d-flex justify-content-start mb-2">
-              <ReactStars {...starsSettings} className="text-center" />
+              {/* <ReactStars {...starsSettings} className="text-center" /> */}
+              <Rate {...starsSettings} />
             </div>
             <div className="card-text">{product.description}</div>
             <div className="d-flex">

@@ -24,14 +24,12 @@ const Main = () => {
         <Route path="/iletisim">
           <Iletisim />
         </Route>
-        <Route path="/urunler">
-          <Urunler />
-        </Route>
-        <Route path="/markalar">
-          <div>
-            <Urunler />
-          </div>
-        </Route>
+        <Route
+          path="/urunler"
+          render={(props) => (
+            <Urunler key={props.location.search}/>
+          )}
+        />
         <Route path="/urun/:productId">
           <Urun />
         </Route>
