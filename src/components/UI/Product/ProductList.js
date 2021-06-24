@@ -9,7 +9,7 @@ import {
   FaStarHalfAlt,
   FaStar,
 } from 'react-icons/fa';
-import { useAuthState, useAuthDispatch, getWishList } from '../../../context';
+import { useAuthState, useAuthDispatch, getWishList, showErrorMessage } from '../../../context';
 import API from '../../../api';
 import moment from 'moment';
 
@@ -47,6 +47,7 @@ const ProductList = (props) => {
 
   const handleWishList = async (event) => {
     if (isInWishList === -1) {
+      showErrorMessage(dispatch, 'Lütfen öncelikle giriş yapınız');
       console.log('must be logged in');
     } else {
       try {

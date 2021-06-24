@@ -27,6 +27,11 @@ const Main = () => {
         <Route path="/urunler">
           <Urunler />
         </Route>
+        <Route path="/markalar">
+          <div>
+            <Urunler />
+          </div>
+        </Route>
         <Route path="/urun/:productId">
           <Urun />
         </Route>

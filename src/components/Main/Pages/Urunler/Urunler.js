@@ -96,6 +96,23 @@ const Urunler = () => {
   //   const [filteredProducts, setFilteredProducts] = useState(
   //     userDetails.products
   //   );
+
+  // if (!sessionStorage.getItem('activeProductsUrl')) {
+  //   sessionStorage.setItem('activeProductsUrl', window.location.href);
+  //   console.log(sessionStorage.getItem('activeProductsUrl'));
+  //   // setReRender(false);
+  // } else if (window.location.href !== sessionStorage.getItem('activeProductsUrl')){
+  //   sessionStorage.setItem('activeProductsUrl', window.location.href);
+  //   // history.push({
+  //     //   search: window.location.search
+  //     // })
+  //     // setLoading(true);
+  //     console.log(1);
+  //     setFilters({
+  //       categories: []
+  //     });
+  //   // setReRender(true);
+  // }
   const starsSettings = {
     isHalf: true,
     size: 16,
@@ -519,7 +536,7 @@ const Urunler = () => {
       }
     }
     setProducts(tempProducts);
-    setLoading(false);
+    
     let filtersString = '';
 
     Object.keys(filters).forEach((key) => {
@@ -537,6 +554,7 @@ const Urunler = () => {
         search: ``,
       });
     }
+    setLoading(false);
   }, [filters, history, loading, sorting, userDetails]);
 
   return (

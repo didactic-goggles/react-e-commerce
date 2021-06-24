@@ -8095,8 +8095,8 @@ textarea.form-control-lg {
 
 .rs-alert-item-close {
   position: absolute;
-  top: 20px;
-  right: 16px;
+  top: 10px;
+  right: 10px;
   padding: 4px;
   font-size: 12px;
   line-height: 1;
@@ -8160,14 +8160,14 @@ textarea.form-control-lg {
   color: #ffb300; }
 
 .rs-alert-container .rs-alert-error .rs-alert-item-content {
-  background-color: #fde9ef;
-  color: #575757; }
+  background-color: #fc6d7b;
+  color: #fff; }
 
 .rs-alert-container .rs-alert-error .rs-alert-item-content .rs-icon {
-  color: #f44336; }
+  color: #fff; }
 
 .rs-alert-container .rs-alert-error .rs-alert-item-close {
-  color: #f44336; }
+  color: #fff; }
 
 .slide-out {
   -webkit-animation-duration: 0.3s;
@@ -8236,3 +8236,13 @@ textarea.form-control-lg {
   animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards; }
+
+.react-stars-container {
+  min-height: 25px;
+  width: 100%; }
+  .react-stars-container > div {
+    width: 100%; }
+    .react-stars-container > div > div {
+      width: 100%;
+      display: flex;
+      justify-content: center; }

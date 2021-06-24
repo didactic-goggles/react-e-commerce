@@ -44,7 +44,7 @@ const Product = (props) => {
 
   const handleWishList = async (event) => {
     if(isInWishList === -1) {
-      showErrorMessage(dispatch, 'Bu ürünü beğendiklerine eklemek için giriş yapmalısın');
+      showErrorMessage(dispatch, 'Lütfen öncelikle giriş yapınız');
       console.log('must be logged in')
     } else {
       try {
@@ -118,7 +118,7 @@ const Product = (props) => {
       </div>
       <div className="card-body">
         <h5 className="text-center">{product.name}</h5>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center react-stars-container" style={{minHeight: '25px', width: '100%'}}>
           <ReactStars {...starsSettings} className="text-center" />
         </div>
         <div className="card-text">{product.description}</div>
