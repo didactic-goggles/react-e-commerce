@@ -21,7 +21,7 @@ import {
   useAuthState,
   showErrorMessage
 } from '../../context';
-// import * as bootstrap from 'bootstrap/dist/js/bootstrap.bundle';
+import * as bootstrap from 'bootstrap/dist/js/bootstrap.bundle';
 
 const Navbar = () => {
   console.log('Rendering => Navbar');

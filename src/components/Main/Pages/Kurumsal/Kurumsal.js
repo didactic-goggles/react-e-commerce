@@ -4,7 +4,6 @@ const Kurumsal = () => {
   console.log('Rendering => Kurumsal');
   useEffect(() => {
     window.scrollTo(0, 0);
-    console.log(1);
   }, [])
   return (
     <div className="container py-4">

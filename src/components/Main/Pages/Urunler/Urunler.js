@@ -461,49 +461,66 @@ const Urunler = (props) => {
     );
   };
 
+  // useEffect(() => {
+  //   const mainNav = document.querySelector('#mainNav');
+  //   if (mainNav) {
+  //     [...mainNav.querySelectorAll('.nav-item.dropdown')].forEach((navItem) => {
+  //       const dropdown = bootstrap.Dropdown.getInstance(
+  //         navItem.querySelector('.dropdown-toggle')
+  //       );
+  //       console.log(dropdown);
+  //       console.log(dropdown._menu);
+  //       if (dropdown._menu) dropdown._menu.classList.remove('show');
+  //       // dropdown.hide();
+  //     });
+  //   }
+  // });
+
+  const showProduct = (product) => {
+    try {
+      if (
+        filters.categories.length > 0 &&
+        !filters.categories.includes(Number(product.categoryId))
+      )
+        return false;
+      if (
+        filters.subCategories.length > 0 &&
+        !filters.subCategories.includes(Number(product.subCategoryId))
+      )
+        return false;
+      if (
+        filters.childCategories.length > 0 &&
+        !filters.childCategories.includes(Number(product.childCategoryId))
+      )
+        return false;
+      if (
+        filters.brands.length > 0 &&
+        !filters.brands.includes(Number(product.brandId))
+      )
+        return false;
+      if (
+        filters.subBrands.length > 0 &&
+        !filters.subBrands.includes(Number(product.subBrandId))
+      )
+        return false;
+      if (filters.sizes.length > 0 && !filters.sizes.includes(product.size))
+        return false;
+      if (
+        filters.ratings.length > 0 &&
+        filters.ratings.filter(
+          (rating) => rating <= Math.round(Number(product.rating))
+        ).length === 0
+      ) {
+        return false;
+      }
+    } catch (error) {}
+    return true;
+  }
+
   useEffect(() => {
     console.log('useEffect');
     setLoading(true);
-    let tempProducts = userDetails.products.filter((product) => {
-      try {
-        if (
-          filters.categories.length > 0 &&
-          !filters.categories.includes(Number(product.categoryId))
-        )
-          return false;
-        if (
-          filters.subCategories.length > 0 &&
-          !filters.subCategories.includes(Number(product.subCategoryId))
-        )
-          return false;
-        if (
-          filters.childCategories.length > 0 &&
-          !filters.childCategories.includes(Number(product.childCategoryId))
-        )
-          return false;
-        if (
-          filters.brands.length > 0 &&
-          !filters.brands.includes(Number(product.brandId))
-        )
-          return false;
-        if (
-          filters.subBrands.length > 0 &&
-          !filters.subBrands.includes(Number(product.subBrandId))
-        )
-          return false;
-        if (filters.sizes.length > 0 && !filters.sizes.includes(product.size))
-          return false;
-        if (
-          filters.ratings.length > 0 &&
-          filters.ratings.filter(
-            (rating) => rating <= Math.round(Number(product.rating))
-          ).length === 0
-        ) {
-          return false;
-        }
-      } catch (error) {}
-      return true;
-    });
+    let tempProducts = userDetails.products.filter((product) => showProduct(product));
     if (sorting !== '') {
       if (sorting.indexOf('name') !== -1) {
         tempProducts = tempProducts.sort((a, b) =>
@@ -663,7 +680,7 @@ const Urunler = (props) => {
           {loading ? (
             <LoadingIndicator text="Ürünler Yükleniyor..." />
           ) : (
-            <Sonuc filters={filters} allProducts={products} mode={mode} />
+            <Sonuc filters={filters} allProducts={products} mode={mode} showProduct={showProduct}/>
           )}
         </div>
       </div>

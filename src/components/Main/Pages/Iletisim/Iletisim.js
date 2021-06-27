@@ -18,7 +18,7 @@ const Iletisim = () => {
           </span>
           <span className="d-flex align-items-center mb-2">
             <FaPhoneAlt className="me-2" />
-            <span>212 635 94 51</span>
+            <a href="tel:+902126359451" className="text-dark">212 635 94 51</a>
           </span>
           <span className="d-flex align-items-center mb-2">
             <a

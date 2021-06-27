@@ -6,50 +6,14 @@ import ProductList from '../../../UI/Product/ProductList';
 const Sonuc = (props) => {
   console.log('Rendering => Sonuç');
 
-  const { filters, allProducts, mode } = props;
+  const { filters, allProducts, mode, showProduct } = props;
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   // const [sortedProducts, setSortedProducts] = useState([]);
   useEffect(() => {
     console.log(allProducts);
     setFilteredProducts(
-      allProducts.filter((product) => {
-        try {
-          if (
-            filters.categories.length > 0 &&
-            !filters.categories.includes(Number(product.categoryId))
-          )
-            return false;
-          if (
-            filters.subCategories.length > 0 &&
-            !filters.subCategories.includes(Number(product.subCategoryId))
-          )
-            return false;
-          if (
-            filters.childCategories.length > 0 &&
-            !filters.childCategories.includes(Number(product.childCategoryId))
-          )
-            return false;
-          if (
-            filters.brands.length > 0 &&
-            !filters.brands.includes(Number(product.brandId))
-          )
-            return false;
-          if (
-            filters.sizes.length > 0 &&
-            !filters.sizes.includes(product.size)
-          )
-            return false;
-          if (
-            filters.ratings.length > 0 &&
-            filters.ratings.filter(
-              (rating) => rating <= Math.round(Number(product.rating))
-            ).length === 0
-          )
-            return false;
-        } catch (error) {}
-        return true;
-      })
+      allProducts.filter((product) => showProduct(product))
     );
   }, [allProducts, filters]);
   // useEffect(() => {

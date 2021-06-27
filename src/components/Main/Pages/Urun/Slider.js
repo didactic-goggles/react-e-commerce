@@ -17,7 +17,7 @@ const Slider = (props) => {
     margin: 16,
     autoplay: true,
     dots: false,
-    // loop: true,
+    loop: true,
     lazyLoad: true,
     responsiveClass: true,
     responsive: {

@@ -37,7 +37,7 @@ const Login = (props) => {
             >
               <div className="py-4 py-md-0">
                 <h3 className="display-5">Hoşgeldiniz</h3>
-                <p>Sitede yeniyseniz lütfen</p>
+                <p>Yeni hesap açmak için</p>
                 <Link to="/kayit" className="btn btn-outline-light">
                   kayıt olun
                 </Link>

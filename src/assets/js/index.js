@@ -7,6 +7,9 @@ window.addEventListener('DOMContentLoaded', () => {
       const dropdown = new bootstrap.Dropdown(
         navItem.querySelector('.dropdown-toggle')
       );
+      navItem.addEventListener('click', (event) => {
+        dropdown.hide();
+      });
       navItem.addEventListener('mouseover', (event) => {
         dropdown.show();
       });

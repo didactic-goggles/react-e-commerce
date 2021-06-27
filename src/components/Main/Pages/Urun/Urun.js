@@ -54,6 +54,7 @@ const Urun = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const getProductDetails = async () => {
       const getProductDetailsResponse = await API.get(
         `/products.php?product_id=${productId}`
@@ -83,7 +84,7 @@ const Urun = () => {
               );
               console.log(1);
             }
-            setLastVisitedProducts(products.filter(p => p.id !== currentProduct.id).reverse().slice(0, 5));
+            setLastVisitedProducts(products.filter(p => p.id !== currentProduct.id).reverse().slice(0, 7));
           } else {
             localStorage.setItem(
               'comfort-visited-products',
@@ -399,6 +400,9 @@ const Urun = () => {
                     id="pills-home"
                     role="tabpanel"
                     aria-labelledby="pills-home-tab"
+                    style={{
+                      whiteSpace: 'pre-line'
+                    }}
                   >
                     {(productInfo.productDetails &&
                       productInfo.productDetails.description) ||

@@ -7640,7 +7640,6 @@ textarea.form-control-lg {
   border: 1px solid var(--bs-primary);
   border-top: 5px solid var(--bs-primary); }
 
-#mainNav .dropdown:hover > .dropdown-menu,
 #mainNav .dropend:hover > .dropdown-menu {
   display: block;
   margin-top: 0; }
@@ -8023,15 +8022,6 @@ textarea.form-control-lg {
     #myCarousel .carousel-item img {
       margin: 5rem 0;
       width: 60%; }
-
-.lg-1 {
-  background-image: linear-gradient(90deg, #2890a3, #05278e); }
-
-.lg-2 {
-  background-image: linear-gradient(90deg, #daeedf, #80c88a); }
-
-.lg-3 {
-  background-image: linear-gradient(180deg, #436972, #d5d5d5); }
 
 .no-active:active, .no-active:focus {
   outline: 0;

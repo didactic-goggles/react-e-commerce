@@ -60,7 +60,7 @@ const Footer = () => {
               </span>
               <span className="mb-2">
                 <FaPhoneAlt className="me-2" style={{ fontSize: '25px' }} />{' '}
-                Telefon: 212 635 94 51
+                <a href="tel:+902126359451" className="text-white">212 635 94 51</a>
               </span>
               <span>
                 <FaEnvelope className="me-2" style={{ fontSize: '25px' }} />{' '}

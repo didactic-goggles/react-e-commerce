@@ -8,7 +8,7 @@ const Anasayfa = () => {
     <>
       {/* // begin:: Slider */}
       <section className="mb-3">
-        <div id="myCarousel" className="carousel slide" data-bs-ride="carousel" data-interval="false">
+        <div id="myCarousel" className="carousel carousel-dark slide" data-bs-ride="carousel" data-interval="false">
           <div className="carousel-indicators">
             <button
               type="button"
@@ -30,6 +30,12 @@ const Anasayfa = () => {
               data-bs-slide-to="2"
               aria-label="Slide 3"
             ></button>
+            <button
+              type="button"
+              data-bs-target="#myCarousel"
+              data-bs-slide-to="3"
+              aria-label="Slide 4"
+            ></button>
             {/* <button
               type="button"
               data-bs-target="#myCarousel"
@@ -42,7 +48,7 @@ const Anasayfa = () => {
               <img
                 src="/assets/img/anasayfa/rs/1.png"
                 // className="w-100"
-                alt="Evony"
+                alt="Tena"
               />
 
               <div className="container d-none">
@@ -77,9 +83,9 @@ const Anasayfa = () => {
             </div>
             <div className="carousel-item lg-3">
               <img
-                src="/assets/img/anasayfa/rs/3.png"
+                src="/assets/img/anasayfa/rs/joly5.png"
                 className=""
-                alt="Evony"
+                alt="Joly"
               />
 
               <div className="container d-none">
@@ -91,6 +97,19 @@ const Anasayfa = () => {
                       Ürün Detayına Git
                     </button>
                   </p> */}
+                </div>
+              </div>
+            </div>
+          <div className="carousel-item lg-3">
+              <img
+                src="/assets/img/anasayfa/rs/hi_slip3.png"
+                className=""
+                alt="Hi-slip"
+              />
+
+              <div className="container d-none">
+                <div className="carousel-caption text-end text-primary">
+                  <h1>Hİ-SLİP</h1>
                 </div>
               </div>
             </div>

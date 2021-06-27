@@ -352,7 +352,7 @@ $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
         border-top: 5px solid var(--bs-primary);
     }
 
-    .dropdown:hover,
+    // .dropdown:hover,
     .dropend:hover {
         &>.dropdown-menu {
 
@@ -893,17 +893,17 @@ $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
 }
 
 .lg {
-    &-1 {
-        background-image: linear-gradient(90deg, #2890a3, #05278e);
-    }
+    // &-1 {
+    //     background-image: linear-gradient(90deg, #2890a3, #05278e);
+    // }
 
-    &-2 {
-        background-image: linear-gradient(90deg, #daeedf, #80c88a);
-    }
+    // &-2 {
+    //     background-image: linear-gradient(90deg, #daeedf, #80c88a);
+    // }
 
-    &-3 {
-        background-image: linear-gradient(180deg, #436972, #d5d5d5);
-    }
+    // &-3 {
+    //     background-image: linear-gradient(180deg, #436972, #d5d5d5);
+    // }
 }
 
 .no-active {
