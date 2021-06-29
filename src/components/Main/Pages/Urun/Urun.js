@@ -8,7 +8,11 @@ import ReactTooltip from 'react-tooltip';
 import ReactImageMagnify from 'react-image-magnify';
 import * as bootstrap from 'bootstrap/dist/js/bootstrap.bundle';
 
-import { useAuthState } from '../../../../context';
+import {
+  useAuthState,
+  useAuthDispatch,
+  showErrorMessage,
+} from '../../../../context';
 import API from '../../../../api';
 import LoadingIndicator from '../../../UI/LoadingIndicator';
 
@@ -20,7 +24,7 @@ const Urun = () => {
   console.log('Rendering => Urun');
   const baseURL = 'https://comfortmedikal.com/';
   // let history = useHistory();
-  // const dispatch = useAuthDispatch();
+  const dispatch = useAuthDispatch();
   const userDetails = useAuthState();
   // console.log(userDetails);
   // const starRating = useRef();
@@ -45,7 +49,7 @@ const Urun = () => {
     onChange: (newValue) => {
       console.log(!!userDetails.user);
       if (!userDetails.user) {
-        console.log('giriş yap');
+        showErrorMessage(dispatch, 'Lütfen öncelikle giriş yapınız');
       } else {
         console.log('uygun');
       }
@@ -62,7 +66,7 @@ const Urun = () => {
 
       const currentProduct = userDetails.products.filter(
         (p) => p.id === productId
-        )[0];
+      )[0];
       if (currentProduct) {
         // Set Last Visited Products
         if (localStorage) {
@@ -84,7 +88,12 @@ const Urun = () => {
               );
               console.log(1);
             }
-            setLastVisitedProducts(products.filter(p => p.id !== currentProduct.id).reverse().slice(0, 7));
+            setLastVisitedProducts(
+              products
+                .filter((p) => p.id !== currentProduct.id)
+                .reverse()
+                .slice(0, 7)
+            );
           } else {
             localStorage.setItem(
               'comfort-visited-products',
@@ -100,12 +109,20 @@ const Urun = () => {
         const tempSuggestedProducts = [];
         let sameSizeCount = 0;
         let sameBrandCount = 0;
-        const filterBrandMode = currentProduct.subBrand ? 'subBrand' : 'brand'
-        userDetails.products.forEach(p => {
-          if (p.size === currentProduct.size && p[filterBrandMode] !== currentProduct[filterBrandMode] && sameSizeCount < 2) {
+        const filterBrandMode = currentProduct.subBrand ? 'subBrand' : 'brand';
+        userDetails.products.forEach((p) => {
+          if (
+            p.size === currentProduct.size &&
+            p[filterBrandMode] !== currentProduct[filterBrandMode] &&
+            sameSizeCount < 2
+          ) {
             tempSuggestedProducts.push(p);
             sameSizeCount++;
-          } else if (p.size !== currentProduct.size && p[filterBrandMode] === currentProduct[filterBrandMode] && sameBrandCount < 2) {
+          } else if (
+            p.size !== currentProduct.size &&
+            p[filterBrandMode] === currentProduct[filterBrandMode] &&
+            sameBrandCount < 2
+          ) {
             tempSuggestedProducts.push(p);
             sameBrandCount++;
           }
@@ -143,20 +160,49 @@ const Urun = () => {
   }, [productId, userDetails]);
 
   const handleActiveProductImageChange = (productImageId) => {
-    // const targetIndex = productInfo.productImages.findIndex(productImage => productImage.id === productImageId);
-    // refCarousel.current.next();
     setProductInfo({
       ...productInfo,
       activeImageProduct: productInfo.productImages.filter(
         (productImage) => productImage.id === productImageId
-        )[0],
+      )[0],
     });
   };
-  
+
   if (loading) return <LoadingIndicator text="Ürün Yükleniyor..." />;
-  
+
   if (!productInfo) return <h5>Ürün yüklenemedi</h5>;
-  
+
+  const ProductImagesCarousel = () => {
+    if (!productInfo.productImages || productInfo.productImages.length === 0)
+      return <div></div>;
+    return (
+      <OwlCarousel
+        key={productId}
+        margin={8}
+        autoplay={true}
+        dots={false}
+        merge={true}
+        autoWidth={true}
+        ref={refCarousel}
+      >
+        {productInfo.productImages.map((productImage) => (
+          <img
+            alt={productInfo.product.name}
+            src={`${baseURL}${productImage.image_path}`}
+            key={productImage.id}
+            style={{
+              maxWidth: '60px',
+              height: '60px',
+              cursor: 'pointer',
+            }}
+            onClick={(event) => {
+              handleActiveProductImageChange(productImage.id);
+            }}
+          />
+        ))}
+      </OwlCarousel>
+    );
+  };
   console.log(productInfo);
   return (
     <section className="container py-3">
@@ -253,44 +299,7 @@ const Urun = () => {
                 )}
               </div>
               <div>
-                <OwlCarousel
-                  // items={1}
-                  margin={8}
-                  autoplay={true}
-                  dots={false}
-                  // center={true}
-                  merge={true}
-                  // loop={true}
-                  // items={4}
-                  autoWidth={true}
-                  ref={refCarousel}
-                  // autoHeight={true}
-                  // ref={specialCarousel}
-                  // onChanged={(e) => {
-                  //   console.log(e)
-                  // }}
-                >
-                  {productInfo.productImages.map((productImage) => (
-                    <img
-                      alt={productInfo.product.name}
-                      src={`${baseURL}${productImage.image_path}`}
-                      key={productImage.id}
-                      // className={productInfo.activeImageProduct.id === productImage.id ? 'img-thumbnail' : ''}
-                      style={{
-                        maxWidth: '60px',
-                        height: '60px',
-                        cursor: 'pointer',
-                      }}
-                      onClick={(event) => {
-                        handleActiveProductImageChange(productImage.id);
-                        // event.target.classList.add('img-thumbnail');
-                      }}
-                    />
-                  ))}
-                  {/* {allProducts.map((product) => (
-                  <Product product={product} key={product.id} />
-                ))} */}
-                </OwlCarousel>
+                <ProductImagesCarousel />
               </div>
             </div>
             <div className="col-sm-7 bg-light py-3 px-3">
@@ -401,7 +410,7 @@ const Urun = () => {
                     role="tabpanel"
                     aria-labelledby="pills-home-tab"
                     style={{
-                      whiteSpace: 'pre-line'
+                      whiteSpace: 'pre-line',
                     }}
                   >
                     {(productInfo.productDetails &&

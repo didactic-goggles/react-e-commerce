@@ -888,6 +888,12 @@ $input-height-lg: calc(1.5em + 1.65rem + 2px) !default;
             // width: 80%;
             margin: 5rem 0;
             width: 60%;
+            &.m-357 {
+              margin: 3.57rem 0;
+            }
+            &.m-369 {
+              margin: 3.69rem 0;
+            }
         }
     }
 }

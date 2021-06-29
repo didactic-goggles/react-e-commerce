@@ -8022,6 +8022,10 @@ textarea.form-control-lg {
     #myCarousel .carousel-item img {
       margin: 5rem 0;
       width: 60%; }
+      #myCarousel .carousel-item img.m-357 {
+        margin: 3.57rem 0; }
+      #myCarousel .carousel-item img.m-369 {
+        margin: 3.69rem 0; }
 
 .no-active:active, .no-active:focus {
   outline: 0;

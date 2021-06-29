@@ -46,7 +46,7 @@ const Anasayfa = () => {
           <div className="carousel-inner">
             <div className="carousel-item active lg-1">
               <img
-                src="/assets/img/anasayfa/rs/1.png"
+                src="https://comfortmedikal.com/img/anasayfa/1.png"
                 // className="w-100"
                 alt="Tena"
               />
@@ -65,7 +65,7 @@ const Anasayfa = () => {
             </div>
             <div className="carousel-item lg-2">
               <img
-                src="/assets/img/anasayfa/rs/2.png"
+                src="https://comfortmedikal.com/img/anasayfa/2.png"
                 className=""
                 alt="Evony"
               />
@@ -83,8 +83,8 @@ const Anasayfa = () => {
             </div>
             <div className="carousel-item lg-3">
               <img
-                src="/assets/img/anasayfa/rs/joly5.png"
-                className=""
+                src="https://comfortmedikal.com/img/anasayfa/3.png"
+                // className="m-357"
                 alt="Joly"
               />
 
@@ -102,8 +102,8 @@ const Anasayfa = () => {
             </div>
           <div className="carousel-item lg-3">
               <img
-                src="/assets/img/anasayfa/rs/hi_slip3.png"
-                className=""
+                src="https://comfortmedikal.com/img/anasayfa/4.png"
+                // className="m-369"
                 alt="Hi-slip"
               />
 

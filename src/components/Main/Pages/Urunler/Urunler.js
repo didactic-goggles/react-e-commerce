@@ -22,7 +22,6 @@ const Urunler = (props) => {
   // console.log('timeStamp', timeStamp);
   const history = useHistory();
   function useQuery() {
-    console.log('query');
     return new URLSearchParams(useLocation().search);
   }
   let query = useQuery();
@@ -151,6 +150,16 @@ const Urunler = (props) => {
                 tempFilters.categories = tempFilters.categories.filter(
                   (categoryId) => Number(category.id) !== categoryId
                 );
+                if (tempFilters.subCategories && category.subCategories) {
+                  tempFilters.subCategories = tempFilters.subCategories.filter((subCategoryId) => 
+                    category.subCategories.findIndex(sc => Number(sc.id) === subCategoryId));
+                  if (tempFilters.childCategories && category.subCategories) {
+                    category.subCategories.forEach(subCategory => {
+                      tempFilters.childCategories = tempFilters.childCategories.filter((childCategoryId) => 
+                        subCategory.childCategories.findIndex(cc => Number(cc.id) === childCategoryId));
+                    })
+                  }
+                }
                 categoryCollapse.hide();
               }
               setFilters(tempFilters);
@@ -193,6 +202,10 @@ const Urunler = (props) => {
                           (subCategoryId) =>
                             Number(subCategory.id) !== subCategoryId
                         );
+                      if (tempFilters.childCategories && subCategory.childCategories) {
+                        tempFilters.childCategories = tempFilters.childCategories.filter((childCategoryId) => 
+                          subCategory.childCategories.findIndex(cc => Number(cc.id) === childCategoryId));
+                      }
                       subCategoryCollapse.hide();
                     }
                     setFilters(tempFilters);
@@ -290,6 +303,10 @@ const Urunler = (props) => {
                   tempFilters.brands = tempFilters.brands.filter(
                     (brandId) => Number(brand.id) !== brandId
                   );
+                  if (tempFilters.subBrands && brand.subBrands) {
+                    tempFilters.subBrands = tempFilters.subBrands.filter((subBrandId) => 
+                    brand.subBrands.findIndex(sb => Number(sb.id) === subBrandId));
+                  }
                   brandCollapse.hide();
                 }
                 setFilters(tempFilters);
@@ -486,13 +503,28 @@ const Urunler = (props) => {
       if (
         filters.subCategories.length > 0 &&
         !filters.subCategories.includes(Number(product.subCategoryId))
-      )
+      ) {
+        const productCategoryObject = userDetails.categories.filter(c => c.id === product.categoryId)[0];
+        if (productCategoryObject.subCategories.length === 0) return true;
+        // else if (productCategoryObject.subCategories.filter(sc => filters.subCategories.includes(Number(sc.id)))[0]) {
+        //   return true;
+        // }
         return false;
+      }
       if (
         filters.childCategories.length > 0 &&
         !filters.childCategories.includes(Number(product.childCategoryId))
-      )
+      ) {
+        const productCategoryObject = userDetails.categories.filter(c => c.id === product.categoryId)[0];
+        const productSubCategoryObject = productCategoryObject.subCategories.filter(sc => sc.id === product.subCategoryId)[0];
+        if (productSubCategoryObject.childCategories.length === 0) return true;
+        else if (filters.subCategories.includes(Number(productSubCategoryObject.id)) && 
+          !productSubCategoryObject.childCategories.filter(cc => filters.childCategories.includes(Number(cc.id)))[0]) return true;
+        // else if (productCategoryObject.subCategories.filter(sc => filters.subCategories.includes(Number(sc.id)))[0]) {
+        //   return true;
+        // }
         return false;
+      }
       if (
         filters.brands.length > 0 &&
         !filters.brands.includes(Number(product.brandId))
@@ -501,8 +533,11 @@ const Urunler = (props) => {
       if (
         filters.subBrands.length > 0 &&
         !filters.subBrands.includes(Number(product.subBrandId))
-      )
+      ) {
+        const productBrandObject = userDetails.brands.filter(b => b.id === product.brandId)[0];
+        if (productBrandObject.subBrands.length === 0) return true;
         return false;
+      }
       if (filters.sizes.length > 0 && !filters.sizes.includes(product.size))
         return false;
       if (
@@ -513,7 +548,9 @@ const Urunler = (props) => {
       ) {
         return false;
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
     return true;
   }
 
