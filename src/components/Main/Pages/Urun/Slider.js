@@ -9,7 +9,7 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 const Slider = (props) => {
   console.log('Rendering => ProductsSlider');
   const { products, title } = props;
-  console.log(products);
+  // console.log(products);
   const carousel = useRef();
 
   const carouselOptions = {
@@ -17,7 +17,7 @@ const Slider = (props) => {
     margin: 16,
     autoplay: true,
     dots: false,
-    loop: true,
+    loop: products.length > 4 ,
     lazyLoad: true,
     responsiveClass: true,
     responsive: {
@@ -64,8 +64,8 @@ const Slider = (props) => {
         {products.length > 0 ? (
           <OwlCarousel {...carouselOptions} ref={carousel}>
             {products &&
-              products.map((product) => (
-                <Product product={product} key={product.id} />
+              products.map((product, i) => (
+                <Product product={product} key={product.id + i} />
               ))}
           </OwlCarousel>
         ) : (

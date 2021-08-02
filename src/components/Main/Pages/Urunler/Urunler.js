@@ -18,7 +18,6 @@ import LoadingIndicator from '../../../UI/LoadingIndicator';
 const Urunler = (props) => {
   console.log('Rendering => Ürünler');
   // const [search1, setSearch1] = useState(props.location.search);
-  console.log(props);
   // console.log('timeStamp', timeStamp);
   const history = useHistory();
   function useQuery() {
@@ -151,8 +150,9 @@ const Urunler = (props) => {
                   (categoryId) => Number(category.id) !== categoryId
                 );
                 if (tempFilters.subCategories && category.subCategories) {
+                  console.log(tempFilters.subCategories, category.subCategories);
                   tempFilters.subCategories = tempFilters.subCategories.filter((subCategoryId) => 
-                    category.subCategories.findIndex(sc => Number(sc.id) === subCategoryId));
+                    category.subCategories.findIndex(sc => Number(sc.id) === subCategoryId) === -1);
                   if (tempFilters.childCategories && category.subCategories) {
                     category.subCategories.forEach(subCategory => {
                       tempFilters.childCategories = tempFilters.childCategories.filter((childCategoryId) => 
@@ -380,7 +380,7 @@ const Urunler = (props) => {
     }
     const Sizes = () => {
       const sizeElements = [];
-      console.log(filters);
+      // console.log(filters);
 
       sizes.forEach((size, index) => {
         sizeElements.push(
@@ -597,7 +597,6 @@ const Urunler = (props) => {
     let filtersString = '';
 
     Object.keys(filters).forEach((key) => {
-      console.log(filters);
       if (filters[key].length > 0) {
         filtersString += `${key}=${filters[key].toString()}&`;
       }

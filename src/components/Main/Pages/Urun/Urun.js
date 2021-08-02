@@ -47,13 +47,13 @@ const Urun = () => {
     filledIcon: <FaStar />,
     edit: false,
     onChange: (newValue) => {
-      console.log(!!userDetails.user);
+      // console.log(!!userDetails.user);
       if (!userDetails.user) {
         showErrorMessage(dispatch, 'Lütfen öncelikle giriş yapınız');
       } else {
         console.log('uygun');
       }
-      console.log(`Example 2: new value is ${newValue}`);
+      // console.log(`Example 2: new value is ${newValue}`);
     },
   };
 
@@ -77,7 +77,7 @@ const Urun = () => {
             const productIndex = products.findIndex(
               (p) => p.id === currentProduct.id
             );
-            console.log(productIndex);
+            // console.log(productIndex);
             if (productIndex === -1) {
               products.push(currentProduct);
               localStorage.setItem(
@@ -86,7 +86,6 @@ const Urun = () => {
                   products,
                 })
               );
-              console.log(1);
             }
             setLastVisitedProducts(
               products
@@ -109,24 +108,53 @@ const Urun = () => {
         const tempSuggestedProducts = [];
         let sameSizeCount = 0;
         let sameBrandCount = 0;
+        let maxSameSizeCount = 2;
+        let maxSameBrandCount = 2;
+        const filterCategoryMode = currentProduct.childCategory
+          ? 'childCategory'
+          : currentProduct.subCategory
+          ? 'subCategory'
+          : 'category';
         const filterBrandMode = currentProduct.subBrand ? 'subBrand' : 'brand';
         userDetails.products.forEach((p) => {
-          if (
-            p.size === currentProduct.size &&
-            p[filterBrandMode] !== currentProduct[filterBrandMode] &&
-            sameSizeCount < 2
-          ) {
-            tempSuggestedProducts.push(p);
-            sameSizeCount++;
-          } else if (
-            p.size !== currentProduct.size &&
-            p[filterBrandMode] === currentProduct[filterBrandMode] &&
-            sameBrandCount < 2
-          ) {
-            tempSuggestedProducts.push(p);
-            sameBrandCount++;
+          if (p.id !== currentProduct.id) {
+            if (
+              p[filterCategoryMode] === currentProduct[filterCategoryMode] &&
+              p[filterBrandMode] !== currentProduct[filterBrandMode] &&
+              sameSizeCount < maxSameSizeCount
+            ) {
+              tempSuggestedProducts.push(p);
+              sameSizeCount++;
+            } else if (
+              p[filterCategoryMode] === currentProduct[filterCategoryMode] &&
+              (p.size ? p.size !== currentProduct.size : true) &&
+              p[filterBrandMode] === currentProduct[filterBrandMode] &&
+              sameBrandCount < maxSameBrandCount
+            ) {
+              tempSuggestedProducts.push(p);
+              sameBrandCount++;
+            }
           }
         });
+        if (sameBrandCount < maxSameBrandCount) {
+          maxSameSizeCount = 6 - sameBrandCount;
+          userDetails.products
+            .filter(
+              (p) =>
+                tempSuggestedProducts.findIndex((fp) => fp.id === p.id) ===
+                  -1 && p.id !== currentProduct.id
+            )
+            .forEach((p) => {
+              if (
+                p[filterCategoryMode] === currentProduct[filterCategoryMode] &&
+                p[filterBrandMode] !== currentProduct[filterBrandMode] &&
+                sameSizeCount < maxSameSizeCount
+              ) {
+                tempSuggestedProducts.push(p);
+                sameSizeCount++;
+              }
+            });
+        }
         setSuggestedProducts(tempSuggestedProducts);
       }
 
@@ -203,7 +231,20 @@ const Urun = () => {
       </OwlCarousel>
     );
   };
-  console.log(productInfo);
+  // console.log(productInfo);
+  const ProductDetails = () => {
+    if (!productInfo.productDetails || !productInfo.productDetails.description)
+      return <div>Ürün özellikleri mevcut değil</div>;
+    return (
+      <ul>
+        {productInfo.productDetails.description
+          .split('\r\n')
+          .filter((item) => item !== '')
+          .map((item, i) => <li key={i}>{item}</li>)}
+      </ul>
+    );
+  };
+
   return (
     <section className="container py-3">
       {productInfo.categories && (
@@ -409,13 +450,11 @@ const Urun = () => {
                     id="pills-home"
                     role="tabpanel"
                     aria-labelledby="pills-home-tab"
-                    style={{
-                      whiteSpace: 'pre-line',
-                    }}
+                    // style={{
+                    //   whiteSpace: 'pre-line',
+                    // }}
                   >
-                    {(productInfo.productDetails &&
-                      productInfo.productDetails.description) ||
-                      'Ürün özellikleri mevcut değil'}
+                    <ProductDetails />
                   </div>
                   <div
                     className="tab-pane fade"
