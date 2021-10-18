@@ -62,7 +62,7 @@ const Header = () => {
                 {userDetails.user ? (
                   <>
                     <li>
-                      <Link to="/hesap-ayarlari" className="dropdown-item">
+                      <Link to="/hesabim" className="dropdown-item">
                         <FaUserCog className="me-2" />
                         Hesap Ayarları
                       </Link>

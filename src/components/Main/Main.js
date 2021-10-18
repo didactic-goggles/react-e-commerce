@@ -10,6 +10,7 @@ import Login from '../Login/Login';
 import Urunler from './Pages/Urunler/Urunler';
 import Signup from '../Login/Signup';
 import WishList from '../WishList/WishList';
+import Hesabim from './Pages/Hesabim';
 
 const Main = () => {
   return (
@@ -35,6 +36,9 @@ const Main = () => {
         </Route>
         <Route path="/begendiklerim">
           <WishList />
+        </Route>
+        <Route path="/hesabim">
+          <Hesabim />
         </Route>
         <Route path="/giris">
           <Login />
