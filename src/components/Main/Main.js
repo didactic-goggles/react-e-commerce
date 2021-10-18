@@ -12,6 +12,8 @@ import Signup from '../Login/Signup';
 import WishList from '../WishList/WishList';
 import Hesabim from './Pages/Hesabim';
 
+import Sepet from './Pages/Sepet/index';
+
 const Main = () => {
   return (
     <main>
@@ -27,9 +29,7 @@ const Main = () => {
         </Route>
         <Route
           path="/urunler"
-          render={(props) => (
-            <Urunler key={props.location.search}/>
-          )}
+          render={(props) => <Urunler key={props.location.search} />}
         />
         <Route path="/urun/:productId">
           <Urun />
@@ -39,6 +39,9 @@ const Main = () => {
         </Route>
         <Route path="/hesabim">
           <Hesabim />
+        </Route>
+        <Route path="/sepet">
+          <Sepet />
         </Route>
         <Route path="/giris">
           <Login />

@@ -10,7 +10,8 @@ import {
   FaUserCog,
   FaHeart,
   FaEnvelope,
-  FaPhoneAlt
+  FaPhoneAlt,
+  FaShoppingCart
 } from 'react-icons/fa';
 import { useAuthDispatch, logout, useAuthState } from '../../context';
 import Navbar from './Navbar';
@@ -93,7 +94,10 @@ const Header = () => {
             </div>
             <Link className="btn border-end" to="/begendiklerim">
               <FaHeart className="me-2 text-danger" />
-              Beğendiklerim
+              {/* Beğendiklerim */}
+            </Link>
+            <Link className="btn border-end" to="/sepet">
+              <FaShoppingCart className="me-2 text-primary" />
             </Link>
             {/* <div className="dropdown">
               <a
