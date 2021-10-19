@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom';
 import './index.scss';
 import Urun from './Urun';
 import Bos from './Bos';
+import { FaChevronLeft } from 'react-icons/fa';
 const Sepet = () => {
   const cart = [
     {
@@ -24,7 +26,7 @@ const Sepet = () => {
       price: 40,
     },
   ];
-  if (true) return <Bos />;
+  // if (true) return <Bos />;
   return (
     <div id="cart" class="container">
       <div class="card">
@@ -44,32 +46,34 @@ const Sepet = () => {
               <Urun product={product} />
             ))}
             <div class="back-to-shop">
-              <a href="#">&leftarrow;</a>
-              <span class="text-muted">Back to shop</span>
+              <Link
+                to="/urunler"
+                className="d-flex align-items-center text-muted text-decoration-none"
+              >
+                <FaChevronLeft class="me-2" />
+                Alışverişe Geri Dön
+              </Link>
             </div>
           </div>
           <div class="col-md-4 summary">
             <div>
               <h5>
-                <b>Summary</b>
+                <b>Özet</b>
               </h5>
             </div>
             <hr />
             <div class="row">
-              <div class="col" style={{ 'padding-left': 0 }}>
-                ITEMS 3
+              <div class="col ps-0">
+                Ürünler
               </div>
-              <div class="col text-right">&euro; 132.00</div>
+              <div class="col text-right">&#8378; 132.00</div>
             </div>
-            <form>
-              <p>SHIPPING</p>{' '}
-              <select>
-                <option class="text-muted">
-                  Standard-Delivery- &euro;5.00
-                </option>
-              </select>
-              <p>GIVE CODE</p> <input id="code" placeholder="Enter your code" />
-            </form>
+            <div class="row">
+              <div class="col ps-0">
+                Kargo
+              </div>
+              <div class="col text-right">&#8378; 0.00</div>
+            </div>
             <div
               class="row"
               style={{
@@ -77,10 +81,10 @@ const Sepet = () => {
                 padding: '2vh 0',
               }}
             >
-              <div class="col">TOTAL PRICE</div>
-              <div class="col text-right">&euro; 137.00</div>
+              <div class="col ps-0">Toplam Tutar</div>
+              <div class="col text-right">&#8378; 137.00</div>
             </div>{' '}
-            <button class="btn-checkout">CHECKOUT</button>
+            <button class="btn-checkout">Siparişi Tamamla</button>
           </div>
         </div>
       </div>
