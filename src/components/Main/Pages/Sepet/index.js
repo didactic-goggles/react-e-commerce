@@ -2,89 +2,108 @@ import { Link } from 'react-router-dom';
 import './index.scss';
 import Urun from './Urun';
 import Bos from './Bos';
+import API from '../../../../api';
+
 import { FaChevronLeft } from 'react-icons/fa';
+import {
+  useAuthDispatch,
+  useAuthState,
+  removeProduct,
+  addProduct,
+} from '../../../../context';
+
 const Sepet = () => {
-  const cart = [
-    {
-      name: 'Ürün 1',
-      quantity: 1,
-      price: 10,
-    },
-    {
-      name: 'Ürün 2',
-      quantity: 2,
-      price: 20,
-    },
-    {
-      name: 'Ürün 3',
-      quantity: 3,
-      price: 30,
-    },
-    {
-      name: 'Ürün 4',
-      quantity: 4,
-      price: 40,
-    },
-  ];
-  // if (true) return <Bos />;
+  const dispatch = useAuthDispatch();
+  const store = useAuthState();
+  const cart = store.cart;
+
+  const handleCreateOrder = async () => {
+    // const formData = new FormData();
+    // cart.forEach((cartItem, index) => {
+    //   console.log(cartItem);
+    //   formData.append(`products[${index}][product_id]`, cartItem.product.id);
+    //   formData.append(`products[${index}][quantity]`, cartItem.quantity);
+
+    // });
+    // formData.append('user_id', 4);
+    const body = {
+      products: cart.map(p => ({product_id: p.product.id, quantity: p.quantity}))
+    }
+    const createOrderResponse = await API.post('createorder.php', body);
+
+    // console.log(formData);
+    console.log(createOrderResponse);
+  }
+  if (cart.length < 1) return <Bos />;
   return (
-    <div id="cart" class="container">
-      <div class="card">
-        <div class="row">
-          <div class="col-md-8 cart">
-            <div class="title">
-              <div class="d-flex justify-content-between">
+    <div id="cart" className="container mt-5">
+      <div className="card">
+        <div className="row">
+          <div className="col-md-8 cart">
+            <div className="title">
+              <div className="d-flex justify-content-between">
                 <h4>
                   <b>Sepet</b>
                 </h4>
-                <div class="align-self-center text-right text-muted">
+                <div className="align-self-center text-right text-muted">
                   {cart.length} ürün
                 </div>
               </div>
             </div>
             {cart.map((product) => (
-              <Urun product={product} />
+              <Urun
+                product={product}
+                dispatch={dispatch}
+                removeProduct={removeProduct}
+                addProduct={addProduct}
+                key={product.product.id}
+              />
             ))}
-            <div class="back-to-shop">
+            <div className="back-to-shop">
               <Link
                 to="/urunler"
                 className="d-flex align-items-center text-muted text-decoration-none"
               >
-                <FaChevronLeft class="me-2" />
+                <FaChevronLeft className="me-2" />
                 Alışverişe Geri Dön
               </Link>
             </div>
           </div>
-          <div class="col-md-4 summary">
+          <div className="col-md-4 summary">
             <div>
               <h5>
                 <b>Özet</b>
               </h5>
             </div>
             <hr />
-            <div class="row">
-              <div class="col ps-0">
-                Ürünler
+            <div className="row">
+              <div className="col ps-0">Ürünler</div>
+              <div className="col text-right">
+                &#8378;
+                {cart.reduce(
+                  (sum, p) => Number(p.productDetails.price) * p.quantity + sum,
+                  0
+                )}
               </div>
-              <div class="col text-right">&#8378; 132.00</div>
             </div>
-            <div class="row">
-              <div class="col ps-0">
-                Kargo
-              </div>
-              <div class="col text-right">&#8378; 0.00</div>
+            <div className="row">
+              <div className="col ps-0">Kargo</div>
+              <div className="col text-right">&#8378; 0.00</div>
             </div>
             <div
-              class="row"
+              className="row"
               style={{
-                'border-top': '1px solid rgba(0,0,0,.1)',
+                borderTop: '1px solid rgba(0,0,0,.1)',
                 padding: '2vh 0',
               }}
             >
-              <div class="col ps-0">Toplam Tutar</div>
-              <div class="col text-right">&#8378; 137.00</div>
+              <div className="col ps-0">Toplam Tutar</div>
+              <div className="col text-right">&#8378;{cart.reduce(
+                  (sum, p) => Number(p.productDetails.price) * p.quantity + sum,
+                  0
+                )}</div>
             </div>{' '}
-            <button class="btn-checkout">Siparişi Tamamla</button>
+            <button className="btn-checkout" onClick={handleCreateOrder}>Siparişi Tamamla</button>
           </div>
         </div>
       </div>

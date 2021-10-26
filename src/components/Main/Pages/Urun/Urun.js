@@ -20,6 +20,7 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import Comments from './Comments';
 import Slider from './Slider';
+import SepeteEkle from './SepeteEkle';
 const Urun = () => {
   console.log('Rendering => Urun');
   const baseURL = 'https://comfortmedikal.com/';
@@ -343,7 +344,7 @@ const Urun = () => {
                 <ProductImagesCarousel />
               </div>
             </div>
-            <div className="col-sm-7 bg-light py-3 px-3">
+            <div className="col-sm-7 d-flex flex-column bg-light py-3 px-3">
               <h4 className="fw-bold text-primary">
                 {productInfo.productDetails.sub_title}
               </h4>
@@ -469,6 +470,9 @@ const Urun = () => {
                     />
                   </div>
                 </div>
+              </div>
+              <div className="mt-auto mb-5">
+                <SepeteEkle product={productInfo} userDetails={userDetails} />
               </div>
             </div>
           </div>

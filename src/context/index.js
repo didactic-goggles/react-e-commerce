@@ -7,6 +7,8 @@ import {
   getAllCategories,
   getAllBrands,
   getAllProducts,
+  addProduct,
+  removeProduct
 } from './actions';
 import { AuthProvider, useAuthDispatch, useAuthState } from './context';
 
@@ -22,4 +24,6 @@ export {
   getAllCategories,
   getAllBrands,
   getAllProducts,
+  addProduct,
+  removeProduct
 };

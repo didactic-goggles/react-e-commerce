@@ -122,3 +122,17 @@ export async function getAllProducts(dispatch) {
 		return getAllProductsResponse;
 	} return { products: [] };
 }
+
+export function addProduct(dispatch, product) {
+	dispatch({ type: 'ADD_TO_CART', payload: product });
+	// localStorage.setItem('cart', JSON.stringify(payload));
+	// localStorage.setItem('currentUserWishList', JSON.stringify(response.wishList || []));
+	// localStorage.setItem('currentUserToken', response.token);
+}
+
+export function removeProduct(dispatch, productId) {
+	dispatch({ type: 'DELETE_FROM_CART', payload: productId });
+	// localStorage.setItem('cart', JSON.stringify(productId));
+	// localStorage.setItem('currentUserWishList', JSON.stringify(response.wishList || []));
+	// localStorage.setItem('currentUserToken', response.token);
+}

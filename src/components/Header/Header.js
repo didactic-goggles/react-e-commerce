@@ -11,7 +11,7 @@ import {
   FaHeart,
   FaEnvelope,
   FaPhoneAlt,
-  FaShoppingCart
+  FaShoppingCart,
 } from 'react-icons/fa';
 import { useAuthDispatch, logout, useAuthState } from '../../context';
 import Navbar from './Navbar';
@@ -20,7 +20,7 @@ const Header = () => {
   console.log('Rendering => Header');
   let history = useHistory();
   const dispatch = useAuthDispatch();
-  const userDetails = useAuthState();
+  const store = useAuthState();
   const handleLogout = () => {
     logout(dispatch);
     history.push('/');
@@ -31,13 +31,19 @@ const Header = () => {
       <div className="border-bottom d-none d-md-block">
         <nav className="navbar navbar-dark container py-0 px-0">
           <div className="border-end px-2">
-            <a href="mailto:info@comfortmedikal.com" className="text-decoration-none text-dark text-lowercase">
+            <a
+              href="mailto:info@comfortmedikal.com"
+              className="text-decoration-none text-dark text-lowercase"
+            >
               <FaEnvelope className="me-2" />
               info@comfortmedikal.com
             </a>
           </div>
           <div className="px-2 ms-2 me-auto">
-            <a href="tel:+902126359451" className="text-decoration-none text-dark">
+            <a
+              href="tel:+902126359451"
+              className="text-decoration-none text-dark"
+            >
               <FaPhoneAlt className="me-2" />
               <span>212 635 94 51</span>
             </a>
@@ -52,15 +58,13 @@ const Header = () => {
                 aria-expanded="false"
               >
                 <FaUserAlt className="me-2" />
-                {userDetails.user
-                  ? `Hoşgeldiniz, ${userDetails.user.username}`
-                  : 'Hesabım'}
+                {store.user ? `Hoşgeldiniz, ${store.user.username}` : 'Hesabım'}
               </a>
               <ul
                 className="dropdown-menu dropdown-menu-end"
                 aria-labelledby="dropdownMenuLink"
               >
-                {userDetails.user ? (
+                {store.user ? (
                   <>
                     <li>
                       <Link to="/hesabim" className="dropdown-item">
@@ -96,9 +100,13 @@ const Header = () => {
               <FaHeart className="me-2 text-danger" />
               {/* Beğendiklerim */}
             </Link>
-            <Link className="btn border-end" to="/sepet">
-              <FaShoppingCart className="me-2 text-primary" />
-            </Link>
+            {store.cart && store.cart.length > 0 && (
+              <Link className="btn border-end" to="/sepet">
+                <FaShoppingCart className="me-2 text-primary" />
+                {store.cart.length}
+              </Link>
+            )}
+
             {/* <div className="dropdown">
               <a
                 className="btn dropdown-toggle"
