@@ -11,7 +11,7 @@ const SepeteEkle = (props) => {
   const dispatch = useAuthDispatch();
   const store = useAuthState();
   const { product, userDetails } = props;
-  const [quantity, setQuantity] = useState(store.cart.find((p) => p.id === product.id)?.quantity);
+  const [quantity, setQuantity] = useState(store.cart.find((p) => p.id === product.id)?.quantity || 0);
   const [inCart, setInCart] = useState(
     !!store.cart.find((p) => p.id === product.id)
   );
