@@ -4,6 +4,9 @@ let user = localStorage.getItem('currentUser')
 let wishList = user && localStorage.getItem('currentUserWishList')
 	? JSON.parse(localStorage.getItem('currentUserWishList'))
 	: [];
+let cart = user && localStorage.getItem('cart')
+	? JSON.parse(localStorage.getItem('cart'))
+	: [];
 let token = localStorage.getItem('currentUserToken');
 
 export const initialState = {
@@ -15,7 +18,8 @@ export const initialState = {
     categories: null,
 	brands: null,
 	products: [],
-	wishList: wishList
+	wishList,
+	cart
 };
 
 export const AuthReducer = (initialState, action) => {
@@ -92,6 +96,20 @@ export const AuthReducer = (initialState, action) => {
 				...initialState,
 				products: action.payload.products
 			}
+		case 'ADD_TO_CART':
+			const stateObj = {
+				...initialState,
+				cart: [...initialState.cart.filter(p => p.id !== action.payload.id), action.payload]
+			}
+			localStorage.setItem('cart', JSON.stringify(stateObj.cart));
+			return stateObj
+		case 'DELETE_FROM_CART':
+			const stateObj1 = {
+				...initialState,
+				cart: initialState.cart.filter(p => p.id !== action.payload)
+			}
+			localStorage.setItem('cart', JSON.stringify(stateObj1.cart));
+			return stateObj1
 		default:
 			throw new Error(`Unhandled action type: ${action.type}`);
 	}
