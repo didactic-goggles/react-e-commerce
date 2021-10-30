@@ -1,3 +1,5 @@
+import API from '../api';
+
 let user = localStorage.getItem('currentUser')
 	? JSON.parse(localStorage.getItem('currentUser'))
 	: '';
@@ -8,6 +10,9 @@ let cart = user && localStorage.getItem('cart')
 	? JSON.parse(localStorage.getItem('cart'))
 	: [];
 let token = localStorage.getItem('currentUserToken');
+if (token && token !== "") {
+	API.defaults.headers.common.Authorization = `Bearer ${token}`;
+}
 
 export const initialState = {
 	user: null || user,
@@ -57,6 +62,14 @@ export const AuthReducer = (initialState, action) => {
 				wishList: action.payload.wishList,
 				errorMessage: null,
 				loading: false,
+			};
+		case 'UPDATE_USER_SUCCESS':
+			return {
+				...initialState,
+				user: {
+					...initialState.user,
+					...action.payload
+				}
 			};
 		case 'LOGOUT':
 			return {

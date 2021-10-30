@@ -1,22 +1,33 @@
 import { useState } from 'react';
+import { useAuthState, useAuthDispatch, updateUser } from '../../../../context';
 
 const Hesap = () => {
-  const [userData, setUserData] = useState({
-    firstname: '',
-    lastname: '',
-    phone: '',
-    email: '',
+  const store = useAuthState();
+  const dispatch = useAuthDispatch();
+  const userData = store.user;
+  const [formSubmitting, setFormSubmitting] = useState(false);
+  const [userFormData, setUserFormData] = useState({
+    firstname: userData.firstname || '',
+    lastname: userData.lastname || '',
+    phone: userData.phone || '',
+    email: userData.email || '',
   });
 
   const handleFormChange = (key, value) => {
-    const tempFormData = { ...userData };
+    const tempFormData = { ...userFormData };
     tempFormData[key] = value;
-    setUserData(tempFormData);
+    setUserFormData(tempFormData);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(userData);
+    try {
+      setFormSubmitting(true);
+      await updateUser(dispatch, userFormData);
+    } catch (error) {
+      console.log(error);
+    }
+    setFormSubmitting(false);
   };
   return (
     <div>
@@ -35,7 +46,7 @@ const Hesap = () => {
               className="form-control"
               id="firstName"
               placeholder=""
-              value={userData.firstname}
+              value={userFormData.firstname}
               onInput={(e) => handleFormChange('firstname', e.target.value)}
               required
             />
@@ -53,7 +64,7 @@ const Hesap = () => {
               className="form-control"
               id="lastName"
               placeholder=""
-              value={userData.lastname}
+              value={userFormData.lastname}
               onInput={(e) => handleFormChange('lastname', e.target.value)}
               required
             />
@@ -71,7 +82,7 @@ const Hesap = () => {
               className="form-control"
               id="phone"
               placeholder="0555 444 3322"
-              value={userData.phone}
+              value={userFormData.phone}
               onInput={(e) => handleFormChange('phone', e.target.value)}
               required
             />
@@ -90,7 +101,7 @@ const Hesap = () => {
               className="form-control"
               id="email"
               placeholder="isim@posta.com"
-              value={userData.email}
+              value={userFormData.email}
               onInput={(e) => handleFormChange('email', e.target.value)}
               required
             />
@@ -101,7 +112,11 @@ const Hesap = () => {
         </div>
         <hr className="my-4" />
 
-        <button className="w-100 btn btn-primary btn-lg" type="submit">
+        <button
+          className="w-100 btn btn-primary btn-lg"
+          type="submit"
+          disabled={formSubmitting}
+        >
           Güncelle
         </button>
       </form>

@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react';
 import IlIlce from '../../../../data/il-ilce';
+import { useAuthState, useAuthDispatch, updateUser } from '../../../../context';
 
 const Adres = () => {
+  const store = useAuthState();
+  const dispatch = useAuthDispatch();
+  const userData = store.user;
+  const [formSubmitting, setFormSubmitting] = useState(false);
   const [stateCollection, setStateCollection] = useState([]);
   const [addressData, setAddressData] = useState({
-    address: '',
-    city: '',
-    province: '',
-    zip: '',
+    address: userData.address || '',
+    city: userData.city || '',
+    province: userData.province || '',
+    zip: userData.zip || '',
   });
 
   const handleFormChange = (key, value) => {
@@ -16,9 +21,15 @@ const Adres = () => {
     setAddressData(tempFormData);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(addressData);
+    try {
+      setFormSubmitting(true);
+      await updateUser(dispatch, addressData);
+    } catch (error) {
+      console.log(error);
+    }
+    setFormSubmitting(false);
   };
 
   useEffect(() => {
@@ -68,13 +79,11 @@ const Adres = () => {
               onChange={(e) => handleFormChange('province', e.target.value)}
             >
               <option value="">Seçin...</option>
-              {stateCollection
-                .sort()
-                .map((ilce) => (
-                  <option value={ilce} key={ilce}>
-                    {ilce}
-                  </option>
-                ))}
+              {stateCollection.sort().map((ilce) => (
+                <option value={ilce} key={ilce}>
+                  {ilce}
+                </option>
+              ))}
             </select>
             <div className="invalid-feedback">Lütfen geçerli bir il seçin</div>
           </div>
@@ -134,7 +143,11 @@ const Adres = () => {
 
         <hr className="my-4" />
 
-        <button className="w-100 btn btn-primary btn-lg" type="submit">
+        <button
+          className="w-100 btn btn-primary btn-lg"
+          type="submit"
+          disabled={formSubmitting}
+        >
           Güncelle
         </button>
       </form>

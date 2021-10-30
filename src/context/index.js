@@ -1,5 +1,6 @@
 import {
   loginUser,
+  updateUser,
   signupUser,
   logout,
   showErrorMessage,
@@ -17,6 +18,7 @@ export {
   useAuthState,
   useAuthDispatch,
   loginUser,
+  updateUser,
   signupUser,
   logout,
   showErrorMessage,
